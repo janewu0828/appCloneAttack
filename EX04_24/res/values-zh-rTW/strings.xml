@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World</string>
+    <string name="app_name">向左轉，向右轉</string>
+    <string name="str_button1">向左旋轉</string>
+    <string name="str_button2">向右旋轉</string>
+    <string name="str_done">好了好了，頭好暈啊！</string>
+    
+    <string name="alert_internet_error_title">網路連線異常</string>
+    <string name="alert_internet_error_msg">請確認網路環境設置正確後，再次嘗試。</string>
+    
+    <string name="toast_checkuser_true">鑑別成功，將繼續程式。</string>
+    
+    <string name="alert_checkuser_error_title">檢測結果</string>
+    <string name="alert_checkuser_error_msg">身分鑑別失敗，程式將停止執行。</string>
+
+</resources>

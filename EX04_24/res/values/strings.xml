@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World</string>
+    <string name="app_name">Turn Left, Turn Right</string>
+    <string name="str_button1">Turn Left</string>
+    <string name="str_button2">Turn Right</string>
+    <string name="str_done">Done！</string>
+    
+    <string name="alert_internet_error_title">Network connection is failed</string>
+    <string name="alert_internet_error_msg">Please check out the connection.</string>
+    
+    <string name="toast_checkuser_true">Authentication is successful, the process will continue.</string>
+    
+    <string name="alert_checkuser_error_title">Test result</string>
+    <string name="alert_checkuser_error_msg">Authentication is failed, the process will be terminated.</string>
+
+</resources>
