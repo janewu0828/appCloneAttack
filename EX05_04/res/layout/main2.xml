@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget34"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/white" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
+
+        <TextView
+            android:id="@+id/myTextView1"
+            style="@style/myTxt"
+            android:text="@string/str_receive" />
+
+        <EditText
+            android:id="@+id/myEditText1"
+            style="@style/myEtxt_email"
+            android:hint="@string/str_receive_hint" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linearLayout1" >
+
+        <TextView
+            android:id="@+id/myTextView2"
+            style="@style/myTxt"
+            android:text="@string/str_cc" />
+
+        <EditText
+            android:id="@+id/myEditText2"
+            style="@style/myEtxt_email"
+            android:hint="@string/str_cc_hint" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linearLayout2" >
+
+        <TextView
+            android:id="@+id/myTextView3"
+            style="@style/myTxt"
+            android:text="@string/str_subject" />
+
+        <EditText
+            android:id="@+id/myEditText3"
+            style="@style/myEtxt"
+            android:hint="@string/str_subject_hint" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linearLayout3"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/myEditText4"
+            style="@style/myEtxt_msg"
+            android:layout_width="match_parent"
+            android:ems="10"
+            android:hint="@string/str_message_hint" >
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linearLayout4"
+        android:gravity="right" >
+
+        <Button
+            android:id="@+id/myButton1"
+            style="@style/myBtn"
+            android:text="@string/str_button" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button1"
+        style="@style/myBtn"
+        android:layout_alignTop="@+id/linearLayout5"
+        android:layout_marginRight="27dp"
+        android:layout_toLeftOf="@+id/linearLayout5"
+        android:text="@string/str_button_cancel" />
+
+</RelativeLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">我要寄信</string>
+    <string name="str_button">送出</string>
+    <string name="str_button_cancel">取消</string>
+    <string name="str_message">發信中...</string>
+    <string name="str_receive">收件者:</string>
+    <string name="str_cc">副本:</string>
+    <string name="str_subject">主旨:</string>
+    <string name="alert_internet_error_title">網路連線異常</string>
+    <string name="alert_internet_error_msg">請確認網路環境設置正確後，再次嘗試。</string>
+    <string name="toast_checkuser_true">鑑別成功，將繼續程式。</string>
+    <string name="alert_checkuser_error_title">檢測結果</string>
+    <string name="alert_checkuser_error_msg">身分鑑別失敗，程式將停止執行。</string>
+    <string name="str_receive_hint">請輸入聯絡人郵件地址</string>
+    <string name="str_cc_hint">請輸入副本郵件地址</string>
+    <string name="str_subject_hint">請輸入主旨</string>
+    <string name="str_message_hint">請輸入郵件內容</string>
+
+</resources>
