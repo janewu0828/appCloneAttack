@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Battery Info</string>
+    <string name="str_title">How to get battery info ?</string>
+    <string name="str_button1">Click me to get battery info</string>
+    <string name="str_button2">Back</string>
+    <string name="str_dialog_title">System Info</string>
+    <string name="str_dialog_body">Battery Info : </string>
+   
+    <string name="alert_internet_error_title">Network connection is failed</string>
+    <string name="alert_internet_error_msg">Please check out the connection.</string>
+   
+    <string name="toast_checkuser_true">Authentication is successful, the process will continue.</string>
+   
+    <string name="alert_checkuser_error_title">Test result</string>
+    <string name="alert_checkuser_error_msg">Authentication is failed, the process will be terminated.</string>
+
+</resources>

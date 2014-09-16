@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <style name="AppTheme" parent="android:Theme.Holo.Light" />
+    
+    <style name="myLayout">
+        
+    </style>
+
+    <style name="myTxt">
+        
+    </style>
+
+    <style name="myBtn">
+        
+    </style>
+
+</resources>
