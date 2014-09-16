@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">We can read each other\’s mind～</string>
+    <string name="app_name">Mind reading</string>
+    <string name="str_button1">Answer</string>
+    <string name="str_button2">Clear</string>
+    <string name="str_radio_question1">Please guess which one is I thinking now ?</string>
+    <string name="str_radio_op1">NINJA BLADE.</string>
+    <string name="str_radio_op2">Halo Wars.</string>
+    <string name="str_radio_op3">Guitar Hero World Tour.</string>
+    <string name="str_guess_correct">Wow! You guessed it!</string>
+    <string name="str_guess_error">Oh, you guessed wrong! Try again......</string>
+    <string name="alert_internet_error_title">Network connection is failed</string>
+    <string name="alert_internet_error_msg">Please check out the connection.</string>
+    <string name="toast_checkuser_true">Authentication is successful, the process will continue.</string>
+    <string name="alert_checkuser_error_title">Test result</string>
+    <string name="alert_checkuser_error_msg">Authentication is failed, the process will be terminated.</string>
+
+</resources>
