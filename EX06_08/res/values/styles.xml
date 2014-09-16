@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <style name="AppTheme" parent="android:Theme.Holo.Light" />
+    
+    <style name="myLayout">
+        
+    </style>
+
+    <style name="myTxt">
+        <item name="android:textSize">30dp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="myBtn">
+         
+    </style>
+
+</resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/myTextView1"
+        style="@style/myTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/myButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="105dp"
+        android:text="@string/str_title" />
+
+    <ProgressBar
+        android:id="@+id/myProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:max="100"
+        android:progress="0" />
+
+    <TextView
+        android:id="@+id/myTextView"
+        style="@style/myTxt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/myProgressBar"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="32dp" />
+
+    <Button
+        android:id="@+id/myButton"
+        style="@style/myTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/myTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="41dp"
+        android:text="@string/strButton" />
+
+</RelativeLayout>
