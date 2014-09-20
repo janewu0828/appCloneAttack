@@ -18,7 +18,9 @@ package com.example.android.snake;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -65,9 +67,25 @@ public class Snake extends Activity {
                 mSnakeView.setMode(SnakeView.PAUSE);
             }
         }
+        
+        findviews();
     }
 
-    @Override
+    private void findviews() {
+		// TODO 自動產生的方法 Stub
+		Button btnUp =(Button)findViewById(R.id.button1);
+		Button btnDown =(Button)findViewById(R.id.button2);
+		Button btnRight =(Button)findViewById(R.id.button3);
+		Button btnLeft =(Button)findViewById(R.id.button4);
+		
+		btnUp.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				
+			}
+		});
+	}
+
+	@Override
     protected void onPause() {
         super.onPause();
         // Pause the game along with the activity
