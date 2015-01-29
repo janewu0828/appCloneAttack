@@ -57,7 +57,7 @@ public class EX04_16 extends Activity {
 		mContext = EX04_16.this;
 		// show a message of authentication is successful in first time
 		isShowTxt = true;
-		// check network configure
+		// check network setting on device
 		checkConnection();
 
 		/* 取得相關物件 */
