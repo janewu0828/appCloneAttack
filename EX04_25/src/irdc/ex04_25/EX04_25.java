@@ -18,16 +18,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class EX04_25 extends Activity
-{ 
+{
   public static View myview;
   
-  protected Button mButton1,mButton2;
+  protected Button mButton1, mButton2;
   public static TextView mTextView1;
   public static RadioGroup mRadioGroup1;
   public static boolean mUserChoice = false;
   public static int mMyChoice = -2;
   public static int intTimes = 0;
-  public static RadioButton mRadio1,mRadio2,mRadio3;
+  public static RadioButton mRadio1, mRadio2, mRadio3;
   
   /** Called when the activity is first created. */
   @Override
@@ -36,28 +36,31 @@ public class EX04_25 extends Activity
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
     
-    // 取得getApplicationContext()資源
+    // get global Application object of the current process
     mAppContext = getApplicationContext();
-    // 顯示AlertDialog所需的資源
+    // get context for AlertDialog
     mContext = EX04_25.this;
-    // 顯示第一次驗證成功訊息
+    // show a message of authentication is successful in first time
     isShowTxt = true;
-    // 檢查網路組態設置
+    // check network setting on device
     checkConnection();
     
-    mButton1 =(Button) findViewById(R.id.myButton1);
-    mButton2 =(Button) findViewById(R.id.myButton2);
+    mButton1 = (Button) findViewById(R.id.myButton1);
+    mButton2 = (Button) findViewById(R.id.myButton2);
     mTextView1 = (TextView) findViewById(R.id.myTextView1);
     
     /* RadioGroup Widget */
     mRadioGroup1 = (RadioGroup) findViewById(R.id.myRadioGroup1);
     
-    mRadio1 = (RadioButton) findViewById(R.id.myOption1); 
+    mRadio1 = (RadioButton) findViewById(R.id.myOption1);
     mRadio2 = (RadioButton) findViewById(R.id.myOption2);
     mRadio3 = (RadioButton) findViewById(R.id.myOption3);
     
     /* 取得三個RadioButton的ID，並存放置整數陣列中 */
-    int[] aryChoose = {mRadio1.getId(), mRadio2.getId(), mRadio3.getId()};
+    int[] aryChoose =
+    {
+        mRadio1.getId(), mRadio2.getId(), mRadio3.getId()
+    };
     
     /* 以亂數的方式指定哪一個為系統猜測的答案 */
     int intRandom = (int) (Math.random() * 3);
@@ -80,14 +83,14 @@ public class EX04_25 extends Activity
     public void onCheckedChanged(RadioGroup group, int checkedId)
     {
       // TODO Auto-generated method stub
-      if(checkedId==mMyChoice)
+      if (checkedId == mMyChoice)
       {
-        /* User猜對了*/
+        /* User猜對了 */
         mUserChoice = true;
       }
       else
       {
-        /* User猜錯了*/
+        /* User猜錯了 */
         mUserChoice = false;
       }
     }
@@ -100,37 +103,40 @@ public class EX04_25 extends Activity
     public void onClick(View v)
     {
       // TODO Auto-generated method stub
-      // check user , download file and dynamic loading-----
+      // ---check user, download file and dynamic loading---
       SendPostRunnable sr = new SendPostRunnable(fileName,
           getApplicationContext());
       
-      // 啟動一個Thread(執行緒)，將要傳送的資料放進Runnable中，讓Thread執行
+      // start a Thread, the data to be transferred into the Runnable, so that Thread execute
       Thread t = new Thread(sr);
       t.start();
-
+      
       try
       {
-        // wait thread t
+        // wait Thread t
         t.join();
-      } catch (InterruptedException e)
+      }
+      catch (InterruptedException e)
       {
         // TODO Auto-generated catch block
         e.printStackTrace();
-      }       
-   
+      }
+      
       if (sr.getResult())
       {
         if (isShowTxt)
           Toast.makeText(mContext,
               mContext.getResources().getString(R.string.toast_checkuser_true),
               Toast.LENGTH_SHORT).show();
-        // 第一次顯示驗證成功訊息後，不再顯示
+        // show a message of Authentication is successful in first time
         isShowTxt = false;
         
-        myview=v;     
-
-      } else
+        myview = v;
+        
+      }
+      else
       {
+        // show a Alert Dialog that Authentication is failed
         showCheckuserError();
       }
     }
@@ -145,16 +151,19 @@ public class EX04_25 extends Activity
       // TODO Auto-generated method stub
       mUserChoice = false;
       intTimes = 0;
-      mRadio1 = (RadioButton) findViewById(R.id.myOption1); 
+      mRadio1 = (RadioButton) findViewById(R.id.myOption1);
       mRadio2 = (RadioButton) findViewById(R.id.myOption2);
       mRadio3 = (RadioButton) findViewById(R.id.myOption3);
-      int[] aryChoose = {mRadio1.getId(), mRadio2.getId(), mRadio3.getId()};
+      int[] aryChoose =
+      {
+          mRadio1.getId(), mRadio2.getId(), mRadio3.getId()
+      };
       int intRandom = (int) (Math.random() * 3);
       mMyChoice = aryChoose[intRandom];
       
       mTextView1.setText(R.string.hello);
       mRadioGroup1.clearCheck();
     }
-  }; 
-    
+  };
+  
 }

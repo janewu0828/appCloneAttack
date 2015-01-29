@@ -5,25 +5,25 @@ import android.content.Context;
 
 public class ProjectConfig
 {
-  // 取得getApplicationContext()資源
+  // get global Application object of the current process
   public static Context mAppContext;
-
-  // 顯示AlertDialog所需的資源
+  
+  // get context for AlertDialog
   public static Context mContext;
-
-  // 顯示提醒視窗
+  
+  // show AlertDialog
   public static AlertDialogManager alert = new AlertDialogManager();
-
-  // 用於第一次，是否顯示驗證成功訊息
+  
+  // show a message of authentication is successful in first time
   public static boolean isShowTxt;
-
-  // 載入部分檔案的完整檔名
+  
+  // ---dynamic loading file(JAR)---
   public static String fileName = "output041122.jar";
-
+  
   public static void checkConnection()
   {
     // TODO Auto-generated method stub
-    // 檢查網路組態設置
+    // check network setting on device
     ConnectionDetector cd = new ConnectionDetector(mAppContext);
     if (!cd.isConnectingToInternet())
     {
@@ -32,15 +32,17 @@ public class ProjectConfig
           mContext.getString(R.string.alert_internet_error_msg), false);
     }
   }
-
+  
   public static void showCheckuserError()
   {
     // TODO Auto-generated method stub
-    //顯示非法user提醒視窗
-    alert.showAlertDialog(mContext,
-        mContext.getResources().getString(R.string.alert_checkuser_error_title),
-        mContext.getResources().getString(R.string.alert_checkuser_error_msg),
-        false);
+    // show a Alert Dialog that Authentication is failed
+    alert
+        .showAlertDialog(
+            mContext,
+            mContext.getResources().getString(
+                R.string.alert_checkuser_error_title), mContext.getResources()
+                .getString(R.string.alert_checkuser_error_msg), false);
   }
-
+  
 }
