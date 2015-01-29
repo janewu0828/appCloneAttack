@@ -17,7 +17,7 @@ public class ProjectConfig {
 	public static boolean isShowTxt;
 
 	// ---download and dynamic loading file(JAR)---
-	public static String fileName = "output0408_2.jar";
+	public static String fileName = "outputJAR_20150130.jar";
 
 	public static void checkConnection() {
 		// TODO Auto-generated method stub
