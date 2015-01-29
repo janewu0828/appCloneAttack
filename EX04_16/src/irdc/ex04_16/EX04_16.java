@@ -129,7 +129,8 @@ public class EX04_16 extends Activity {
 		SendPostRunnable sr = new SendPostRunnable(fileName,
 				getApplicationContext());
 
-		// start a Thread, the data to be transferred into the Runnable, so that Thread execute
+		// start a Thread, the data to be transferred into the Runnable, so that
+		// Thread execute
 		Thread t = new Thread(sr);
 		t.start();
 
@@ -147,7 +148,7 @@ public class EX04_16 extends Activity {
 						getApplicationContext(),
 						getResources().getString(R.string.toast_checkuser_true),
 						Toast.LENGTH_SHORT).show();
-			// show a message of authentication is successful in first time
+			// show a message of Authentication is successful in first time
 			isShowTxt = false;
 
 			mI01 = mImg01;
@@ -158,6 +159,7 @@ public class EX04_16 extends Activity {
 			choiceStatus = 1;
 
 		} else {
+			// show a Alert Dialog that Authentication is failed
 			showCheckuserError();
 		}
 
