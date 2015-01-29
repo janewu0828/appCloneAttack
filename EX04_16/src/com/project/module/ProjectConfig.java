@@ -16,7 +16,7 @@ public class ProjectConfig {
 	// show a message of authentication is successful in first time
 	public static boolean isShowTxt;
 
-	// ---download and dynamic loading file(JAR)---
+	// ---dynamic loading filename(JAR)---
 	public static String fileName = "outputJAR_20150130.jar";
 
 	public static void checkConnection() {
