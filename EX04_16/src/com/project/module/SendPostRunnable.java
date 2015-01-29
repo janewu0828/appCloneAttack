@@ -208,8 +208,8 @@ public class SendPostRunnable implements Runnable {
 		DeviceUuidFactory DFactory = new DeviceUuidFactory(context2);
 		String deviceId = DFactory.getDeviceUuid().toString();
 
-		Log.i("deviceId", deviceId);
-		Log.i("deviceId length", "" + deviceId.length());
+		// Log.i("deviceId", deviceId);
+		// Log.i("deviceId length", "" + deviceId.length());
 
 		return deviceId;
 	}
@@ -220,8 +220,8 @@ public class SendPostRunnable implements Runnable {
 				.getSystemService(Context.TELEPHONY_SERVICE);
 		String imei = tM.getDeviceId();
 
-		Log.i("IMEI", imei);
-		Log.i("IMEI" + " length", "" + imei.length());
+		// Log.i("IMEI", imei);
+		// Log.i("IMEI" + " length", "" + imei.length());
 
 		return imei;
 	}
