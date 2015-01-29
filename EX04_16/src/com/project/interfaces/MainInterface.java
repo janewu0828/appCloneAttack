@@ -3,39 +3,42 @@ package com.project.interfaces;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
-public interface MainInterface
-{
+public interface MainInterface {
 
-  public String sayHello();
+	public String sayHello();
 
-  public String loadMethod();
+	public String loadMethod();
 
-  public void setS1(int s1);
+	public void setS1(int s1);
 
-  public void setAns(int ans);
-  
-  public void setChoiceStatus(int choiceStatus);
-  
-  public void setD01(Drawable d01);
-  public void setD02(Drawable d02);
-  public void setD03(Drawable d03); 
+	public void setAns(int ans);
 
-  public void setResult(String result);
-  
-  public void setmContext(Context mContext);
-  
-  public int getS1();
+	public void setChoiceStatus(int choiceStatus);
 
-  public int getAns();
-  
-  public int getChoiceStatus();
-  
-  public Drawable getD01();
-  public Drawable getD02();
-  public Drawable getD03();
-  
-  public String getResult();
-  
-  public Context getmContext();
-  
+	public void setD01(Drawable d01);
+
+	public void setD02(Drawable d02);
+
+	public void setD03(Drawable d03);
+
+	public void setResult(String result);
+
+	public void setmContext(Context mContext);
+
+	public int getS1();
+
+	public int getAns();
+
+	public int getChoiceStatus();
+
+	public Drawable getD01();
+
+	public Drawable getD02();
+
+	public Drawable getD03();
+
+	public String getResult();
+
+	public Context getmContext();
+
 }
