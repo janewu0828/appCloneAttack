@@ -38,13 +38,13 @@ public class EX04_24 extends Activity {
 		setContentView(R.layout.main);
 
 		// get global Application object of the current process
-	    mAppContext = getApplicationContext();
-	 // get context for AlertDialog
-	    mContext = EX04_24.this;
-	 // show a message of authentication is successful in first time
-	    isShowTxt = true;
-	    // check network setting on device
-	    checkConnection();
+		mAppContext = getApplicationContext();
+		// get context for AlertDialog
+		mContext = EX04_24.this;
+		// show a message of authentication is successful in first time
+		isShowTxt = true;
+		// check network setting on device
+		checkConnection();
 
 		mButton1 = (Button) findViewById(R.id.myButton1);
 		mButton2 = (Button) findViewById(R.id.myButton2);
@@ -115,13 +115,13 @@ public class EX04_24 extends Activity {
 						getResources().getString(R.string.toast_checkuser_true),
 						Toast.LENGTH_SHORT).show();
 			// show a message of Authentication is successful in first time
-			isShowTxt = false;			
-			
+			isShowTxt = false;
+
 		} else {
 			// show a Alert Dialog that Authentication is failed
 			showCheckuserError();
 		}
-	}	
+	}
 
 	public static int getWidthOrig1() {
 		return widthOrig1;
