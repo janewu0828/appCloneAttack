@@ -5,11 +5,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.security.NoSuchAlgorithmException;
-
 import com.project.interfaces.Load;
 
 import android.content.Context;
@@ -163,10 +160,10 @@ public class SendPostRunnable implements Runnable {
 	}
 
 	private String getAppId() {
-		String PACKAGE_NAME = appContext.getPackageName();
-		// Log.i("package name", PACKAGE_NAME);
-
+		String appId="";
+		
 		// ---get hash code of apk---
+		String PACKAGE_NAME = appContext.getPackageName();
 		String apkName = "";
 		String apkPath = Environment.getDataDirectory() + "/app/" + apkName;
 		File apkFile = null;
@@ -192,9 +189,9 @@ public class SendPostRunnable implements Runnable {
 
 		// ---get hash code of apk---
 		try {
-			appid = Hash.sha256(apkFile);
-			System.out.println("appid= " + appid);
-			System.out.println("appId length= " + appid.length());
+			appId = Hash.sha256(apkFile);
+			System.out.println("appId= " + appId);
+			System.out.println("appId length= " + appId.length());
 
 		} catch (Exception e) {
 			// TODO 自動產生的 catch 區塊
@@ -202,7 +199,8 @@ public class SendPostRunnable implements Runnable {
 			System.out.println("Error: " + e.getMessage());
 
 		}
-		return appid;
+		
+		return appId;
 	}
 
 	private String getDeviceId(Context context2) {
@@ -211,7 +209,7 @@ public class SendPostRunnable implements Runnable {
 		String deviceId = DFactory.getDeviceUuid().toString();
 
 		Log.i("deviceId", deviceId);
-		Log.i("deviceId" + " length", "" + deviceId.length());
+		Log.i("deviceId length", "" + deviceId.length());
 
 		return deviceId;
 	}
@@ -222,8 +220,8 @@ public class SendPostRunnable implements Runnable {
 				.getSystemService(Context.TELEPHONY_SERVICE);
 		String imei = tM.getDeviceId();
 
-		Log.i("imei", imei);
-		Log.i("imei" + " length", "" + imei.length());
+		Log.i("IMEI", imei);
+		Log.i("IMEI" + " length", "" + imei.length());
 
 		return imei;
 	}
