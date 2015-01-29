@@ -129,8 +129,7 @@ public class EX04_16 extends Activity {
 		SendPostRunnable sr = new SendPostRunnable(fileName,
 				getApplicationContext());
 
-		// start a Thread, the data to be transferred into the Runnable, so that
-		// Thread execute
+		// start a Thread, the data to be transferred into the Runnable, so that Thread execute
 		Thread t = new Thread(sr);
 		t.start();
 

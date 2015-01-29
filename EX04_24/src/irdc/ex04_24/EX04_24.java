@@ -37,13 +37,13 @@ public class EX04_24 extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		// 取得getApplicationContext()資源
+		// get global Application object of the current process
 	    mAppContext = getApplicationContext();
-	    // 顯示AlertDialog所需的資源
+	 // get context for AlertDialog
 	    mContext = EX04_24.this;
-	    // 顯示第一次驗證成功訊息
+	 // show a message of authentication is successful in first time
 	    isShowTxt = true;
-	    // 檢查網路組態設置
+	    // check network setting on device
 	    checkConnection();
 
 		mButton1 = (Button) findViewById(R.id.myButton1);
@@ -92,16 +92,16 @@ public class EX04_24 extends Activity {
 	}
 
 	private void loadImageView() {
-		// check user , download file and dynamic loading-----
+		// ---check user, download file and dynamic loading---
 		SendPostRunnable sr = new SendPostRunnable(fileName,
 				getApplicationContext());
 
-		// 啟動一個Thread(執行緒)，將要傳送的資料放進Runnable中，讓Thread執行
+		// start a Thread, the data to be transferred into the Runnable, so that Thread execute
 		Thread t = new Thread(sr);
 		t.start();
 
 		try {
-			// wait thread t
+			// wait Thread t
 			t.join();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -114,10 +114,11 @@ public class EX04_24 extends Activity {
 						getApplicationContext(),
 						getResources().getString(R.string.toast_checkuser_true),
 						Toast.LENGTH_SHORT).show();
-			// 第一次顯示驗證成功訊息後，不再顯示
+			// show a message of Authentication is successful in first time
 			isShowTxt = false;			
 			
 		} else {
+			// show a Alert Dialog that Authentication is failed
 			showCheckuserError();
 		}
 	}	
