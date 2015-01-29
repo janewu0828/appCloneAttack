@@ -20,16 +20,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CheckUser {
-  public static final int progress_bar_type = 0;
+	public static final int progress_bar_type = 0;
 
-	String uri = "http://140.118.109.165/web2/php/app.php";
-	String appid=null;
-	String deviceid=null;
-	String IMEI=null;
+	String appSecurityEnhancer_uri = "http://140.118.109.165/web2/php/app.php";
+	String appid = null;
+	String deviceid = null;
+	String IMEI = null;
 
 	// 主要是记录用户会话过程中的一些用户的基本信息
 	private HashMap<String, String> session = new HashMap<String, String>();
-	
+
 	/**
 	 * @param appid
 	 * @param deviceid
@@ -44,13 +44,13 @@ public class CheckUser {
 	public boolean checkUser() {
 
 		DefaultHttpClient mHttpClient = new DefaultHttpClient();
-		HttpPost mPost = new HttpPost(uri);
+		HttpPost mPost = new HttpPost(appSecurityEnhancer_uri);
 
 		List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
 		pairs.add(new BasicNameValuePair("appId", appid));
 		pairs.add(new BasicNameValuePair("deviceId", deviceid));
-		pairs.add(new BasicNameValuePair("IMEI",IMEI));
-		
+		pairs.add(new BasicNameValuePair("IMEI", IMEI));
+
 		try {
 			mPost.setEntity(new UrlEncodedFormEntity(pairs, HTTP.UTF_8));
 		} catch (UnsupportedEncodingException e) {
@@ -74,7 +74,7 @@ public class CheckUser {
 					String flag = "";
 					String appId = "";
 					String deviceId = "";
-					//String IMEI="";
+					// String IMEI="";
 					String sessionid = "";
 					try {
 						jsonObject = new JSONObject(info);
@@ -94,10 +94,10 @@ public class CheckUser {
 						session.put("s_userid", appId);
 						session.put("s_username", deviceId);
 						session.put("s_sessionid", sessionid);
-						
+
 						return true;
 					} else {
-					  
+
 						return false;
 					}
 				} else {
@@ -117,5 +117,5 @@ public class CheckUser {
 
 		return false;
 	}
-	
+
 }
