@@ -1,6 +1,5 @@
 package irdc.ex04_16;
 
-/* import相關class */
 import static com.project.module.ProjectConfig.mAppContext;
 import static com.project.module.ProjectConfig.mContext;
 import static com.project.module.ProjectConfig.isShowTxt;
@@ -9,6 +8,7 @@ import static com.project.module.ProjectConfig.checkConnection;
 import static com.project.module.ProjectConfig.showCheckuserError;
 import com.project.module.SendPostRunnable;
 
+/* import相關class */
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -20,175 +20,156 @@ import android.widget.Toast;
 import android.util.Log;
 import android.view.View;
 
-public class EX04_16 extends Activity
-{  
-  public static Drawable d01;
-  public static Drawable d02;
-  public static Drawable d03;
-  public static int mys1=0;
-  public static int ans =0;
-  public static boolean mI01;
-  public static boolean mI02;
-  public static boolean mI03;
+public class EX04_16 extends Activity {
+	public static Drawable d01;
+	public static Drawable d02;
+	public static Drawable d03;
+	public static int mys1 = 0;
+	public static int ans = 0;
+	public static boolean mI01;
+	public static boolean mI02;
+	public static boolean mI03;
 
-  /* 宣告物件變數 */
-  public static ImageView mImageView01;
-  public static ImageView mImageView02;
-  public static ImageView mImageView03;
-  private Button mButton;
-  public static TextView mText;
-  public static int choiceStatus = 0;
-  /*
-   * 宣告長度為3的int陣列，並將三張牌的id放入 R.drawable.p01：紅心A R.drawable.p02：黑桃2
-   * R.drawable.p03：梅花3 R.drawable.p04：撲克牌背面
-   */
-  public static int[] s1 = new int[]
-  { R.drawable.p01, R.drawable.p02, R.drawable.p03 };
+	/* 宣告物件變數 */
+	public static ImageView mImageView01;
+	public static ImageView mImageView02;
+	public static ImageView mImageView03;
+	private Button mButton;
+	public static TextView mText;
+	public static int choiceStatus = 0;
 
-  /** Called when the activity is first created. */
-  @Override
-  public void onCreate(Bundle savedInstanceState)
-  {
-    super.onCreate(savedInstanceState);
-    /* 載入main.xml Layout */
-    setContentView(R.layout.main);
+	/*
+	 * 宣告長度為3的int陣列，並將三張牌的id放入 R.drawable.p01：紅心A R.drawable.p02：黑桃2
+	 * R.drawable.p03：梅花3 R.drawable.p04：撲克牌背面
+	 */
+	public static int[] s1 = new int[] { R.drawable.p01, R.drawable.p02,
+			R.drawable.p03 };
 
-    // 取得getApplicationContext()資源
-    mAppContext = getApplicationContext();
-    // 顯示AlertDialog所需的資源
-    mContext = EX04_16.this;
-    // 顯示第一次驗證成功訊息
-    isShowTxt = true;
-    // 檢查網路組態設置
-    checkConnection();     
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
 
-    /* 取得相關物件 */
-    mText = (TextView) findViewById(R.id.mText);
-    mImageView01 = (ImageView) findViewById(R.id.mImage01);
-    mImageView02 = (ImageView) findViewById(R.id.mImage02);
-    mImageView03 = (ImageView) findViewById(R.id.mImage03);
-    mButton = (Button) findViewById(R.id.mButton);
-    /* 執行洗牌程式 */
-    randon();    
+		// get global Application object of the current process
+		mAppContext = getApplicationContext();
+		// get context for AlertDialog
+		mContext = EX04_16.this;
+		// show a message of authentication is successful in first time
+		isShowTxt = true;
+		// check network configure
+		checkConnection();
 
-    /* 替mImageView01加入onClickListener */
-    mImageView01.setOnClickListener(new View.OnClickListener()
-    {
-      public void onClick(View v)
-      {
-        if (choiceStatus == 0)
-        {
-          Log.i("event", "翻牌1");
-          loadImageView(false, true, true, s1[0]);
-        }
-      }
-    });
+		/* 取得相關物件 */
+		mText = (TextView) findViewById(R.id.mText);
+		mImageView01 = (ImageView) findViewById(R.id.mImage01);
+		mImageView02 = (ImageView) findViewById(R.id.mImage02);
+		mImageView03 = (ImageView) findViewById(R.id.mImage03);
+		mButton = (Button) findViewById(R.id.mButton);
+		/* 執行洗牌程式 */
+		randon();
 
-    /* 替mImageView02加入onClickListener */
-    mImageView02.setOnClickListener(new View.OnClickListener()
-    {
-      public void onClick(View v)
-      {
-        if (choiceStatus == 0)
-        {
-          Log.i("event", "翻牌2");
-          loadImageView(true, false, true, s1[1]);
-        }
-      }
-    });
+		/* 替mImageView01加入onClickListener */
+		mImageView01.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				if (choiceStatus == 0) {
+					Log.i("event", "翻牌1");
+					loadImageView(false, true, true, s1[0]);
+				}
+			}
+		});
 
-    /* 替mImageView03加入onClickListener */
-    mImageView03.setOnClickListener(new View.OnClickListener()
-    {
-      public void onClick(View v)
-      {
-        if (choiceStatus == 0)
-        {
-          Log.i("event", "翻牌3");
-          loadImageView(true, true, false, s1[2]);
-        }
-      }
-    });
+		/* 替mImageView02加入onClickListener */
+		mImageView02.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				if (choiceStatus == 0) {
+					Log.i("event", "翻牌2");
+					loadImageView(true, false, true, s1[1]);
+				}
+			}
+		});
 
-    /* 替mButton加入onClickListener，使其按下後三張牌都翻為背面且重新洗牌 */
-    mButton.setOnClickListener(new Button.OnClickListener()
-    {
-      public void onClick(View v)
-      {
-        mText.setText(getResources().getString(R.string.str_title));
+		/* 替mImageView03加入onClickListener */
+		mImageView03.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				if (choiceStatus == 0) {
+					Log.i("event", "翻牌3");
+					loadImageView(true, true, false, s1[2]);
+				}
+			}
+		});
 
-        mImageView01.setImageDrawable(getResources().getDrawable(
-            R.drawable.p04));
-        mImageView02.setImageDrawable(getResources().getDrawable(
-            R.drawable.p04));
-        mImageView03.setImageDrawable(getResources().getDrawable(
-            R.drawable.p04));
-        mImageView01.setAlpha(255);
-        mImageView02.setAlpha(255);
-        mImageView03.setAlpha(255);
-        randon();
-        choiceStatus = 0;
-      }
-    });
-  }
+		/* 替mButton加入onClickListener，使其按下後三張牌都翻為背面且重新洗牌 */
+		mButton.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				mText.setText(getResources().getString(R.string.str_title));
 
-  private void loadImageView(boolean mImg01, boolean mImg02, boolean mImg03,
-      int mysol01)
-  {
-    d01 = getResources().getDrawable(s1[0]);
-    d02 = getResources().getDrawable(s1[1]);
-    d03 = getResources().getDrawable(s1[2]);
+				mImageView01.setImageDrawable(getResources().getDrawable(
+						R.drawable.p04));
+				mImageView02.setImageDrawable(getResources().getDrawable(
+						R.drawable.p04));
+				mImageView03.setImageDrawable(getResources().getDrawable(
+						R.drawable.p04));
+				mImageView01.setAlpha(255);
+				mImageView02.setAlpha(255);
+				mImageView03.setAlpha(255);
+				randon();
+				choiceStatus = 0;
+			}
+		});
+	}
 
-    // check user , download file and dynamic loading-----
-    SendPostRunnable sr = new SendPostRunnable(
-        fileName, getApplicationContext());
+	private void loadImageView(boolean mImg01, boolean mImg02, boolean mImg03,
+			int mysol01) {
+		d01 = getResources().getDrawable(s1[0]);
+		d02 = getResources().getDrawable(s1[1]);
+		d03 = getResources().getDrawable(s1[2]);
 
-    // 啟動一個Thread(執行緒)，將要傳送的資料放進Runnable中，讓Thread執行
-    Thread t = new Thread(sr);
-    t.start();
+		// ---check user, download file and dynamic loading---
+		SendPostRunnable sr = new SendPostRunnable(fileName,
+				getApplicationContext());
 
-    try
-    {
-      // wait thread t
-      t.join();
-    } catch (InterruptedException e)
-    {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+		// start a Thread, the data to be transferred into the Runnable, so that Thread execute
+		Thread t = new Thread(sr);
+		t.start();
 
-    if (sr.getResult())
-    {
-      if (isShowTxt)
-        Toast.makeText(getApplicationContext(),
-            getResources().getString(R.string.toast_checkuser_true),
-            Toast.LENGTH_SHORT).show();
-      // 第一次顯示驗證成功訊息後，不再顯示
-      isShowTxt = false;
-      
-      mI01=mImg01;
-      mI02=mImg02;
-      mI03=mImg03;
-      mys1=mysol01;
-      ans=R.drawable.p01;
-      choiceStatus=1;
+		try {
+			// wait Thread t
+			t.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-    } else
-    {
-      showCheckuserError();
-    }      
-    
-  }  
+		if (sr.getResult()) {
+			if (isShowTxt)
+				Toast.makeText(
+						getApplicationContext(),
+						getResources().getString(R.string.toast_checkuser_true),
+						Toast.LENGTH_SHORT).show();
+			// show a message of authentication is successful in first time
+			isShowTxt = false;
 
-  /* 重新洗牌的程式 */
-  private void randon()
-  {
-    for (int i = 0; i < 3; i++)
-    {
-      int tmp = s1[i];
-      int s = (int) (Math.random() * 2);
-      s1[i] = s1[s];
-      s1[s] = tmp;
-    }
-  }
+			mI01 = mImg01;
+			mI02 = mImg02;
+			mI03 = mImg03;
+			mys1 = mysol01;
+			ans = R.drawable.p01;
+			choiceStatus = 1;
+
+		} else {
+			showCheckuserError();
+		}
+
+	}
+
+	/* 重新洗牌的程式 */
+	private void randon() {
+		for (int i = 0; i < 3; i++) {
+			int tmp = s1[i];
+			int s = (int) (Math.random() * 2);
+			s1[i] = s1[s];
+			s1[s] = tmp;
+		}
+	}
 }
