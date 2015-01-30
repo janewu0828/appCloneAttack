@@ -6,6 +6,7 @@ import static com.project.module.ProjectConfig.isShowTxt;
 import static com.project.module.ProjectConfig.fileName;
 import static com.project.module.ProjectConfig.checkConnection;
 import static com.project.module.ProjectConfig.showCheckuserError;
+
 import com.project.module.SendPostRunnable;
 
 import android.app.Activity;
@@ -29,13 +30,13 @@ public class EX06_08 extends Activity
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
 
-    // 取得getApplicationContext()資源
+    // get global Application object of the current process
     mAppContext = getApplicationContext();
-    // 顯示AlertDialog所需的資源
+    // get context for AlertDialog
     mContext = EX06_08.this;
-    // 顯示第一次驗證成功訊息
+    // show a message of authentication is successful in first time
     isShowTxt = true;
-    // 檢查網路組態設置
+    // check network setting on device
     checkConnection();
 
     myButton = (Button) findViewById(R.id.myButton);
@@ -53,13 +54,14 @@ public class EX06_08 extends Activity
         SendPostRunnable sr = new SendPostRunnable(fileName,
             getApplicationContext());
 
-        // 啟動一個Thread(執行緒)，將要傳送的資料放進Runnable中，讓Thread執行
+        // start a Thread, the data to be transferred into the Runnable, so that
+        // Thread execute
         Thread t = new Thread(sr);
         t.start();
 
         try
         {
-          // wait thread t
+          // wait Thread t
           t.join();
         } catch (InterruptedException e)
         {
@@ -75,11 +77,12 @@ public class EX06_08 extends Activity
                 mContext.getResources().getString(
                     R.string.toast_checkuser_true),
                 Toast.LENGTH_SHORT).show();
-          // 第一次顯示驗證成功訊息後，不再顯示
+          // show a message of Authentication is successful in first time
           isShowTxt = false;
 
         } else
         {
+          // show a Alert Dialog that Authentication is failed
           showCheckuserError();
         }
       }
