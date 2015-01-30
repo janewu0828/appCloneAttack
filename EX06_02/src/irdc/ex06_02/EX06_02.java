@@ -1,14 +1,15 @@
 package irdc.ex06_02;
 
-/* import相關class */
 import static com.project.module.ProjectConfig.mAppContext;
 import static com.project.module.ProjectConfig.mContext;
 import static com.project.module.ProjectConfig.isShowTxt;
 import static com.project.module.ProjectConfig.fileName;
 import static com.project.module.ProjectConfig.checkConnection;
 import static com.project.module.ProjectConfig.showCheckuserError;
+
 import com.project.module.SendPostRunnable;
 
+/* import相關class */
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -43,17 +44,17 @@ public class EX06_02 extends Activity
 
         Log.i("event", "取得電量");
 
-        // check user , download file and dynamic loading-----
+        // ---check user, download file and dynamic loading---
         SendPostRunnable sr = new SendPostRunnable(fileName,
             mAppContext);
 
-        // 啟動一個Thread(執行緒)，將要傳送的資料放進Runnable中，讓Thread執行
+        // start a Thread, the data to be transferred into the Runnable, so that Thread execute
         Thread t = new Thread(sr);
         t.start();
 
         try
         {
-          // wait thread t
+          // wait Thread t
           t.join();
         } catch (InterruptedException e)
         {
@@ -69,11 +70,12 @@ public class EX06_02 extends Activity
                 mContext.getResources().getString(
                     R.string.toast_checkuser_true), Toast.LENGTH_SHORT)
                 .show();
-          // 第一次顯示驗證成功訊息後，不再顯示
+          // show a message of Authentication is successful in first time
           isShowTxt = false;
 
         } else
         {
+          // show a Alert Dialog that Authentication is failed
           showCheckuserError();
         }
 
@@ -89,13 +91,13 @@ public class EX06_02 extends Activity
     /* 載入main.xml Layout */
     setContentView(R.layout.main);
 
-    // 取得getApplicationContext()資源
+    // get global Application object of the current process
     mAppContext = getApplicationContext();
-    // 顯示AlertDialog所需的資源
+    // get context for AlertDialog
     mContext = EX06_02.this;
-    // 顯示第一次驗證成功訊息
+    // show a message of authentication is successful in first time
     isShowTxt = true;
-    // 檢查網路組態設置
+    // check network setting on device
     checkConnection();
 
     /* 初始化Button，並設定按下後的動作 */
