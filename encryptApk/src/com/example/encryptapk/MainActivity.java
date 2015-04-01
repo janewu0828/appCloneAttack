@@ -40,8 +40,7 @@ public class MainActivity extends ActionBarActivity {
 
 		@Override
 		public void onClick(View v) {
-			Editable edit = edit_seed.getText();
-			String str = edit.toString();
+			String str = edit_seed.getText().toString();
 
 			if (str == null || "".equals(str)) {
 				text_state.setText("seed is null !!!");
