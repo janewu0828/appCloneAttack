@@ -46,8 +46,7 @@ public class MainActivity extends ActionBarActivity {
 				text_state.setText("seed is null !!!");
 				Log.e(TAG, "str is null" + str);
 			} else {
-				// 加密保存
-				
+				// 加密保存				
 				seed=str;
 				isSuccess = true;
 				
@@ -86,7 +85,7 @@ public class MainActivity extends ActionBarActivity {
 
 				if (isSuccess) {
 					text_state.setText("加密成功");
-					Log.i(TAG, "seed=" + edit_seed.toString() + "加密成功");
+					Log.e(TAG, "seed= " + seed + ", 加密成功");
 				} else {
 					text_state.setText("加密失敗");
 				}
