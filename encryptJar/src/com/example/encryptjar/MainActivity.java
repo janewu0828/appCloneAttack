@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.example.encryptjar.R;
 
 public class MainActivity extends ActionBarActivity {
@@ -27,9 +29,10 @@ public class MainActivity extends ActionBarActivity {
 	private EditText edit_seed;
 	private Button btn_Encryption;
 
+	private String outputFileName = "encrypt.jar";
 	private File sdCard = Environment.getExternalStorageDirectory();
-	// 欲加密檔案的路径，在res\raw\encryptjar.jar找到文件，再放到外部存储的目录下。用於测试
-	private File oldFile = new File(sdCard+"/project/", "outputJAR_20150130.jar");
+	// 欲加密檔案的路径，在res\raw\outputjar.jar.jar找到文件，再放到外部存储的目录下。用於测试
+	private File oldFile = new File(sdCard + "/project/", "outputJAR.jar");
 
 	private FileInputStream fis = null;
 	private FileOutputStream fos = null;
@@ -46,19 +49,19 @@ public class MainActivity extends ActionBarActivity {
 				text_state.setText("seed is null !!!");
 				Log.e(TAG, "str is null" + str);
 			} else {
-				// 加密保存				
-				seed=str;
+				// 加密保存
+				seed = str;
 				isSuccess = true;
-				
+
 				try {
 					fis = new FileInputStream(oldFile);
-					
+
 					byte[] oldByte = new byte[(int) oldFile.length()];
 					fis.read(oldByte); // 读取
 
-					byte[] newByte = AESUtils.encryptVoice(seed, oldByte);
-					
 					// 加密
+					byte[] newByte = AESUtils.encryptVoice(seed, oldByte);
+					oldFile = new File(sdCard + "/project/", outputFileName);
 					fos = new FileOutputStream(oldFile);
 					fos.write(newByte);
 
@@ -87,7 +90,8 @@ public class MainActivity extends ActionBarActivity {
 				if (isSuccess) {
 					text_state.setText("加密成功");
 					Log.e(TAG, "seed= " + seed + ", 加密成功");
-					Log.e(TAG, "filepath= " +oldFile.getAbsolutePath().toString());
+					Log.e(TAG, "filepath= "
+							+ oldFile.getAbsolutePath().toString());
 				} else {
 					text_state.setText("加密失敗");
 				}
