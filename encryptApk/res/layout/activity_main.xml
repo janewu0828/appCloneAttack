@@ -31,7 +31,7 @@
         android:layout_below="@+id/text_state"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:text="seed" >
+        android:text="key" >
 
         <requestFocus />
     </EditText>
