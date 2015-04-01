@@ -1,11 +1,10 @@
-package com.example.encryptapk;
+package com.example.encryptjar;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.os.Bundle;
@@ -18,9 +17,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.example.encryptjar.R;
 
 public class MainActivity extends ActionBarActivity {
-	private static final String TAG = "encrypt apk";
+	private static final String TAG = "encryptJar";
 	private static String seed = "guess"; // 种子
 
 	private TextView text_state;
@@ -28,8 +28,8 @@ public class MainActivity extends ActionBarActivity {
 	private Button btn_Encryption;
 
 	private File sdCard = Environment.getExternalStorageDirectory();
-	// 欲加密檔案的路径，在res\raw\encryptapk.apk找到文件，再放到外部存储的根目录下。用於测试
-	private File oldFile = new File(sdCard, "encryptapk.apk");
+	// 欲加密檔案的路径，在res\raw\encryptjar.jar找到文件，再放到外部存储的目录下。用於测试
+	private File oldFile = new File(sdCard+"/project/", "outputJAR_20150130.jar");
 
 	private FileInputStream fis = null;
 	private FileOutputStream fos = null;
@@ -52,11 +52,12 @@ public class MainActivity extends ActionBarActivity {
 				
 				try {
 					fis = new FileInputStream(oldFile);
+					
 					byte[] oldByte = new byte[(int) oldFile.length()];
 					fis.read(oldByte); // 读取
 
-					Log.e(TAG, "seed= " + seed);
 					byte[] newByte = AESUtils.encryptVoice(seed, oldByte);
+					
 					// 加密
 					fos = new FileOutputStream(oldFile);
 					fos.write(newByte);
@@ -64,28 +65,29 @@ public class MainActivity extends ActionBarActivity {
 				} catch (FileNotFoundException e) {
 					isSuccess = false;
 					e.printStackTrace();
-					Log.e(TAG, String.valueOf(e));
+					Log.e(TAG, e.getMessage());
 				} catch (IOException e) {
 					isSuccess = false;
 					e.printStackTrace();
-					Log.e(TAG, String.valueOf(e));
+					Log.e(TAG, e.getMessage());
 				} catch (Exception e) {
 					isSuccess = false;
 					e.printStackTrace();
-					Log.e(TAG, String.valueOf(e));
+					Log.e(TAG, e.getMessage());
 				} finally {
 					try {
 						fis.close();
 						fos.close();
 					} catch (IOException e) {
 						e.printStackTrace();
-						Log.e(TAG, String.valueOf(e));
+						Log.e(TAG, e.getMessage());
 					}
 				}
 
 				if (isSuccess) {
 					text_state.setText("加密成功");
 					Log.e(TAG, "seed= " + seed + ", 加密成功");
+					Log.e(TAG, "filepath= " +oldFile.getAbsolutePath().toString());
 				} else {
 					text_state.setText("加密失敗");
 				}
