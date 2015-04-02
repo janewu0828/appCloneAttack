@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+
 import com.project.interfaces.Load;
 
 import android.content.Context;
@@ -16,43 +17,58 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 public class SendPostRunnable implements Runnable {
+	private static final String TAG = "SendPostRunnable";
 
-	Context appContext;
+	private Context appContext;
+	private String appid = null;
+	private String deviceid = null;
+	private String IMEI = null;
 
-	String fileName = "";
-
-	String appid = null;
-	String deviceid = null;
-	String IMEI = null;
-
-	boolean result = true;
+	private boolean result = true;
 
 	// download file from server
-	String file_url = "http://140.118.109.165/web2/download/" + fileName;
-	String outputFilePath = Environment.getExternalStorageDirectory()
-			.getAbsolutePath() + "/project";
+	private String fileName = "";
+	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/web2/";
+	private String file_url = appSecurityEnhancer_url + "download/" + fileName;
+	private String outputFilePath = Environment.getExternalStorageDirectory()
+			.getAbsolutePath() + "/project/";
 
 	/**
 	 * @param result
 	 */
 	public SendPostRunnable(String fileName, Context appContext) {
 		super();
+
 		this.fileName = fileName;
 		this.appContext = appContext;
+
 		this.appid = getAppId();
 		this.deviceid = getDeviceId(appContext);
 		this.IMEI = getIMEI(appContext);
 	}
 
 	private void sendPostDataToInternet() {
-		CheckUser cu = new CheckUser(appid, deviceid, IMEI);
-		setResult(cu.checkUser());
-		Log.i("cu.checkUser()", "" + result);
+		// CheckUser cu = new CheckUser(appid, deviceid, IMEI);
+		// setResult(cu.checkUser());
+		// Log.i(TAG, "cu.checkUser()= " + result);
 
-		if (result) {
+		// if (result) {
+		if (new File(outputFilePath + fileName).exists()) {
+			// decrypt Jar
+			Decrypt decfile = new Decrypt(fileName, outputFilePath,
+					com.project.module.ProjectConfig.personal_key);
+			decfile.decryptJar();
+
+			// dynamic loading -----
+			String loadFileName = decfile.getOutputFileName();
+			Load ld = new Load("outputJAR.jar", outputFilePath);
+//			Load ld = new Load(loadFileName, outputFilePath);
+			ld.loadJar(appContext);
+		} else {
 			// Asnyc Dowload
 			new DownloadFileFromURL().execute(file_url);
 		}
+		// }
 	}
 
 	@Override
@@ -101,15 +117,14 @@ public class SendPostRunnable implements Runnable {
 				InputStream input = new BufferedInputStream(url.openStream(),
 						8192);
 
-				File outputFile = new File(outputFilePath);
+				File outputFileDir = new File(outputFilePath);
 
-				if (!outputFile.exists()) {
-					outputFile.mkdir();
+				if (!outputFileDir.exists()) {
+					outputFileDir.mkdir();
 				}
-				// Log.e("e", outputFile.toString());
 
 				// Output stream
-				OutputStream output = new FileOutputStream(outputFilePath + "/"
+				OutputStream output = new FileOutputStream(outputFilePath
 						+ fileName);
 
 				byte data[] = new byte[2048];
@@ -134,7 +149,7 @@ public class SendPostRunnable implements Runnable {
 				input.close();
 
 			} catch (Exception e) {
-				Log.e("Error: ", e.getMessage());
+				Log.e(TAG, "Error: " + e.getMessage());
 			}
 
 			return null;
@@ -151,17 +166,16 @@ public class SendPostRunnable implements Runnable {
 		 * After completing background task Dismiss the progress dialog
 		 * **/
 		@Override
-		protected void onPostExecute(String file_url) {
+		protected void onPostExecute(String paramString) {
 			// dynamic loading -----
-			Load ld = new Load(fileName);
+			Load ld = new Load(fileName, outputFilePath);
 			ld.loadJar(appContext);
 		}
-
 	}
 
 	private String getAppId() {
-		String appId="";
-		
+		String appId = "";
+
 		// ---get hash code of apk---
 		String PACKAGE_NAME = appContext.getPackageName();
 		String apkName = "";
@@ -182,7 +196,7 @@ public class SendPostRunnable implements Runnable {
 				System.out.println("no exists= " + apkFile.toString());
 
 			} else {
-				System.out.println("exists= " + apkFile.toString());
+				// System.out.println("exists= " + apkFile.toString());
 				isNext++;
 			}
 		}
@@ -190,16 +204,16 @@ public class SendPostRunnable implements Runnable {
 		// ---get hash code of apk---
 		try {
 			appId = Hash.sha256(apkFile);
-			System.out.println("appId= " + appId);
-			System.out.println("appId length= " + appId.length());
+			// System.out.println("appId= " + appId);
+			// System.out.println("appId length= " + appId.length());
 
 		} catch (Exception e) {
 			// TODO 自動產生的 catch 區塊
 			e.printStackTrace();
-			System.out.println("Error: " + e.getMessage());
+			Log.e(TAG, "Error: " + e.getMessage());
 
 		}
-		
+
 		return appId;
 	}
 
@@ -208,8 +222,8 @@ public class SendPostRunnable implements Runnable {
 		DeviceUuidFactory DFactory = new DeviceUuidFactory(context2);
 		String deviceId = DFactory.getDeviceUuid().toString();
 
-		// Log.i("deviceId", deviceId);
-		// Log.i("deviceId length", "" + deviceId.length());
+		// System.out.println("deviceId", deviceId);
+		// System.out.println("deviceId length", "" + deviceId.length());
 
 		return deviceId;
 	}
@@ -220,8 +234,8 @@ public class SendPostRunnable implements Runnable {
 				.getSystemService(Context.TELEPHONY_SERVICE);
 		String imei = tM.getDeviceId();
 
-		// Log.i("IMEI", imei);
-		// Log.i("IMEI" + " length", "" + imei.length());
+		// System.out.println("IMEI", imei);
+		// System.out.println("IMEI" + " length", "" + imei.length());
 
 		return imei;
 	}
