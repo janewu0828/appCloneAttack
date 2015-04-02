@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">猜猜紅心A</string>
     
     <string name="str_title">猜猜看紅心A是哪一張?</string>
     <string name="str_button">再玩一次</string>
