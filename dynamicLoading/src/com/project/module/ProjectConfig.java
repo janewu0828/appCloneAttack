@@ -17,7 +17,9 @@ public class ProjectConfig {
 	public static boolean isShowTxt;
 
 	// ---dynamic loading filename(JAR)---
-	public static String fileName = "outputJAR_20150130.jar";
+	public static String fileName = "encrypt.jar";
+
+	public static String personal_key = "";
 
 	public static void checkConnection() {
 		// TODO Auto-generated method stub
@@ -40,6 +42,12 @@ public class ProjectConfig {
 						R.string.alert_checkuser_error_title),
 				mContext.getResources().getString(
 						R.string.alert_checkuser_error_msg), false);
+	}
+
+	public static void showPersonalKey() {
+		// TODO Auto-generated method stub
+		AlertDialogManager alert = new AlertDialogManager();
+		alert.showAlertEditDialog(mContext, "Input Personal Key", "key", false);
 	}
 
 }
