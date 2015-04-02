@@ -1,25 +1,31 @@
 package com.project.module;
 
+import static com.project.module.ProjectConfig.personal_key;
+
 import irdc.ex04_16.R;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
-public class AlertDialogManager
-{
+public class AlertDialogManager {
+	private float myTextSize = 28.0f;
 
-  float myTextSize = 28.0f;
-
-  /**
-   * Function to display simple AlertDialog
-   * 
-   * @param context - application context
-   * @param title - alert dialog title
-   * @param message - alert message
-   * @param status - success/failure (used to set icon) - pass null if you don't want icon
-   * */
+	/**
+	 * Function to display simple AlertDialog
+	 * 
+	 * @param context
+	 *            - application context
+	 * @param title
+	 *            - alert dialog title
+	 * @param message
+	 *            - alert message
+	 * @param status
+	 *            - success/failure (used to set icon) - pass null if you don't
+	 *            want icon
+	 * */
 	@SuppressWarnings("deprecation")
 	public void showAlertDialog(Context context, String title, String message,
 			Boolean status) {
@@ -76,6 +82,37 @@ public class AlertDialogManager
 			Button btn = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
 			btn.setTextSize(myTextSize);
 		}
+	}
+
+	public void showAlertEditDialog(Context context, String title,String message,
+			Boolean status) {
+		
+		AlertDialog.Builder editDialog = new AlertDialog.Builder(context);		
+		editDialog.setTitle("--- " + title + " ---");
+		
+		final EditText editText = new EditText(context);
+		editText.setText(message);
+		editDialog.setView(editText);
+
+		editDialog.setPositiveButton("OK",
+				new DialogInterface.OnClickListener() {
+					// do something when the button is clicked
+					public void onClick(DialogInterface arg0, int arg1) {
+						personal_key = editText.getText().toString();
+						System.out.println("key= " + personal_key);
+					}
+				});
+		
+		editDialog.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+					// do something when the button is clicked
+					public void onClick(DialogInterface arg0, int arg1) {
+						// ...
+					}
+				});
+		
+		editDialog.show();
+		
 	}
 
 }
