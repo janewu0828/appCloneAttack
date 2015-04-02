@@ -22,10 +22,10 @@ import org.json.JSONObject;
 public class CheckUser {
 	public static final int progress_bar_type = 0;
 
-	String appSecurityEnhancer_uri = "http://140.118.109.165/web2/php/app.php";
-	String appid = null;
-	String deviceid = null;
-	String IMEI = null;
+	private String uri = SendPostRunnable.appSecurityEnhancer_url + "php/app.php";
+	private String appid = null;
+	private String deviceid = null;
+	private String IMEI = null;
 
 	// 主要是记录用户会话过程中的一些用户的基本信息
 	private HashMap<String, String> session = new HashMap<String, String>();
@@ -44,7 +44,7 @@ public class CheckUser {
 	public boolean checkUser() {
 
 		DefaultHttpClient mHttpClient = new DefaultHttpClient();
-		HttpPost mPost = new HttpPost(appSecurityEnhancer_uri);
+		HttpPost mPost = new HttpPost(uri);
 
 		List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
 		pairs.add(new BasicNameValuePair("appId", appid));
@@ -67,7 +67,7 @@ public class CheckUser {
 
 				if (entity != null) {
 					String info = EntityUtils.toString(entity);
-					System.out.println("info-----------" + info);
+					System.out.println("-----------info-----------" + info);
 					// 以下主要是对服务器端返回的数据进行解析
 					JSONObject jsonObject = null;
 					// flag为登录成功与否的标记,从服务器端返回的数据
