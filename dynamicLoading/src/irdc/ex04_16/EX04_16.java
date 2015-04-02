@@ -6,6 +6,8 @@ import static com.project.module.ProjectConfig.isShowTxt;
 import static com.project.module.ProjectConfig.fileName;
 import static com.project.module.ProjectConfig.checkConnection;
 import static com.project.module.ProjectConfig.showCheckuserError;
+import static com.project.module.ProjectConfig.showPersonalKey;
+
 import com.project.module.SendPostRunnable;
 
 /* import相關class */
@@ -16,7 +18,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import android.util.Log;
 import android.view.View;
 
@@ -57,8 +58,10 @@ public class EX04_16 extends Activity {
 		mContext = EX04_16.this;
 		// show a message of authentication is successful in first time
 		isShowTxt = true;
-		// check network setting on device
-		checkConnection();
+		// // check network setting on device
+		// checkConnection();
+		// input decryption key
+		showPersonalKey();
 
 		/* 取得相關物件 */
 		mText = (TextView) findViewById(R.id.mText);
@@ -129,7 +132,8 @@ public class EX04_16 extends Activity {
 		SendPostRunnable sr = new SendPostRunnable(fileName,
 				getApplicationContext());
 
-		// start a Thread, the data to be transferred into the Runnable, so that Thread execute
+		// start a Thread, the data to be transferred into the Runnable, so that
+		// Thread execute
 		Thread t = new Thread(sr);
 		t.start();
 
