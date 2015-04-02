@@ -5,6 +5,7 @@ import java.io.File;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Environment;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 import dalvik.system.DexClassLoader;
@@ -31,7 +32,7 @@ public class Load {
 
 			// export jar path
 			File sourceFile = new File(sourceFilePath);
-			Log.e(TAG, "path= " + sourceFile.getAbsolutePath());
+			// Log.e(TAG, "path= " + sourceFile.getAbsolutePath());
 
 			// export dex tmp path
 			File file = context.getDir("osdk", 0);
@@ -49,10 +50,12 @@ public class Load {
 
 			// return jar result
 			String str = mMainInterface.sayHello();
-			Context mContext=com.project.module.ProjectConfig.mAppContext;
 			Log.e(TAG, "jar content= " + str);
-			Toast.makeText(mContext, "jar content= " + str, Toast.LENGTH_SHORT).show();
 
+			Looper.prepare();
+			Toast.makeText(context, "jar content= " + str, Toast.LENGTH_SHORT)
+					.show();
+			Looper.loop();// 进入loop中的循环，查看消息队列
 
 			// exe
 			mMainInterface.loadMethod();
