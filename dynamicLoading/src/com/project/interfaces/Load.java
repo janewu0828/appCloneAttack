@@ -6,34 +6,32 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
-
+import android.widget.Toast;
 import dalvik.system.DexClassLoader;
 
 public class Load {
-	int s1 = 0;
-	int ans = 0;
-	String result = "";
+	private static final String TAG = "Load";
 
-	String folderPath = "project";
-	String fileName = "";
+	private String fileName = "";
+	private String folderPath = "";
 
 	/**
 	 * @param fileName
 	 */
-	public Load(String fileName) {
+	public Load(String fileName, String folderPath) {
 		super();
 		this.fileName = fileName;
+		this.folderPath = folderPath;
 	}
 
 	@SuppressLint("NewApi")
 	public void loadJar(Context context) {
 		try {
-			String sourceFilePath = Environment.getExternalStorageDirectory()
-					+ File.separator + folderPath + File.separator + fileName;
+			String sourceFilePath = folderPath + fileName;
 
 			// export jar path
 			File sourceFile = new File(sourceFilePath);
-			// Log.e("path", sourceFile.getAbsolutePath());
+			Log.e(TAG, "path= " + sourceFile.getAbsolutePath());
 
 			// export dex tmp path
 			File file = context.getDir("osdk", 0);
@@ -50,18 +48,22 @@ public class Load {
 					.newInstance();
 
 			// return jar result
-			// String str = mMainInterface.sayHello();
-			// Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
+			String str = mMainInterface.sayHello();
+			Context mContext=com.project.module.ProjectConfig.mAppContext;
+			Log.e(TAG, "jar content= " + str);
+			Toast.makeText(mContext, "jar content= " + str, Toast.LENGTH_SHORT).show();
+
 
 			// exe
 			mMainInterface.loadMethod();
 
 			File deleteFile = new File(sourceFile.getAbsolutePath());
 			boolean deleted = deleteFile.delete();
-			Log.e("deleteFile", String.valueOf(deleted));
+			Log.e(TAG, "deleteFile= " + String.valueOf(deleted));
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			Log.e(TAG, "Error: " + e.getMessage());
 		}
 	}
 
