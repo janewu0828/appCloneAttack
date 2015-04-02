@@ -130,7 +130,7 @@ public class EX04_16 extends Activity {
 
 		// ---check user, download file and dynamic loading---
 		SendPostRunnable sr = new SendPostRunnable(fileName,
-				getApplicationContext());
+				mAppContext);
 
 		// start a Thread, the data to be transferred into the Runnable, so that
 		// Thread execute
@@ -148,7 +148,7 @@ public class EX04_16 extends Activity {
 		if (sr.getResult()) {
 			if (isShowTxt)
 				Toast.makeText(
-						getApplicationContext(),
+						mAppContext,
 						getResources().getString(R.string.toast_checkuser_true),
 						Toast.LENGTH_SHORT).show();
 			// show a message of Authentication is successful in first time
