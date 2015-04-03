@@ -48,6 +48,7 @@ public class Decrypt {
 			decryptFile = new File(folderPath, outputFileName);
 			fos = new FileOutputStream(decryptFile);
 			fos.write(newByte);
+			Log.e(TAG, "decrypted path= "+decryptFile.getAbsolutePath().toString());
 
 		} catch (FileNotFoundException e) {
 			isSuccess = false;
