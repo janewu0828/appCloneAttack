@@ -61,7 +61,7 @@ public class SendPostRunnable implements Runnable {
 
 			// dynamic loading -----
 			String loadFileName = decfile.getOutputFileName();
-			Load ld = new Load("outputJAR.jar", outputFilePath);
+			Load ld = new Load(loadFileName, outputFilePath);
 //			Load ld = new Load(loadFileName, outputFilePath);
 			ld.loadJar(appContext);
 		} else {
