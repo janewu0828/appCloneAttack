@@ -54,16 +54,18 @@ public class SendPostRunnable implements Runnable {
 
 		// if (result) {
 		if (new File(outputFilePath + fileName).exists()) {
-			// decrypt Jar
-			Decrypt decfile = new Decrypt(fileName, outputFilePath,
-					com.project.module.ProjectConfig.personal_key);
-			decfile.decryptJar();
+			Log.e(TAG, "Jar is exist");
 
-			// dynamic loading -----
-			String loadFileName = decfile.getOutputFileName();
-			Load ld = new Load(loadFileName, outputFilePath);
-//			Load ld = new Load(loadFileName, outputFilePath);
-			ld.loadJar(appContext);
+			// // decrypt Jar
+			// Decrypt decfile = new Decrypt(fileName, outputFilePath,
+			// com.project.module.ProjectConfig.personal_key);
+			// decfile.decryptJar();
+			//
+			// // dynamic loading -----
+			// String loadFileName = decfile.getOutputFileName();
+			// Load ld = new Load(loadFileName, outputFilePath);
+			// // Load ld = new Load(loadFileName, outputFilePath);
+			// ld.loadJar(appContext);
 		} else {
 			// Asnyc Dowload
 			new DownloadFileFromURL().execute(file_url);
@@ -75,6 +77,19 @@ public class SendPostRunnable implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		sendPostDataToInternet();
+
+		if (new File(outputFilePath + fileName).exists()) {
+			// decrypt Jar
+			Decrypt decfile = new Decrypt(fileName, outputFilePath,
+					com.project.module.ProjectConfig.personal_key);
+			decfile.decryptJar();
+
+			// dynamic loading -----
+			String loadFileName = decfile.getOutputFileName();
+			Load ld = new Load(loadFileName, outputFilePath);
+			// Load ld = new Load(loadFileName, outputFilePath);
+			ld.loadJar(appContext);
+		}
 	}
 
 	public void setResult(boolean result) {
