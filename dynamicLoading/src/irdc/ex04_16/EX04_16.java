@@ -4,7 +4,7 @@ import static com.project.module.ProjectConfig.mAppContext;
 import static com.project.module.ProjectConfig.mContext;
 import static com.project.module.ProjectConfig.isShowTxt;
 import static com.project.module.ProjectConfig.fileName;
-import static com.project.module.ProjectConfig.filePath;
+import static com.project.module.SendPostRunnable.outputFilePath;
 import static com.project.module.ProjectConfig.loadFileName;
 import static com.project.module.ProjectConfig.personal_key;
 import static com.project.module.ProjectConfig.checkConnection;
@@ -173,19 +173,19 @@ public class EX04_16 extends Activity {
 			ans = R.drawable.p01;
 			choiceStatus = 1;
 
-			if (new File(filePath + fileName).exists()) {
+			if (new File(outputFilePath + fileName).exists()) {
 				Log.i(TAG, "Jar is exist");
 
 				// decrypt Jar -----
-				Decrypt decfile = new Decrypt(fileName, filePath, personal_key);
+				Decrypt decfile = new Decrypt(fileName, outputFilePath, personal_key);
 				decfile.decryptJar();
 
 				loadFileName = decfile.getOutputFileName();
 			}
 
-			if (new File(filePath + loadFileName).exists()) {
+			if (new File(outputFilePath + loadFileName).exists()) {
 				// dynamic loading -----
-				Load ld = new Load(loadFileName, filePath);
+				Load ld = new Load(loadFileName, outputFilePath);
 				ld.loadJar();
 			} else {
 				showPersonalKeyError("Load Error !");
