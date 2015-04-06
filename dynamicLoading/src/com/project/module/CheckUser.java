@@ -83,7 +83,7 @@ public class CheckUser {
 						flag = jsonObject.getString("flag");
 						appId = jsonObject.getString("appId");
 						deviceId = jsonObject.getString("deviceId");
-						IMEI = jsonObject.getString("IMEI");
+						// IMEI = jsonObject.getString("IMEI");
 						sessionid = jsonObject.getString("sessionid");
 
 					} catch (JSONException e) {
