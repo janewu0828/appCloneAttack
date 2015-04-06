@@ -150,7 +150,7 @@ public class EX04_16 extends Activity {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-
+			Log.e(TAG, "Error: "+e.getMessage());
 		}
 		
 		String outputFilePath = Environment.getExternalStorageDirectory()
