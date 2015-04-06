@@ -93,7 +93,7 @@ public class SendPostRunnable implements Runnable {
 			String loadFileName = decfile.getOutputFileName();
 			Load ld = new Load(loadFileName, outputFilePath);
 			// Load ld = new Load(loadFileName, outputFilePath);
-			ld.loadJar(mAppContext);
+			ld.loadJar();
 		}
 	}
 
@@ -189,7 +189,7 @@ public class SendPostRunnable implements Runnable {
 		protected void onPostExecute(String paramString) {
 			// dynamic loading -----
 			Load ld = new Load(fileName, outputFilePath);
-			ld.loadJar(mAppContext);
+			ld.loadJar();
 		}
 	}
 

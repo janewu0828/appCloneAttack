@@ -1,5 +1,7 @@
 package com.project.interfaces;
 
+import static com.project.module.ProjectConfig.mAppContext;
+
 import java.io.File;
 
 import android.annotation.SuppressLint;
@@ -26,7 +28,8 @@ public class Load {
 	}
 
 	@SuppressLint("NewApi")
-	public void loadJar(Context context) {
+	public void loadJar() {
+		Context context = mAppContext;
 		try {
 			String sourceFilePath = folderPath + fileName;
 
@@ -52,10 +55,11 @@ public class Load {
 			String str = mMainInterface.sayHello();
 			Log.e(TAG, "jar content= " + str);
 
-//			Looper.prepare();
-//			Toast.makeText(context, "jar content= " + str, Toast.LENGTH_SHORT)
-//					.show();
-//			Looper.loop();// 进入loop中的循环，查看消息队列
+			// Looper.prepare();
+			// Toast.makeText(context, "jar content= " + str,
+			// Toast.LENGTH_SHORT)
+			// .show();
+			// Looper.loop();// 进入loop中的循环，查看消息队列
 
 			// exe
 			mMainInterface.loadMethod();
