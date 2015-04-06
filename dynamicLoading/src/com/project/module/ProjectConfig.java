@@ -19,8 +19,6 @@ public class ProjectConfig {
 
 	// dynamic loading filename(JAR) -----
 	public static String fileName = "encrypt.jar";	
-	public static String filePath = Environment.getExternalStorageDirectory()
-			.getAbsolutePath() + "/project/";
 	public static String loadFileName = "";
 
 	public static String personal_key = "";
