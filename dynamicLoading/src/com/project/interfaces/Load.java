@@ -59,6 +59,7 @@ public class Load {
 
 			// exe
 			mMainInterface.loadMethod();
+			Log.e(TAG, "finished");
 
 			File deleteFile = new File(sourceFile.getAbsolutePath());
 			boolean deleted = deleteFile.delete();
