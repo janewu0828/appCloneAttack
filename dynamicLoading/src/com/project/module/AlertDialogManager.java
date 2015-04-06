@@ -99,7 +99,6 @@ public class AlertDialogManager {
 					// do something when the button is clicked
 					public void onClick(DialogInterface arg0, int arg1) {
 						personal_key = editText.getText().toString();
-						System.out.println("key= " + personal_key);
 					}
 				});
 		

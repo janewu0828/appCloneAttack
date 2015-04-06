@@ -1,6 +1,5 @@
 package com.project.interfaces;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 public interface MainInterface {
