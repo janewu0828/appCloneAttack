@@ -8,13 +8,18 @@ import static com.project.module.ProjectConfig.checkConnection;
 import static com.project.module.ProjectConfig.showCheckuserError;
 import static com.project.module.ProjectConfig.showPersonalKey;
 
-import com.project.module.SendPostRunnable;
+import java.io.File;
 
+import com.project.interfaces.Load;
+import com.project.module.Decrypt;
+
+import com.project.module.SendPostRunnable;
 
 /* import相關class */
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -145,6 +150,26 @@ public class EX04_16 extends Activity {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+
+		}
+		
+		String outputFilePath = Environment.getExternalStorageDirectory()
+				.getAbsolutePath() + "/project/";
+
+		String loadFileName = "";
+		if (new File(outputFilePath + fileName).exists()) {
+			Log.i(TAG, "Jar is exist");
+			
+			// decrypt Jar -----
+			Decrypt decfile = new Decrypt(fileName, outputFilePath,
+					com.project.module.ProjectConfig.personal_key);
+			decfile.decryptJar();
+			Log.i(TAG, "decrypted Jar");
+
+			// dynamic loading -----
+			loadFileName = decfile.getOutputFileName();
+			Load ld = new Load(loadFileName, outputFilePath);
+			ld.loadJar();
 		}
 
 		if (sr.getResult()) {
