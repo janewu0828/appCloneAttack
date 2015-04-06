@@ -10,7 +10,7 @@ import android.util.Log;
 
 public class Decrypt {
 	private static final String TAG = "Decrypt";
-	private static String seed = "";
+	private String seed = "";
 
 	private String fileName = "";
 	private String outputFileName = "decrypt.jar";
