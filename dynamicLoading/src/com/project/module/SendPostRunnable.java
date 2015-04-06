@@ -1,5 +1,7 @@
 package com.project.module;
 
+import static com.project.module.ProjectConfig.mAppContext;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,7 +21,6 @@ import android.util.Log;
 public class SendPostRunnable implements Runnable {
 	private static final String TAG = "SendPostRunnable";
 
-	private Context appContext;
 	private String appid = null;
 	private String deviceid = null;
 	private String IMEI = null;
@@ -36,15 +37,14 @@ public class SendPostRunnable implements Runnable {
 	/**
 	 * @param result
 	 */
-	public SendPostRunnable(String fileName, Context appContext) {
+	public SendPostRunnable(String fileName) {
 		super();
 
 		this.fileName = fileName;
-		this.appContext = appContext;
 
 		this.appid = getAppId();
-		this.deviceid = getDeviceId(appContext);
-		this.IMEI = getIMEI(appContext);
+		this.deviceid = getDeviceId(mAppContext);
+		this.IMEI = getIMEI(mAppContext);
 	}
 
 	private void sendPostDataToInternet() {
@@ -65,7 +65,7 @@ public class SendPostRunnable implements Runnable {
 			// String loadFileName = decfile.getOutputFileName();
 			// Load ld = new Load(loadFileName, outputFilePath);
 			// // Load ld = new Load(loadFileName, outputFilePath);
-			// ld.loadJar(appContext);
+			// ld.loadJar(mAppContext);
 		} else {
 			// Asnyc Dowload
 			new DownloadFileFromURL().execute(file_url);
@@ -81,19 +81,19 @@ public class SendPostRunnable implements Runnable {
 
 		if (new File(outputFilePath + fileName).exists()) {
 			Log.e(TAG, "decrypt Jar");
-			
+
 			// decrypt Jar
 			Decrypt decfile = new Decrypt(fileName, outputFilePath,
 					com.project.module.ProjectConfig.personal_key);
 			decfile.decryptJar();
 
 			Log.e(TAG, "dynamic loading");
-			
+
 			// dynamic loading -----
 			String loadFileName = decfile.getOutputFileName();
 			Load ld = new Load(loadFileName, outputFilePath);
 			// Load ld = new Load(loadFileName, outputFilePath);
-			ld.loadJar(SendPostRunnable.this.appContext);
+			ld.loadJar(mAppContext);
 		}
 	}
 
@@ -189,7 +189,7 @@ public class SendPostRunnable implements Runnable {
 		protected void onPostExecute(String paramString) {
 			// dynamic loading -----
 			Load ld = new Load(fileName, outputFilePath);
-			ld.loadJar(appContext);
+			ld.loadJar(mAppContext);
 		}
 	}
 
@@ -197,43 +197,43 @@ public class SendPostRunnable implements Runnable {
 		String appId = "";
 
 		// ---get hash code of apk---
-		String PACKAGE_NAME = appContext.getPackageName();
+		String PACKAGE_NAME = mAppContext.getPackageName();
 		String apkName = "";
 		String apkPath = Environment.getDataDirectory() + "/app/" + apkName;
 		File apkFile = null;
 		int i = 0;
 		int isNext = 0;
 
-//		// ---get apk file name---
-//		for (i = 1; isNext < 1; i++) {
-//			apkName = PACKAGE_NAME + "-" + i + ".apk";
-//			// System.out.println("fileName= " + fileName);
-//
-//			apkFile = new File(apkPath);
-//			// System.out.println("path= " + apkFile.getAbsolutePath());
-//
-//			if (!apkFile.exists()) {
-//				System.out.println("no exists= " + apkFile.toString());
-//
-//			} else {
-//				// System.out.println("exists= " + apkFile.toString());
-//				isNext++;
-//			}
-//		}
-//
-//		// ---get hash code of apk---
-//		try {
-//			appId = Hash.sha256(apkFile);
-//			// System.out.println("appId= " + appId);
-//			// System.out.println("appId length= " + appId.length());
-//
-//		} catch (Exception e) {
-//			// TODO 自動產生的 catch 區塊
-//			e.printStackTrace();
-//			Log.e(TAG, "Error: " + e.getMessage());
-//
-//		}
-		appId="123";
+		// // ---get apk file name---
+		// for (i = 1; isNext < 1; i++) {
+		// apkName = PACKAGE_NAME + "-" + i + ".apk";
+		// // System.out.println("fileName= " + fileName);
+		//
+		// apkFile = new File(apkPath);
+		// // System.out.println("path= " + apkFile.getAbsolutePath());
+		//
+		// if (!apkFile.exists()) {
+		// System.out.println("no exists= " + apkFile.toString());
+		//
+		// } else {
+		// // System.out.println("exists= " + apkFile.toString());
+		// isNext++;
+		// }
+		// }
+		//
+		// // ---get hash code of apk---
+		// try {
+		// appId = Hash.sha256(apkFile);
+		// // System.out.println("appId= " + appId);
+		// // System.out.println("appId length= " + appId.length());
+		//
+		// } catch (Exception e) {
+		// // TODO 自動產生的 catch 區塊
+		// e.printStackTrace();
+		// Log.e(TAG, "Error: " + e.getMessage());
+		//
+		// }
+		appId = "123";
 
 		return appId;
 	}
@@ -251,7 +251,7 @@ public class SendPostRunnable implements Runnable {
 
 	private String getIMEI(Context context2) {
 		// TODO Auto-generated method stub
-		TelephonyManager tM = (TelephonyManager) appContext
+		TelephonyManager tM = (TelephonyManager) mAppContext
 				.getSystemService(Context.TELEPHONY_SERVICE);
 		String imei = tM.getDeviceId();
 
