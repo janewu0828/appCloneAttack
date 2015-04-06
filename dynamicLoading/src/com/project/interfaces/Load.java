@@ -67,7 +67,7 @@ public class Load {
 
 			File deleteFile = new File(sourceFile.getAbsolutePath());
 			boolean deleted = deleteFile.delete();
-			Log.e(TAG, "deleted= " + String.valueOf(deleted));
+			Log.e(TAG, "deleted= " + String.valueOf(deleted)+", file= "+sourceFile.getAbsolutePath());
 
 		} catch (Exception e) {
 			e.printStackTrace();
