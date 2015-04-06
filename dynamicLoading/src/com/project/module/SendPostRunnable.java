@@ -204,36 +204,36 @@ public class SendPostRunnable implements Runnable {
 		int i = 0;
 		int isNext = 0;
 
-		// ---get apk file name---
-		for (i = 1; isNext < 1; i++) {
-			apkName = PACKAGE_NAME + "-" + i + ".apk";
-			// System.out.println("fileName= " + fileName);
-
-			apkFile = new File(apkPath);
-			// System.out.println("path= " + apkFile.getAbsolutePath());
-
-			if (!apkFile.exists()) {
-				System.out.println("no exists= " + apkFile.toString());
-
-			} else {
-				// System.out.println("exists= " + apkFile.toString());
-				isNext++;
-			}
-		}
-
-		// ---get hash code of apk---
-		try {
-			appId = Hash.sha256(apkFile);
-			// System.out.println("appId= " + appId);
-			// System.out.println("appId length= " + appId.length());
-
-		} catch (Exception e) {
-			// TODO 自動產生的 catch 區塊
-			e.printStackTrace();
-			Log.e(TAG, "Error: " + e.getMessage());
-
-		}
-
+//		// ---get apk file name---
+//		for (i = 1; isNext < 1; i++) {
+//			apkName = PACKAGE_NAME + "-" + i + ".apk";
+//			// System.out.println("fileName= " + fileName);
+//
+//			apkFile = new File(apkPath);
+//			// System.out.println("path= " + apkFile.getAbsolutePath());
+//
+//			if (!apkFile.exists()) {
+//				System.out.println("no exists= " + apkFile.toString());
+//
+//			} else {
+//				// System.out.println("exists= " + apkFile.toString());
+//				isNext++;
+//			}
+//		}
+//
+//		// ---get hash code of apk---
+//		try {
+//			appId = Hash.sha256(apkFile);
+//			// System.out.println("appId= " + appId);
+//			// System.out.println("appId length= " + appId.length());
+//
+//		} catch (Exception e) {
+//			// TODO 自動產生的 catch 區塊
+//			e.printStackTrace();
+//			Log.e(TAG, "Error: " + e.getMessage());
+//
+//		}
+		appId="123";
 
 		return appId;
 	}
