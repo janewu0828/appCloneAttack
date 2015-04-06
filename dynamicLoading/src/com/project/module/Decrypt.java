@@ -15,7 +15,7 @@ public class Decrypt {
 	private String fileName = "";
 	private String outputFileName = "decrypt.jar";
 	private String folderPath = "";
-	private File decryptFilePath;
+	// private File decryptFilePath;
 	private File decryptFile;
 
 	private FileInputStream fis = null;
@@ -35,20 +35,21 @@ public class Decrypt {
 		// 解密保存
 		isSuccess = true;
 
-		decryptFilePath = new File(folderPath);
+		// decryptFilePath = new File(folderPath);
 		decryptFile = new File(folderPath, fileName);
 		byte[] oldByte = new byte[(int) decryptFile.length()];
 
 		try {
 			fis = new FileInputStream(decryptFile);
 			fis.read(oldByte);
-			
+
 			// 解密
 			byte[] newByte = AESUtils.decryptVoice(seed, oldByte);
 			decryptFile = new File(folderPath, outputFileName);
 			fos = new FileOutputStream(decryptFile);
 			fos.write(newByte);
-			Log.e(TAG, "decrypted path= "+decryptFile.getAbsolutePath().toString());
+			Log.e(TAG, "decrypted path= "
+					+ decryptFile.getAbsolutePath().toString());
 
 		} catch (FileNotFoundException e) {
 			isSuccess = false;
