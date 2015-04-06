@@ -129,8 +129,7 @@ public class EX04_16 extends Activity {
 		d03 = getResources().getDrawable(s1[2]);
 
 		// ---check user, download file and dynamic loading---
-		SendPostRunnable sr = new SendPostRunnable(fileName,
-				mAppContext);
+		SendPostRunnable sr = new SendPostRunnable(fileName);
 
 		// start a Thread, the data to be transferred into the Runnable, so that
 		// Thread execute
