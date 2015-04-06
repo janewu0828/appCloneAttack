@@ -1,17 +1,13 @@
 package com.project.interfaces;
 
-import com.project.module.ProjectConfig;
-
+import static com.project.module.ProjectConfig.mContext;
 import irdc.ex04_16.EX04_16;
 import irdc.ex04_16.R;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class InterfaceTest implements MainInterface {
-	Context mContext = ProjectConfig.mContext;
 
 	Drawable d01 = EX04_16.d01;
 	Drawable d02 = EX04_16.d02;
@@ -65,7 +61,7 @@ public class InterfaceTest implements MainInterface {
 		setChoiceStatus(1);
 
 		mText.setText(result);
-		Log.i("result", "" + result);
+		System.out.println("result: " + result);
 
 		choiceStatus = getChoiceStatus();
 
@@ -126,14 +122,6 @@ public class InterfaceTest implements MainInterface {
 
 	public void setResult(String result) {
 		this.result = result;
-	}
-
-	public Context getmContext() {
-		return mContext;
-	}
-
-	public void setmContext(Context mContext) {
-		this.mContext = mContext;
 	}
 
 }
