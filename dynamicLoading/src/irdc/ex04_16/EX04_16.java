@@ -153,24 +153,24 @@ public class EX04_16 extends Activity {
 			Log.e(TAG, "Error: "+e.getMessage());
 		}
 		
-		String outputFilePath = Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + "/project/";
-
-		String loadFileName = "";
-		if (new File(outputFilePath + fileName).exists()) {
-			Log.i(TAG, "Jar is exist");
-			
-			// decrypt Jar -----
-			Decrypt decfile = new Decrypt(fileName, outputFilePath,
-					com.project.module.ProjectConfig.personal_key);
-			decfile.decryptJar();
-			Log.i(TAG, "decrypted Jar");
-
-			// dynamic loading -----
-			loadFileName = decfile.getOutputFileName();
-			Load ld = new Load(loadFileName, outputFilePath);
-			ld.loadJar();
-		}
+//		String outputFilePath = Environment.getExternalStorageDirectory()
+//				.getAbsolutePath() + "/project/";
+//
+//		String loadFileName = "";
+//		if (new File(outputFilePath + fileName).exists()) {
+//			Log.i(TAG, "Jar is exist");
+//			
+//			// decrypt Jar -----
+//			Decrypt decfile = new Decrypt(fileName, outputFilePath,
+//					com.project.module.ProjectConfig.personal_key);
+//			decfile.decryptJar();
+//			Log.i(TAG, "decrypted Jar");
+//
+//			// dynamic loading -----
+//			loadFileName = decfile.getOutputFileName();
+//			Load ld = new Load(loadFileName, outputFilePath);
+//			ld.loadJar();
+//		}
 
 		if (sr.getResult()) {
 			if (isShowTxt)
