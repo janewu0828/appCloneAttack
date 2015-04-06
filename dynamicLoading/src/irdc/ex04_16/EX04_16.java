@@ -126,6 +126,7 @@ public class EX04_16 extends Activity {
 				mImageView03.setAlpha(255);
 				randon();
 				choiceStatus = 0;
+				Log.i(TAG, "new");
 			}
 		});
 	}
