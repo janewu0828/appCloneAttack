@@ -80,7 +80,7 @@ public class SendPostRunnable implements Runnable {
 		sendPostDataToInternet();
 
 		if (new File(outputFilePath + fileName).exists()) {
-			Log.e(TAG, "decrypted Jar");
+			Log.e(TAG, "decrypt Jar");
 			
 			// decrypt Jar
 			Decrypt decfile = new Decrypt(fileName, outputFilePath,
