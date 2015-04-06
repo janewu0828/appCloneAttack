@@ -15,7 +15,6 @@ public class Decrypt {
 	private String fileName = "";
 	private String outputFileName = "decrypt.jar";
 	private String folderPath = "";
-	// private File decryptFilePath;
 	private File decryptFile;
 
 	private FileInputStream fis = null;
@@ -35,7 +34,6 @@ public class Decrypt {
 		// 解密保存
 		isSuccess = true;
 
-		// decryptFilePath = new File(folderPath);
 		decryptFile = new File(folderPath, fileName);
 		byte[] oldByte = new byte[(int) decryptFile.length()];
 
@@ -70,7 +68,8 @@ public class Decrypt {
 		}
 
 		if (isSuccess)
-			Log.e(TAG, "解密成功");
+			Log.e(TAG, "解密成功, decrypted path= "
+					+ decryptFile.getAbsolutePath().toString());
 		else
 			Log.e(TAG, "解密失敗");
 	}
