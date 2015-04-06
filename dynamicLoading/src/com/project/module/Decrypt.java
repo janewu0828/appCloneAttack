@@ -63,13 +63,18 @@ public class Decrypt {
 			fos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			Log.e(TAG, "IOException Error: " + e.getMessage());
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			Log.e(TAG, "NullPointerException Error: " + e.getMessage());
 		}
 
 		if (isSuccess)
 			Log.i(TAG, "解密成功, decrypted path= "
 					+ decryptFile.getAbsolutePath().toString());
-		else
+		else {
 			Log.e(TAG, "解密失敗");
+		}
 	}
 
 	public String getOutputFileName() {

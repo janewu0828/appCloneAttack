@@ -6,7 +6,6 @@ import java.io.File;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 import dalvik.system.DexClassLoader;
@@ -52,12 +51,9 @@ public class Load {
 
 			// return jar result
 			String str = mMainInterface.sayHello();
-			Log.e(TAG, "jar content= " + str);
-
-			Looper.prepare();
 			Toast.makeText(context, "jar content= " + str, Toast.LENGTH_SHORT)
 					.show();
-			Looper.loop();// 进入loop中的循环，查看消息队列
+			Log.i(TAG, "jar content= " + str);
 
 			// exe
 			mMainInterface.loadMethod();

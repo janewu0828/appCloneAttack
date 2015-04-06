@@ -4,22 +4,24 @@ import static com.project.module.ProjectConfig.mAppContext;
 import static com.project.module.ProjectConfig.mContext;
 import static com.project.module.ProjectConfig.isShowTxt;
 import static com.project.module.ProjectConfig.fileName;
+import static com.project.module.ProjectConfig.filePath;
+import static com.project.module.ProjectConfig.loadFileName;
+import static com.project.module.ProjectConfig.personal_key;
 import static com.project.module.ProjectConfig.checkConnection;
-import static com.project.module.ProjectConfig.showCheckuserError;
+import static com.project.module.ProjectConfig.showCheckUserError;
 import static com.project.module.ProjectConfig.showPersonalKey;
+import static com.project.module.ProjectConfig.showPersonalKeyError;
 
 import java.io.File;
 
 import com.project.interfaces.Load;
 import com.project.module.Decrypt;
-
 import com.project.module.SendPostRunnable;
 
 /* import相關class */
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,8 +30,8 @@ import android.util.Log;
 import android.view.View;
 
 public class EX04_16 extends Activity {
-	private static final String TAG = "EX04_16";	
-	
+	private static final String TAG = "EX04_16";
+
 	public static Drawable d01;
 	public static Drawable d02;
 	public static Drawable d03;
@@ -66,8 +68,8 @@ public class EX04_16 extends Activity {
 		mContext = EX04_16.this;
 		// show a message of authentication is successful in first time
 		isShowTxt = true;
-		// // check network setting on device
-		// checkConnection();
+		// check network setting on device
+		checkConnection();
 		// input decryption key
 		showPersonalKey();
 
@@ -126,6 +128,7 @@ public class EX04_16 extends Activity {
 				mImageView03.setAlpha(255);
 				randon();
 				choiceStatus = 0;
+
 				Log.i(TAG, "new");
 			}
 		});
@@ -137,7 +140,7 @@ public class EX04_16 extends Activity {
 		d02 = getResources().getDrawable(s1[1]);
 		d03 = getResources().getDrawable(s1[2]);
 
-		// ---check user, download file and dynamic loading---
+		// ---check user and download encrypted Jar---
 		SendPostRunnable sr = new SendPostRunnable(fileName);
 
 		// start a Thread, the data to be transferred into the Runnable, so that
@@ -151,27 +154,8 @@ public class EX04_16 extends Activity {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Log.e(TAG, "Error: "+e.getMessage());
+			Log.e(TAG, e.getMessage());
 		}
-		
-//		String outputFilePath = Environment.getExternalStorageDirectory()
-//				.getAbsolutePath() + "/project/";
-//
-//		String loadFileName = "";
-//		if (new File(outputFilePath + fileName).exists()) {
-//			Log.i(TAG, "Jar is exist");
-//			
-//			// decrypt Jar -----
-//			Decrypt decfile = new Decrypt(fileName, outputFilePath,
-//					com.project.module.ProjectConfig.personal_key);
-//			decfile.decryptJar();
-//			Log.i(TAG, "decrypted Jar");
-//
-//			// dynamic loading -----
-//			loadFileName = decfile.getOutputFileName();
-//			Load ld = new Load(loadFileName, outputFilePath);
-//			ld.loadJar();
-//		}
 
 		if (sr.getResult()) {
 			if (isShowTxt)
@@ -189,9 +173,28 @@ public class EX04_16 extends Activity {
 			ans = R.drawable.p01;
 			choiceStatus = 1;
 
+			if (new File(filePath + fileName).exists()) {
+				Log.i(TAG, "Jar is exist");
+
+				// decrypt Jar -----
+				Decrypt decfile = new Decrypt(fileName, filePath, personal_key);
+				decfile.decryptJar();
+
+				loadFileName = decfile.getOutputFileName();
+			}
+
+			if (new File(filePath + loadFileName).exists()) {
+				// dynamic loading -----
+				Load ld = new Load(loadFileName, filePath);
+				ld.loadJar();
+			} else {
+				showPersonalKeyError("Load Error !");
+				Log.e(TAG, "Error: " + loadFileName);
+			}
+
 		} else {
 			// show a Alert Dialog that Authentication is failed
-			showCheckuserError();
+			showCheckUserError();
 		}
 
 	}

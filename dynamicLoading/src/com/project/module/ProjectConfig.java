@@ -2,6 +2,7 @@ package com.project.module;
 
 import irdc.ex04_16.R;
 import android.content.Context;
+import android.os.Environment;
 
 public class ProjectConfig {
 	// get global Application object of the current process
@@ -16,8 +17,11 @@ public class ProjectConfig {
 	// show a message of authentication is successful in first time
 	public static boolean isShowTxt;
 
-	// ---dynamic loading filename(JAR)---
-	public static String fileName = "encrypt.jar";
+	// dynamic loading filename(JAR) -----
+	public static String fileName = "encrypt.jar";	
+	public static String filePath = Environment.getExternalStorageDirectory()
+			.getAbsolutePath() + "/project/";
+	public static String loadFileName = "";
 
 	public static String personal_key = "";
 
@@ -33,7 +37,7 @@ public class ProjectConfig {
 		}
 	}
 
-	public static void showCheckuserError() {
+	public static void showCheckUserError() {
 		// TODO Auto-generated method stub
 		// show a Alert Dialog that Authentication is failed
 		alert.showAlertDialog(
@@ -48,6 +52,12 @@ public class ProjectConfig {
 		// TODO Auto-generated method stub
 		AlertDialogManager alert = new AlertDialogManager();
 		alert.showAlertEditDialog(mContext, "Input Personal Key", "key", false);
+	}
+
+	public static void showPersonalKeyError(String msg) {
+		// TODO Auto-generated method stub
+		// show a Alert Dialog that Personal Key is failed
+		alert.showAlertDialog(mContext, "Personal Key Error", msg, false);
 	}
 
 }

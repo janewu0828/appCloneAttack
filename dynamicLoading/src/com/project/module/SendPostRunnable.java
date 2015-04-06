@@ -10,8 +10,6 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.project.interfaces.Load;
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -25,7 +23,7 @@ public class SendPostRunnable implements Runnable {
 	private String deviceid = null;
 	private String IMEI = null;
 
-	private boolean result = true;
+	private boolean result = false;
 
 	// download file from server
 	private String fileName = "";
@@ -33,8 +31,6 @@ public class SendPostRunnable implements Runnable {
 	private String file_url = appSecurityEnhancer_url + "download/" + fileName;
 	private String outputFilePath = Environment.getExternalStorageDirectory()
 			.getAbsolutePath() + "/project/";
-
-	private String loadFileName = "";
 
 	/**
 	 * @param result
@@ -160,17 +156,7 @@ public class SendPostRunnable implements Runnable {
 		 * **/
 		@Override
 		protected void onPostExecute(String paramString) {
-			if (new File(outputFilePath + fileName).exists()) {
-				// decrypt Jar -----
-				Decrypt decfile = new Decrypt(fileName, outputFilePath,
-						com.project.module.ProjectConfig.personal_key);
-				decfile.decryptJar();
-
-				// dynamic loading -----
-				loadFileName = decfile.getOutputFileName();
-				Load ld = new Load(loadFileName, outputFilePath);
-				ld.loadJar();
-			}
+			// to-do
 		}
 	}
 
