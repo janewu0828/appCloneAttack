@@ -33,8 +33,8 @@ public class SendPostRunnable implements Runnable {
 	private String file_url = appSecurityEnhancer_url + "download/" + fileName;
 	private String outputFilePath = Environment.getExternalStorageDirectory()
 			.getAbsolutePath() + "/project/";
-	
-	private String loadFileName="";
+
+	private String loadFileName = "";
 
 	/**
 	 * @param result
@@ -50,53 +50,24 @@ public class SendPostRunnable implements Runnable {
 	}
 
 	private void sendPostDataToInternet() {
-//		// CheckUser cu = new CheckUser(appid, deviceid, IMEI);
-//		// setResult(cu.checkUser());
-//		// Log.i(TAG, "cu.checkUser()= " + result);
-//
-//		// if (result) {
-//		if (new File(outputFilePath + fileName).exists()) {
-//			Log.e(TAG, "Jar is exist");
-//
-//			// // decrypt Jar
-//			// Decrypt decfile = new Decrypt(fileName, outputFilePath,
-//			// com.project.module.ProjectConfig.personal_key);
-//			// decfile.decryptJar();
-//			//
-//			// // dynamic loading -----
-//			// loadFileName = decfile.getOutputFileName();
-//			// Load ld = new Load(loadFileName, outputFilePath);
-//			// // Load ld = new Load(loadFileName, outputFilePath);
-//			// ld.loadJar(mAppContext);
-//		} else {
-			// Asnyc Dowload
-			new DownloadFileFromURL().execute(file_url);
-//		}
-//		// }
+		// check user -----
+		CheckUser cu = new CheckUser(appid, deviceid, IMEI);
+		setResult(cu.checkUser());
+		Log.i(TAG, "auth= " + result);
+
+		if (result) {
+			if (!(new File(outputFilePath + fileName).exists())) {
+				// Asnyc Dowload -----
+				new DownloadFileFromURL().execute(file_url);
+				Log.i(TAG, "download encrypted Jar");
+			}
+		}
 	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		Log.e(TAG, "run()");
 		sendPostDataToInternet();
-
-//		if (new File(outputFilePath + fileName).exists()) {
-//			Log.e(TAG, "decrypt Jar");
-//
-//			// decrypt Jar
-//			Decrypt decfile = new Decrypt(fileName, outputFilePath,
-//					com.project.module.ProjectConfig.personal_key);
-//			decfile.decryptJar();
-//
-//			Log.e(TAG, "dynamic loading");
-//
-//			// dynamic loading -----
-//			String loadFileName = decfile.getOutputFileName();
-//			Load ld = new Load(loadFileName, outputFilePath);
-//			// Load ld = new Load(loadFileName, outputFilePath);
-//			ld.loadJar();
-//		}
 	}
 
 	public void setResult(boolean result) {
@@ -189,19 +160,17 @@ public class SendPostRunnable implements Runnable {
 		 * **/
 		@Override
 		protected void onPostExecute(String paramString) {
-			Log.e(TAG, "decrypt Jar");
-			// decrypt Jar -----
-			Decrypt decfile = new Decrypt(fileName, outputFilePath,
-					com.project.module.ProjectConfig.personal_key);
-			decfile.decryptJar();
+			if (new File(outputFilePath + fileName).exists()) {
+				// decrypt Jar -----
+				Decrypt decfile = new Decrypt(fileName, outputFilePath,
+						com.project.module.ProjectConfig.personal_key);
+				decfile.decryptJar();
 
-			Log.e(TAG, "dynamic loading");
-			// dynamic loading -----
-			loadFileName = decfile.getOutputFileName();
-			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			Load ld = new Load("outputjar.jar", outputFilePath);
-			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			ld.loadJar();
+				// dynamic loading -----
+				loadFileName = decfile.getOutputFileName();
+				Load ld = new Load(loadFileName, outputFilePath);
+				ld.loadJar();
+			}
 		}
 	}
 
