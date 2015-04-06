@@ -23,8 +23,6 @@ public interface MainInterface {
 
 	public void setResult(String result);
 
-	public void setmContext(Context mContext);
-
 	public int getS1();
 
 	public int getAns();
@@ -38,7 +36,5 @@ public interface MainInterface {
 	public Drawable getD03();
 
 	public String getResult();
-
-	public Context getmContext();
 
 }
