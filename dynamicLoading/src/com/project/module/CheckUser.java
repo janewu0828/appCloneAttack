@@ -1,5 +1,7 @@
 package com.project.module;
 
+import static com.project.module.SendPostRunnable.appSecurityEnhancer_url;
+
 import java.io.IOException;
 
 import java.io.UnsupportedEncodingException;
@@ -22,7 +24,7 @@ import org.json.JSONObject;
 public class CheckUser {
 	public static final int progress_bar_type = 0;
 
-	private String uri = SendPostRunnable.appSecurityEnhancer_url + "php/app.php";
+	private String uri = appSecurityEnhancer_url + "php/app.php";
 	private String appid = null;
 	private String deviceid = null;
 	private String IMEI = null;
