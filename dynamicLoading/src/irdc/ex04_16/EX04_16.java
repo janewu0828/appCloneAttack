@@ -10,6 +10,7 @@ import static com.project.module.ProjectConfig.showPersonalKey;
 
 import com.project.module.SendPostRunnable;
 
+
 /* import相關class */
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -22,6 +23,8 @@ import android.util.Log;
 import android.view.View;
 
 public class EX04_16 extends Activity {
+	private static final String TAG = "EX04_16";	
+	
 	public static Drawable d01;
 	public static Drawable d02;
 	public static Drawable d03;
@@ -76,7 +79,7 @@ public class EX04_16 extends Activity {
 		mImageView01.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (choiceStatus == 0) {
-					Log.i("event", "翻牌1");
+					Log.i(TAG, "card_1");
 					loadImageView(false, true, true, s1[0]);
 				}
 			}
@@ -86,7 +89,7 @@ public class EX04_16 extends Activity {
 		mImageView02.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (choiceStatus == 0) {
-					Log.i("event", "翻牌2");
+					Log.i(TAG, "card_2");
 					loadImageView(true, false, true, s1[1]);
 				}
 			}
@@ -96,7 +99,7 @@ public class EX04_16 extends Activity {
 		mImageView03.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (choiceStatus == 0) {
-					Log.i("event", "翻牌3");
+					Log.i(TAG, "card_3");
 					loadImageView(true, true, false, s1[2]);
 				}
 			}

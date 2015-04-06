@@ -46,8 +46,6 @@ public class Decrypt {
 			decryptFile = new File(folderPath, outputFileName);
 			fos = new FileOutputStream(decryptFile);
 			fos.write(newByte);
-			Log.e(TAG, "decrypted path= "
-					+ decryptFile.getAbsolutePath().toString());
 
 		} catch (FileNotFoundException e) {
 			isSuccess = false;
@@ -68,7 +66,7 @@ public class Decrypt {
 		}
 
 		if (isSuccess)
-			Log.e(TAG, "解密成功, decrypted path= "
+			Log.i(TAG, "解密成功, decrypted path= "
 					+ decryptFile.getAbsolutePath().toString());
 		else
 			Log.e(TAG, "解密失敗");

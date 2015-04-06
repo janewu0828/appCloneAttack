@@ -61,7 +61,7 @@ public class InterfaceTest implements MainInterface {
 		setChoiceStatus(1);
 
 		mText.setText(result);
-		System.out.println("result: " + result);
+		System.out.println("result=" + result);
 
 		choiceStatus = getChoiceStatus();
 
