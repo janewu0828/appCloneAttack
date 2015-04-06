@@ -29,7 +29,7 @@ public class SendPostRunnable implements Runnable {
 	private String fileName = "";
 	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/web2/";
 	private String file_url = appSecurityEnhancer_url + "download/" + fileName;
-	private String outputFilePath = Environment.getExternalStorageDirectory()
+	public static String outputFilePath = Environment.getExternalStorageDirectory()
 			.getAbsolutePath() + "/project/";
 
 	/**
