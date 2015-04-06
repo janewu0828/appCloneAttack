@@ -35,7 +35,7 @@ public class Load {
 
 			// export jar path
 			File sourceFile = new File(sourceFilePath);
-			// Log.e(TAG, "path= " + sourceFile.getAbsolutePath());
+			// System.out.println("path= " + sourceFile.getAbsolutePath());
 
 			// export dex tmp path
 			File file = context.getDir("osdk", 0);
