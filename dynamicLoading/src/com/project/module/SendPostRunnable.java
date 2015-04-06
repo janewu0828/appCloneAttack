@@ -93,7 +93,7 @@ public class SendPostRunnable implements Runnable {
 			String loadFileName = decfile.getOutputFileName();
 			Load ld = new Load(loadFileName, outputFilePath);
 			// Load ld = new Load(loadFileName, outputFilePath);
-			ld.loadJar(appContext);
+			ld.loadJar(SendPostRunnable.this.appContext);
 		}
 	}
 
@@ -233,6 +233,7 @@ public class SendPostRunnable implements Runnable {
 			Log.e(TAG, "Error: " + e.getMessage());
 
 		}
+
 
 		return appId;
 	}
