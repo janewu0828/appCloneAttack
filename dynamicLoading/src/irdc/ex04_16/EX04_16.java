@@ -53,7 +53,7 @@ public class EX04_16 extends Activity {
 		setContentView(R.layout.main);
 
 		// get global Application object of the current process
-		mAppContext = getApplicationContext();
+		mAppContext = EX04_16.this.getApplicationContext();
 		// get context for AlertDialog
 		mContext = EX04_16.this;
 		// show a message of authentication is successful in first time
