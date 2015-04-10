@@ -46,10 +46,12 @@ public class SendPostRunnable implements Runnable {
 
 	private void sendPostDataToInternet() {
 
-		System.out.println("appId= " + appId + ", appId length= " + appId.length());
-		String appId2=getAppId2(mAppContext);
-		System.out.println("appId2= " + appId2 + ", appId2 length= " + appId2.length());
-		
+		System.out.println("appId= " + appId + ", appId length= "
+				+ appId.length());
+		String appId2 = getAppId2(mAppContext);
+		System.out.println("appId2= " + appId2 + ", appId2 length= "
+				+ appId2.length());
+
 		System.out.println("IMEI= " + IMEI + ", IMEI length= " + IMEI.length());
 		System.out.println("UUID= " + UUID + ", UUID length= " + UUID.length());
 
