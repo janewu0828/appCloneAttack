@@ -18,6 +18,8 @@ import com.project.interfaces.Load;
 import com.project.module.Decrypt;
 import com.project.module.SendPostRunnable;
 
+import com.project.module.Tracing;
+
 /* import相關class */
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -186,7 +188,10 @@ public class EX04_16 extends Activity {
 			if (new File(outputFilePath + loadFileName).exists()) {
 				// dynamic loading -----
 				Load ld = new Load(loadFileName, outputFilePath);
-				ld.loadJar();
+				ld.loadJar();	
+				
+				Tracing trace=new Tracing(loadFileName, personal_key, sr.getSession());
+				Log.e(TAG, "T: " + trace.tracingLog());
 			} else {
 				showPersonalKeyError("Load Error !");
 				Log.e(TAG, "Error: " + loadFileName);
