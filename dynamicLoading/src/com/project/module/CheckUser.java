@@ -3,7 +3,6 @@ package com.project.module;
 import static com.project.module.SendPostRunnable.appSecurityEnhancer_url;
 
 import java.io.IOException;
-
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,21 +24,22 @@ public class CheckUser {
 	public static final int progress_bar_type = 0;
 
 	private String uri = appSecurityEnhancer_url + "php/app.php";
-	private String appid = null;
-	private String deviceid = null;
+	private String appId = null;
+	private String UUID = null;
 	private String IMEI = null;
 
 	// 主要是记录用户会话过程中的一些用户的基本信息
 	private HashMap<String, String> session = new HashMap<String, String>();
 
 	/**
-	 * @param appid
-	 * @param deviceid
+	 * @param appId
+	 * @param UUID
+	 * @param IMEI
 	 */
-	public CheckUser(String appid, String deviceid, String IMEI) {
+	public CheckUser(String appId, String UUID, String IMEI) {
 		super();
-		this.appid = appid;
-		this.deviceid = deviceid;
+		this.appId = appId;
+		this.UUID = UUID;
 		this.IMEI = IMEI;
 	}
 
@@ -49,8 +49,8 @@ public class CheckUser {
 		HttpPost mPost = new HttpPost(uri);
 
 		List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
-		pairs.add(new BasicNameValuePair("appId", appid));
-		pairs.add(new BasicNameValuePair("deviceId", deviceid));
+		pairs.add(new BasicNameValuePair("appId", appId));
+		pairs.add(new BasicNameValuePair("UUID", UUID));
 		pairs.add(new BasicNameValuePair("IMEI", IMEI));
 
 		try {
@@ -74,16 +74,16 @@ public class CheckUser {
 					JSONObject jsonObject = null;
 					// flag为登录成功与否的标记,从服务器端返回的数据
 					String flag = "";
-					String appId = "";
-					String deviceId = "";
-					// String IMEI="";
+					String app_id = "";
+					String deviceid = "";
+					String androidid = "";
 					String sessionid = "";
 					try {
 						jsonObject = new JSONObject(info);
 						flag = jsonObject.getString("flag");
-						appId = jsonObject.getString("appId");
-						deviceId = jsonObject.getString("deviceId");
-						// IMEI = jsonObject.getString("IMEI");
+						app_id = jsonObject.getString("app_id");
+						deviceid = jsonObject.getString("deviceid");
+						androidid = jsonObject.getString("androidid");
 						sessionid = jsonObject.getString("sessionid");
 
 					} catch (JSONException e) {
@@ -93,8 +93,9 @@ public class CheckUser {
 					// 根据服务器端返回的标记,判断服务端端验证是否成功
 					if (flag.equals("success")) {
 						// 为session传递相的值,用于在session过程中记录相关用户信息
-						session.put("s_userid", appId);
-						session.put("s_username", deviceId);
+						session.put("s_app_id", app_id);
+						session.put("s_deviceid", deviceid);
+						session.put("s_androidid", androidid);
 						session.put("s_sessionid", sessionid);
 
 						return true;
