@@ -7,8 +7,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.NoSuchAlgorithmException;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -19,8 +21,8 @@ import android.util.Log;
 public class SendPostRunnable implements Runnable {
 	private static final String TAG = "SendPostRunnable";
 
-	private String appid = null;
-	private String deviceid = null;
+	private String appId = null;
+	private String UUID = null;
 	private String IMEI = null;
 
 	private boolean result = false;
@@ -29,25 +31,30 @@ public class SendPostRunnable implements Runnable {
 	private String fileName = "";
 	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/web2/";
 	private String file_url = appSecurityEnhancer_url + "download/" + fileName;
-	public static String outputFilePath = Environment.getExternalStorageDirectory()
-			.getAbsolutePath() + "/project/";
+	public static String outputFilePath = Environment
+			.getExternalStorageDirectory().getAbsolutePath() + "/project/";
 
-	/**
-	 * @param result
-	 */
 	public SendPostRunnable(String fileName) {
 		super();
 
 		this.fileName = fileName;
 
-		this.appid = getAppId();
-		this.deviceid = getDeviceId(mAppContext);
+		this.appId = getAppId(mAppContext);
+		this.UUID = getUUID(mAppContext);
 		this.IMEI = getIMEI(mAppContext);
 	}
 
 	private void sendPostDataToInternet() {
+
+		System.out.println("appId= " + appId + ", appId length= " + appId.length());
+		String appId2=getAppId2(mAppContext);
+		System.out.println("appId2= " + appId2 + ", appId2 length= " + appId2.length());
+		
+		System.out.println("IMEI= " + IMEI + ", IMEI length= " + IMEI.length());
+		System.out.println("UUID= " + UUID + ", UUID length= " + UUID.length());
+
 		// check user -----
-		CheckUser cu = new CheckUser(appid, deviceid, IMEI);
+		CheckUser cu = new CheckUser(appId, UUID, IMEI);
 		setResult(cu.checkUser());
 		Log.i(TAG, "auth= " + result);
 
@@ -160,11 +167,30 @@ public class SendPostRunnable implements Runnable {
 		}
 	}
 
-	private String getAppId() {
-		String appId = "";
+	private String getAppId(Context context) {
+		String str = "";
+
+		String PACKAGE_NAME = context.getPackageName();
+		Log.i(TAG, "package name= " + PACKAGE_NAME);
+
+		try {
+			str = AeSimpleSHA1.SHA1(str);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO 自動產生的 catch 區塊
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO 自動產生的 catch 區塊
+			e.printStackTrace();
+		}
+
+		return str;
+	}
+
+	private String getAppId2(Context context) {
+		String str = "";
 
 		// ---get hash code of apk---
-		String PACKAGE_NAME = mAppContext.getPackageName();
+		String PACKAGE_NAME = context.getPackageName();
 		String apkName = "";
 		String apkPath = Environment.getDataDirectory() + "/app/" + apkName;
 		File apkFile = null;
@@ -190,7 +216,7 @@ public class SendPostRunnable implements Runnable {
 
 		// ---get hash code of apk---
 		try {
-			appId = Hash.sha256(apkFile);
+			str = Hash.sha256(apkFile);
 			// System.out.println("appId= " + appId);
 			// System.out.println("appId length= " + appId.length());
 
@@ -201,30 +227,24 @@ public class SendPostRunnable implements Runnable {
 
 		}
 
-		return appId;
+		return str;
 	}
 
-	private String getDeviceId(Context context2) {
+	private String getUUID(Context context) {
 		// TODO Auto-generated method stub
-		DeviceUuidFactory DFactory = new DeviceUuidFactory(context2);
-		String deviceId = DFactory.getDeviceUuid().toString();
+		DeviceUuidFactory DFactory = new DeviceUuidFactory(context);
+		String str = DFactory.getDeviceUuid().toString();
 
-		// System.out.println("deviceId", deviceId);
-		// System.out.println("deviceId length", "" + deviceId.length());
-
-		return deviceId;
+		return str;
 	}
 
-	private String getIMEI(Context context2) {
+	private String getIMEI(Context context) {
 		// TODO Auto-generated method stub
-		TelephonyManager tM = (TelephonyManager) mAppContext
+		TelephonyManager tM = (TelephonyManager) context
 				.getSystemService(Context.TELEPHONY_SERVICE);
-		String imei = tM.getDeviceId();
+		String str = tM.getDeviceId();
 
-		// System.out.println("IMEI", imei);
-		// System.out.println("IMEI" + " length", "" + imei.length());
-
-		return imei;
+		return str;
 	}
 
 }
