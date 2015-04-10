@@ -121,4 +121,8 @@ public class CheckUser {
 		return false;
 	}
 
+	public HashMap<String, String> getSession() {
+		return session;
+	}
+
 }
