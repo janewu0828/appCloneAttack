@@ -26,22 +26,33 @@ public class Tracing {
 	private static final String TAG = "Tracing";
 
 	private String uri = appSecurityEnhancer_url + "php/tracing.php";
-	private String key = "";
+	private String personalKey = null;
+	private String loadFileName = null;
 
-	// 主要是记录用户会话过程中的一些用户的基本信息
-	private HashMap<String, String> session = new HashMap<String, String>();
+	private HashMap<String, String> session;
 
-	public Tracing(String key) {
+	public Tracing(String loadFileName, String personalKey,
+			HashMap<String, String> session) {
 		super();
-		this.key = key;
+		this.loadFileName = loadFileName;
+		this.personalKey = personalKey;
+		this.session = session;
 	}
 
-	public void tracingLog() {
+	public boolean tracingLog() {
+		String sess_app_id = session.get("s_app_id");
+		String sess_deviceid = session.get("s_deviceid");
+		String sess_id = session.get("s_sessionid");
+
 		DefaultHttpClient mHttpClient = new DefaultHttpClient();
 		HttpPost mPost = new HttpPost(uri);
 
 		List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
-		pairs.add(new BasicNameValuePair("personal_key", key));
+		pairs.add(new BasicNameValuePair("sess_app_id", sess_app_id));
+		pairs.add(new BasicNameValuePair("sess_deviceid", sess_deviceid));
+		pairs.add(new BasicNameValuePair("sess_load_file_name", loadFileName));
+		pairs.add(new BasicNameValuePair("sess_personal_key", personalKey));
+		pairs.add(new BasicNameValuePair("sess_sessionid", sess_id));
 
 		try {
 			mPost.setEntity(new UrlEncodedFormEntity(pairs, HTTP.UTF_8));
@@ -64,12 +75,20 @@ public class Tracing {
 					JSONObject jsonObject = null;
 					// flag为登录成功与否的标记,从服务器端返回的数据
 					String flag = "";
-					String key = "";
+					String app_id = "";
+					String deviceid = "";
+					String load_file_name = "";
+					String personal_key = "";
+					String sessionid = "";
 
 					try {
 						jsonObject = new JSONObject(info);
 						flag = jsonObject.getString("flag");
-						key = jsonObject.getString("appId");
+						app_id = jsonObject.getString("app_id");
+						deviceid = jsonObject.getString("deviceid");
+						load_file_name = jsonObject.getString("load_file_name");
+						personal_key = jsonObject.getString("personal_key");
+						sessionid = jsonObject.getString("sessionid");
 
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
@@ -79,12 +98,17 @@ public class Tracing {
 					// 根据服务器端返回的标记,判断服务端端验证是否成功
 					if (flag.equals("success")) {
 						// 为session传递相的值,用于在session过程中记录相关用户信息
-						session.put("s_key", key);
+						session.put("info_app_id", app_id);
+						session.put("info_deviceid", deviceid);
+						session.put("info_load_file_name", load_file_name);
+						session.put("info_personal_key", personal_key);
+						session.put("info_sessionid", sessionid);
+						return true;
 					} else {
-						Log.e(TAG, "error");
+						return false;
 					}
 				} else {
-					Log.e(TAG, "error");
+					return false;
 				}
 
 			}
@@ -98,6 +122,7 @@ public class Tracing {
 			e.printStackTrace();
 			Log.e(TAG, "Error: " + e.getMessage());
 		}
+		return false;
 	}
 
 }
