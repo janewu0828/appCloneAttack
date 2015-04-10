@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -26,6 +27,7 @@ public class SendPostRunnable implements Runnable {
 	private String IMEI = null;
 
 	private boolean result = false;
+	private HashMap<String, String> session;
 
 	// download file from server
 	private String fileName = "";
@@ -36,9 +38,7 @@ public class SendPostRunnable implements Runnable {
 
 	public SendPostRunnable(String fileName) {
 		super();
-
 		this.fileName = fileName;
-
 		this.appId = getAppId(mAppContext);
 		this.UUID = getUUID(mAppContext);
 		this.IMEI = getIMEI(mAppContext);
@@ -57,7 +57,7 @@ public class SendPostRunnable implements Runnable {
 
 		// check user -----
 		CheckUser cu = new CheckUser(appId, UUID, IMEI);
-		setResult(cu.checkUser());
+		result = cu.checkUser();
 		Log.i(TAG, "auth= " + result);
 
 		if (result) {
@@ -66,6 +66,9 @@ public class SendPostRunnable implements Runnable {
 				new DownloadFileFromURL().execute(file_url);
 				Log.i(TAG, "download encrypted Jar");
 			}
+
+			session = cu.getSession();
+			Log.i(TAG, "s_sessionid= " + session.get("s_sessionid"));
 		}
 	}
 
@@ -73,16 +76,6 @@ public class SendPostRunnable implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		sendPostDataToInternet();
-	}
-
-	public void setResult(boolean result) {
-		// TODO Auto-generated method stub
-		this.result = result;
-	}
-
-	public boolean getResult() {
-		// TODO Auto-generated method stub
-		return result;
 	}
 
 	// AsynTask
@@ -167,6 +160,14 @@ public class SendPostRunnable implements Runnable {
 		protected void onPostExecute(String paramString) {
 			// to-do
 		}
+	}
+
+	public boolean getResult() {
+		return result;
+	}
+
+	public HashMap<String, String> getSession() {
+		return session;
 	}
 
 	private String getAppId(Context context) {
