@@ -48,6 +48,7 @@ public class SendPostRunnable implements Runnable {
 
 		System.out.println("appId= " + appId + ", appId length= "
 				+ appId.length());
+
 		String appId2 = getAppId2(mAppContext);
 		System.out.println("appId2= " + appId2 + ", appId2 length= "
 				+ appId2.length());
@@ -68,7 +69,7 @@ public class SendPostRunnable implements Runnable {
 			}
 
 			session = cu.getSession();
-			Log.i(TAG, "s_sessionid= " + session.get("s_sessionid"));
+			// System.out.println("s_sessionid= " + session.get("s_sessionid"));
 		}
 	}
 
