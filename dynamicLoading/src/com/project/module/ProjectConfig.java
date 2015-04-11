@@ -2,7 +2,6 @@ package com.project.module;
 
 import irdc.ex04_16.R;
 import android.content.Context;
-import android.os.Environment;
 
 public class ProjectConfig {
 	// get global Application object of the current process
