@@ -46,15 +46,16 @@ public class SendPostRunnable implements Runnable {
 
 	private void sendPostDataToInternet() {
 
-		System.out.println("appId= " + appId + ", appId length= "
-				+ appId.length());
-
+		// System.out.println("appId= " + appId + ", appId length= "
+		// + appId.length());
 		String appId2 = getAppId2(mAppContext);
 		System.out.println("appId2= " + appId2 + ", appId2 length= "
 				+ appId2.length());
 
-		System.out.println("IMEI= " + IMEI + ", IMEI length= " + IMEI.length());
-		System.out.println("UUID= " + UUID + ", UUID length= " + UUID.length());
+		// System.out.println("IMEI= " + IMEI + ", IMEI length= " +
+		// IMEI.length());
+		// System.out.println("UUID= " + UUID + ", UUID length= " +
+		// UUID.length());
 
 		// check user -----
 		CheckUser cu = new CheckUser(appId, UUID, IMEI);
@@ -175,7 +176,7 @@ public class SendPostRunnable implements Runnable {
 		String str = "";
 
 		String PACKAGE_NAME = context.getPackageName();
-		Log.i(TAG, "package name= " + PACKAGE_NAME);
+		// System.out.println("package name= " + PACKAGE_NAME);
 
 		try {
 			str = AeSimpleSHA1.SHA1(str);
