@@ -12,14 +12,11 @@ import static com.project.module.ProjectConfig.showCheckUserError;
 import static com.project.module.ProjectConfig.showPersonalKey;
 import static com.project.module.ProjectConfig.showPersonalKeyError;
 
-import java.io.File;
-import java.util.HashMap;
-
 import com.project.interfaces.Load;
 import com.project.module.Decrypt;
 import com.project.module.SendPostRunnable;
-import com.project.module.SendTracingPostRunnable;
-import com.project.module.Tracing;
+
+import java.io.File;
 
 /* import相關class */
 import android.app.Activity;
@@ -192,17 +189,10 @@ public class EX04_16 extends Activity {
 				Load ld = new Load(loadFileName, outputFilePath);
 				ld.loadJar();
 
-				// Tracing trace=new Tracing(loadFileName, personal_key,
-				// sr.getSession());
-				// Log.e(TAG, "T: " + trace.tracingLog());
-				SendTracingPostRunnable stpr = new SendTracingPostRunnable(
-						"strTxt", loadFileName, personal_key, sr.getSession());
-
-				// start a Thread, the data to be transferred into the Runnable,
-				// so that
-				// Thread execute
-				Thread t2 = new Thread(stpr);
-				t2.start();
+				sr = new SendPostRunnable(fileName, personal_key,
+						sr.getSession());
+				t = new Thread(sr);
+				t.start();
 			} else {
 				showPersonalKeyError("Load Error !");
 				Log.e(TAG, "Error: " + loadFileName);
