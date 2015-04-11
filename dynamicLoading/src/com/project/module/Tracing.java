@@ -40,21 +40,24 @@ public class Tracing {
 	}
 
 	public boolean tracingLog() {
-		String sess_app_id = session.get("s_app_id");
 		String sess_deviceid = session.get("s_deviceid");
 		String sess_id = session.get("s_sessionid");
 
-		DefaultHttpClient mHttpClient = new DefaultHttpClient();
-		HttpPost mPost = new HttpPost(uri);
+		// System.out.println("sess_deviceid= " + sess_deviceid);
+		// System.out.println("sess_id= " + sess_id);
 
+		DefaultHttpClient mHttpClient = new DefaultHttpClient();
+		HttpPost mPost = new HttpPost(uri); // 建立HTTP Post連線
+
+		// Post運作傳送變數用NameValuePair[]陣列儲存
 		List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
-		pairs.add(new BasicNameValuePair("sess_app_id", sess_app_id));
 		pairs.add(new BasicNameValuePair("sess_deviceid", sess_deviceid));
 		pairs.add(new BasicNameValuePair("sess_load_file_name", loadFileName));
 		pairs.add(new BasicNameValuePair("sess_personal_key", personalKey));
 		pairs.add(new BasicNameValuePair("sess_sessionid", sess_id));
 
 		try {
+			// 發出HTTP request
 			mPost.setEntity(new UrlEncodedFormEntity(pairs, HTTP.UTF_8));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
@@ -62,47 +65,34 @@ public class Tracing {
 		}
 
 		try {
+			// 取得HTTP response
 			HttpResponse response = mHttpClient.execute(mPost);
 			int res = response.getStatusLine().getStatusCode();
 
+			// 若狀態碼為200 ok
 			if (res == 200) {
 				HttpEntity entity = response.getEntity();
 
 				if (entity != null) {
+					// 取出response字串
 					String info = EntityUtils.toString(entity);
 					System.out.println("-----------info-----------" + info);
 					// 以下主要是对服务器端返回的数据进行解析
 					JSONObject jsonObject = null;
 					// flag为登录成功与否的标记,从服务器端返回的数据
 					String flag = "";
-					String app_id = "";
-					String deviceid = "";
-					String load_file_name = "";
-					String personal_key = "";
-					String sessionid = "";
 
 					try {
 						jsonObject = new JSONObject(info);
 						flag = jsonObject.getString("flag");
-						app_id = jsonObject.getString("app_id");
-						deviceid = jsonObject.getString("deviceid");
-						load_file_name = jsonObject.getString("load_file_name");
-						personal_key = jsonObject.getString("personal_key");
-						sessionid = jsonObject.getString("sessionid");
-
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 						Log.e(TAG, "Error: " + e.getMessage());
 					}
 					// 根据服务器端返回的标记,判断服务端端验证是否成功
-					if (flag.equals("success")) {
-						// 为session传递相的值,用于在session过程中记录相关用户信息
-						session.put("info_app_id", app_id);
-						session.put("info_deviceid", deviceid);
-						session.put("info_load_file_name", load_file_name);
-						session.put("info_personal_key", personal_key);
-						session.put("info_sessionid", sessionid);
+					if (flag.equals("notempty")) {
+
 						return true;
 					} else {
 						return false;
