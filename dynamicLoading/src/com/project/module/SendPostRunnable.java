@@ -1,6 +1,7 @@
 package com.project.module;
 
 import static com.project.module.ProjectConfig.mAppContext;
+import static com.project.module.ProjectConfig.personal_key;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -30,7 +31,8 @@ public class SendPostRunnable implements Runnable {
 	private HashMap<String, String> session;
 
 	// download file from server
-	private String fileName = "";
+	private String fileName = null;
+	private String personalKey = null;
 	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/web2/";
 	private String file_url = appSecurityEnhancer_url + "download/" + fileName;
 	public static String outputFilePath = Environment
@@ -42,6 +44,13 @@ public class SendPostRunnable implements Runnable {
 		this.appId = getAppId(mAppContext);
 		this.UUID = getUUID(mAppContext);
 		this.IMEI = getIMEI(mAppContext);
+	}
+
+	public SendPostRunnable(String fileName, String personalKey,
+			HashMap<String, String> session) {
+		this.fileName = fileName;
+		this.personalKey = personalKey;
+		this.session = session;
 	}
 
 	private void sendPostDataToInternet() {
@@ -74,10 +83,19 @@ public class SendPostRunnable implements Runnable {
 		}
 	}
 
+	private void sendPostDataToInternet2() {
+		Tracing trace = new Tracing(fileName, personal_key, session);
+		Log.e(TAG, "Tracing: " + trace.tracingLog());
+
+	}
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		sendPostDataToInternet();
+		if (personalKey == null)
+			sendPostDataToInternet();
+		else
+			sendPostDataToInternet2();
 	}
 
 	// AsynTask
@@ -179,7 +197,7 @@ public class SendPostRunnable implements Runnable {
 		// System.out.println("package name= " + PACKAGE_NAME);
 
 		try {
-			str = AeSimpleSHA1.SHA1(str);
+			str = AeSimpleSHA1.SHA1(PACKAGE_NAME);
 		} catch (NoSuchAlgorithmException e) {
 			// TODO 自動產生的 catch 區塊
 			e.printStackTrace();
