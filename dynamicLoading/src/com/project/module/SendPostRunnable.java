@@ -33,7 +33,7 @@ public class SendPostRunnable implements Runnable {
 	// download file from server
 	private String fileName = null;
 	private String personalKey = null;
-	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/sub-project2/";
+	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/sub_project2/";
 	private String file_url = appSecurityEnhancer_url + "download/" + fileName;
 	public static String outputFilePath = Environment
 			.getExternalStorageDirectory().getAbsolutePath() + "/project/";
