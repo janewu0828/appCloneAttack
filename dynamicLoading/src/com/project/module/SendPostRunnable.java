@@ -33,7 +33,7 @@ public class SendPostRunnable implements Runnable {
 	// download file from server
 	private String fileName = null;
 	private String personalKey = null;
-	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/web2/";
+	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/sub-project2/";
 	private String file_url = appSecurityEnhancer_url + "download/" + fileName;
 	public static String outputFilePath = Environment
 			.getExternalStorageDirectory().getAbsolutePath() + "/project/";
@@ -85,7 +85,8 @@ public class SendPostRunnable implements Runnable {
 
 	private void sendPostDataToInternet2() {
 		Tracing trace = new Tracing(fileName, personal_key, session);
-		Log.e(TAG, "Tracing: " + trace.tracingLog());
+		boolean result = trace.tracingLog();
+		// Log.e(TAG, "Tracing: " + result);
 
 	}
 
@@ -215,7 +216,7 @@ public class SendPostRunnable implements Runnable {
 		// ---get hash code of apk---
 		String PACKAGE_NAME = context.getPackageName();
 		String apkName = "";
-		String apkPath = Environment.getDataDirectory() + "/app/" + apkName;
+		String apkPath = "";
 		File apkFile = null;
 		int i = 0;
 		int isNext = 0;
@@ -223,16 +224,18 @@ public class SendPostRunnable implements Runnable {
 		// ---get apk file name---
 		for (i = 1; isNext < 1; i++) {
 			apkName = PACKAGE_NAME + "-" + i + ".apk";
-			// System.out.println("fileName= " + fileName);
+			// System.out.println("fileName= " + apkName);
 
+			apkPath = Environment.getDataDirectory() + "/app/" + apkName;
 			apkFile = new File(apkPath);
 			// System.out.println("path= " + apkFile.getAbsolutePath());
 
 			if (!apkFile.exists()) {
-				System.out.println("no exists= " + apkFile.toString());
+				// System.out.println("no exists= " +
+				// apkFile.getAbsolutePath());
 
 			} else {
-				// System.out.println("exists= " + apkFile.toString());
+				// System.out.println("exists= " + apkFile.getAbsolutePath());
 				isNext++;
 			}
 		}
@@ -240,8 +243,6 @@ public class SendPostRunnable implements Runnable {
 		// ---get hash code of apk---
 		try {
 			str = Hash.sha256(apkFile);
-			// System.out.println("appId= " + appId);
-			// System.out.println("appId length= " + appId.length());
 
 		} catch (Exception e) {
 			// TODO 自動產生的 catch 區塊
