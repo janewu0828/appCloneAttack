@@ -43,7 +43,7 @@ public class SendPostRunnable implements Runnable {
 		this.fileName = fileName;
 		this.appId = getAppId(mAppContext);
 		this.UUID = getUUID(mAppContext);
-		this.IMEI = getIMEI(mAppContext);
+		// this.IMEI = getIMEI(mAppContext);
 	}
 
 	public SendPostRunnable(String fileName, String personalKey,
@@ -67,7 +67,7 @@ public class SendPostRunnable implements Runnable {
 		// UUID.length());
 
 		// check user -----
-		CheckUser cu = new CheckUser(appId, UUID, IMEI);
+		CheckUser cu = new CheckUser(appId, UUID);
 		result = cu.checkUser();
 		Log.i(TAG, "auth= " + result);
 
