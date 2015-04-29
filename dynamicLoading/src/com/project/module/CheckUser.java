@@ -26,7 +26,7 @@ public class CheckUser {
 	private String uri = appSecurityEnhancer_url + "php/app.php";
 	private String appId = null;
 	private String UUID = null;
-	private String IMEI = null;
+//	private String IMEI = null;
 
 	// 主要是记录用户会话过程中的一些用户的基本信息
 	private HashMap<String, String> session = new HashMap<String, String>();
@@ -36,12 +36,12 @@ public class CheckUser {
 	 * @param UUID
 	 * @param IMEI
 	 */
-	public CheckUser(String appId, String UUID, String IMEI) {
-		super();
-		this.appId = appId;
-		this.UUID = UUID;
-		this.IMEI = IMEI;
-	}
+//	public CheckUser(String appId, String UUID, String IMEI) {
+//		super();
+//		this.appId = appId;
+//		this.UUID = UUID;
+//		this.IMEI = IMEI;
+//	}
 
 	public CheckUser(String appId, String UUID) {
 		super();
