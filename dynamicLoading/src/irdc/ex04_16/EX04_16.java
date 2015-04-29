@@ -14,9 +14,12 @@ import static com.project.module.ProjectConfig.showPersonalKeyError;
 
 import com.project.interfaces.Load;
 import com.project.module.Decrypt;
+import com.project.module.PersonalKeyManager;
 import com.project.module.SendPostRunnable;
 
 import java.io.File;
+
+
 
 /* import相關class */
 import android.app.Activity;
@@ -176,9 +179,17 @@ public class EX04_16 extends Activity {
 			if (new File(outputFilePath + fileName).exists()) {
 				Log.i(TAG, "Jar is exist");
 
-				// decrypt Jar -----
+				// decrypt EB(session_key) -----
+				String session_key = Decrypt.decryptSessionKey(sr.getSession()
+						.get("s_enable_block"),
+						sr.getSession().get("s_enable_block2"), sr.getSession()
+								.get("s_enable_block3"), personal_key);
+				// System.out.println("session_key=" + session_key);
+				// String session_key="589040359334464";
+
+				// decrypt CB(Jar) -----
 				Decrypt decfile = new Decrypt(fileName, outputFilePath,
-						personal_key);
+						session_key);
 				decfile.decryptJar();
 
 				loadFileName = decfile.getOutputFileName();
