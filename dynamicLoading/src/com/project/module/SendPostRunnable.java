@@ -25,7 +25,7 @@ public class SendPostRunnable implements Runnable {
 
 	private String appId = null;
 	private String UUID = null;
-	private String IMEI = null;
+	// private String IMEI = null;
 
 	private boolean result = false;
 	private HashMap<String, String> session;
@@ -41,7 +41,7 @@ public class SendPostRunnable implements Runnable {
 	public SendPostRunnable(String fileName) {
 		super();
 		this.fileName = fileName;
-		this.appId = getAppId(mAppContext);
+		this.appId = getAppId2(mAppContext);
 		this.UUID = getUUID(mAppContext);
 		// this.IMEI = getIMEI(mAppContext);
 	}
@@ -57,7 +57,7 @@ public class SendPostRunnable implements Runnable {
 
 		// System.out.println("appId= " + appId + ", appId length= "
 		// + appId.length());
-		String appId2 = getAppId2(mAppContext);
+		String appId2 = getAppId(mAppContext);
 		System.out.println("appId2= " + appId2 + ", appId2 length= "
 				+ appId2.length());
 
@@ -194,25 +194,6 @@ public class SendPostRunnable implements Runnable {
 	private String getAppId(Context context) {
 		String str = "";
 
-		String PACKAGE_NAME = context.getPackageName();
-		// System.out.println("package name= " + PACKAGE_NAME);
-
-		try {
-			str = AeSimpleSHA1.SHA1(PACKAGE_NAME);
-		} catch (NoSuchAlgorithmException e) {
-			// TODO 自動產生的 catch 區塊
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO 自動產生的 catch 區塊
-			e.printStackTrace();
-		}
-
-		return str;
-	}
-
-	private String getAppId2(Context context) {
-		String str = "";
-
 		// ---get hash code of apk---
 		String PACKAGE_NAME = context.getPackageName();
 		String apkName = "";
@@ -254,6 +235,25 @@ public class SendPostRunnable implements Runnable {
 		return str;
 	}
 
+	private String getAppId2(Context context) {
+		String str = "";
+
+		String PACKAGE_NAME = context.getPackageName();
+		// System.out.println("package name= " + PACKAGE_NAME);
+
+		try {
+			str = AeSimpleSHA1.SHA1(PACKAGE_NAME);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO 自動產生的 catch 區塊
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO 自動產生的 catch 區塊
+			e.printStackTrace();
+		}
+
+		return str;
+	}
+
 	private String getUUID(Context context) {
 		// TODO Auto-generated method stub
 		DeviceUuidFactory DFactory = new DeviceUuidFactory(context);
@@ -262,13 +262,13 @@ public class SendPostRunnable implements Runnable {
 		return str;
 	}
 
-	private String getIMEI(Context context) {
-		// TODO Auto-generated method stub
-		TelephonyManager tM = (TelephonyManager) context
-				.getSystemService(Context.TELEPHONY_SERVICE);
-		String str = tM.getDeviceId();
-
-		return str;
-	}
+	// private String getIMEI(Context context) {
+	// // TODO Auto-generated method stub
+	// TelephonyManager tM = (TelephonyManager) context
+	// .getSystemService(Context.TELEPHONY_SERVICE);
+	// String str = tM.getDeviceId();
+	//
+	// return str;
+	// }
 
 }
