@@ -23,19 +23,6 @@
         android:layout_marginTop="10dp"
         android:text="state" />
 
-    <EditText
-        android:id="@+id/edit_seed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_state"
-        android:layout_below="@+id/text_state"
-        android:layout_marginTop="10dp"
-        android:ems="10"
-        android:text="key" >
-
-        <requestFocus />
-    </EditText>
-
     <Button
         android:id="@+id/btn_encryption"
         android:layout_width="wrap_content"
@@ -44,5 +31,24 @@
         android:layout_below="@+id/edit_seed"
         android:layout_marginTop="10dp"
         android:text="encryption" />
+
+    <EditText
+        android:id="@+id/edit_seed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_state"
+        android:layout_below="@+id/text_state"
+        android:layout_marginTop="45dp"
+        android:ems="10"
+        android:text="589040359334464" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/edit_seed"
+        android:layout_below="@+id/text_state"
+        android:layout_marginTop="22dp"
+        android:text="key:" />
 
 </RelativeLayout>
