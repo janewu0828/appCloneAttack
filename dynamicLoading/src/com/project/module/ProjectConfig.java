@@ -17,7 +17,7 @@ public class ProjectConfig {
 	public static boolean isShowTxt;
 
 	// dynamic loading filename(JAR) -----
-	public static String fileName = "encrypt.jar";	
+	public static String fileName = "encrypt.jar";
 	public static String loadFileName = "";
 
 	public static String personal_key = "";
@@ -47,8 +47,14 @@ public class ProjectConfig {
 
 	public static void showPersonalKey() {
 		// TODO Auto-generated method stub
-		AlertDialogManager alert = new AlertDialogManager();
-		alert.showAlertEditDialog(mContext, "Input Personal Key", "key", false);
+		personal_key = PersonalKeyManager.read();
+		// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		// System.out.println("personal_key= " + personal_key);
+		// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+		// AlertDialogManager alert = new AlertDialogManager();
+		// alert.showAlertEditDialog(mContext, "Input Personal Key",
+		// "0123456789abcdef", false);
 	}
 
 	public static void showPersonalKeyError(String msg) {
