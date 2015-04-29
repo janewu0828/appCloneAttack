@@ -43,6 +43,12 @@ public class CheckUser {
 		this.IMEI = IMEI;
 	}
 
+	public CheckUser(String appId, String UUID) {
+		super();
+		this.appId = appId;
+		this.UUID = UUID;
+	}
+
 	public boolean checkUser() {
 
 		DefaultHttpClient mHttpClient = new DefaultHttpClient();
@@ -51,7 +57,7 @@ public class CheckUser {
 		List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
 		pairs.add(new BasicNameValuePair("appId", appId));
 		pairs.add(new BasicNameValuePair("UUID", UUID));
-		pairs.add(new BasicNameValuePair("IMEI", IMEI));
+//		pairs.add(new BasicNameValuePair("IMEI", IMEI));
 
 		try {
 			mPost.setEntity(new UrlEncodedFormEntity(pairs, HTTP.UTF_8));
@@ -76,14 +82,20 @@ public class CheckUser {
 					String flag = "";
 					String app_id = "";
 					String deviceid = "";
-					String androidid = "";
+//					String androidid = "";
+					String enable_block="";
+					String enable_block2="";
+					String enable_block3="";
 					String sessionid = "";
 					try {
 						jsonObject = new JSONObject(info);
 						flag = jsonObject.getString("flag");
 						app_id = jsonObject.getString("app_id");
 						deviceid = jsonObject.getString("deviceid");
-						androidid = jsonObject.getString("androidid");
+//						androidid = jsonObject.getString("androidid");
+						enable_block=jsonObject.getString("enable_block");
+						enable_block2=jsonObject.getString("enable_block2");
+						enable_block3=jsonObject.getString("enable_block3");
 						sessionid = jsonObject.getString("sessionid");
 
 					} catch (JSONException e) {
@@ -95,7 +107,10 @@ public class CheckUser {
 						// 为session传递相的值,用于在session过程中记录相关用户信息
 						session.put("s_app_id", app_id);
 						session.put("s_deviceid", deviceid);
-						session.put("s_androidid", androidid);
+//						session.put("s_androidid", androidid);
+						session.put("s_enable_block", enable_block);
+						session.put("s_enable_block2", enable_block2);
+						session.put("s_enable_block3", enable_block3);
 						session.put("s_sessionid", sessionid);
 
 						return true;
