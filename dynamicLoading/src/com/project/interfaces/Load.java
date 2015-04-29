@@ -57,12 +57,12 @@ public class Load {
 
 			// exe
 			mMainInterface.loadMethod();
-			Log.i(TAG, "finished");
+			// Log.i(TAG, "finished");
 
 			File deleteFile = new File(sourceFile.getAbsolutePath());
 			boolean deleted = deleteFile.delete();
-			Log.i(TAG, "deleted= " + String.valueOf(deleted) + ", file= "
-					+ sourceFile.getAbsolutePath());
+			// Log.i(TAG, "deleted= " + String.valueOf(deleted) + ", file= "
+			// + sourceFile.getAbsolutePath());
 
 		} catch (Exception e) {
 			e.printStackTrace();
