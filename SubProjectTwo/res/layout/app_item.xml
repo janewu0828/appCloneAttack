@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/myLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
@@ -13,21 +14,17 @@
 
         <ImageView
             android:id="@+id/app_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp" >
+            style="@style/myIcon" >
         </ImageView>
 
         <TextView
             android:id="@+id/app_name"
+            style="@style/myAppName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="bold" 
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="10dp">
-        </TextView>
+            android:singleLine="true" />
     </LinearLayout>
 
 </LinearLayout>
