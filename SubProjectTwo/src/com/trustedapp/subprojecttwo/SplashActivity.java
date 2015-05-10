@@ -26,7 +26,7 @@ public class SplashActivity extends Activity {
 			public void run() {
 				// This method will be executed once the timer is over
 				// Start your app main activity
-				Intent i = new Intent(SplashActivity.this, MainActivity.class); // MainActivity為主要檔案名稱
+				Intent i = new Intent(SplashActivity.this, ListActivity.class); // 主要檔案名稱
 				startActivity(i);
 
 				// close this activity
