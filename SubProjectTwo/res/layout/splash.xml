@@ -14,12 +14,24 @@
         android:src="@drawable/load" />
 
     <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="115dp"
+        android:text="App複製攻擊之預防與偵測"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFFFF"
+        android:textSize="40sp" />
+
+    <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="131dp"
+        android:layout_marginTop="171dp"
         android:text="App Clone Attack Prevention and Detection"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FFFFFFFF"
@@ -31,10 +43,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="61dp"
-        android:text="NTUST ISLAB 2015"
+        android:layout_marginTop="74dp"
+        android:text="copyright © NTUST ISLAB 2015"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FFFFFFFF"
-        android:textSize="40sp" />
+        android:textSize="30sp" />
 
 </RelativeLayout>
