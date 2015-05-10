@@ -16,7 +16,8 @@
         android:id="@+id/mImage01"
         style="@style/myImg"
         android:layout_x="202dp"
-        android:layout_y="92dp" />
+        android:layout_y="92dp"
+        android:src="@drawable/p04" />
     <!-- 小 -->
     <!-- android:layout_x="20dp" -->
     <!-- android:layout_y="122dp" -->
@@ -28,7 +29,8 @@
         android:id="@+id/mImage02"
         style="@style/myImg"
         android:layout_x="49dp"
-        android:layout_y="389dp" />
+        android:layout_y="389dp"
+        android:src="@drawable/p04" />
     <!-- 小 -->
     <!-- android:layout_x="126dp" -->
     <!-- android:layout_y="122dp" -->
@@ -40,7 +42,8 @@
         android:id="@+id/mImage03"
         style="@style/myImg"
         android:layout_x="344dp"
-        android:layout_y="391dp" />
+        android:layout_y="391dp"
+        android:src="@drawable/p04" />
     <!-- 小 -->
     <!-- android:layout_x="232dp" -->
     <!-- android:layout_y="122dp" -->

@@ -14,7 +14,7 @@
     
     <string name="toast_checkuser_true">Authentication is successful, the process will continue.</string>
     
-    <string name="alert_checkuser_error_title">Test result</string>
+    <string name="alert_checkuser_error_title">Message</string>
     <string name="alert_checkuser_error_msg">Authentication is failed, the process will be terminated.</string>
 
 </resources>
