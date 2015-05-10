@@ -19,6 +19,9 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -42,11 +45,12 @@ public class ListActivity extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
 		try {
-			requestWindowFeature(Window.FEATURE_NO_TITLE);
+			// requestWindowFeature(Window.FEATURE_NO_TITLE);
 			setContentView(R.layout.applist);
-
-			mContext = ListActivity.this;
 
 			pd = new ProgressDialogManager(this, getResources().getString(
 					R.string.applist_loading_msg), false);
@@ -121,10 +125,12 @@ public class ListActivity extends Activity {
 				}
 			};
 			super.onCreate(savedInstanceState);
+			mContext = ListActivity.this;
 
 		} catch (Exception e) {
 			finish();
 		}
+		
 	}
-	
+
 }
