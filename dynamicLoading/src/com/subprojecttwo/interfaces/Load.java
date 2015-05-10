@@ -1,6 +1,6 @@
-package com.project.interfaces;
+package com.subprojecttwo.interfaces;
 
-import static com.project.module.ProjectConfig.mAppContext;
+import static com.subprojecttwo.module.ProjectConfig.mAppContext;
 
 import java.io.File;
 
@@ -43,7 +43,7 @@ public class Load {
 					context.getClassLoader());
 
 			Class<?> libProviderClazz = classLoader
-					.loadClass("com.project.interfaces.InterfaceTest");
+					.loadClass("com.subprojecttwo.interfaces.InterfaceTest");
 
 			// interface
 			MainInterface mMainInterface = (MainInterface) libProviderClazz

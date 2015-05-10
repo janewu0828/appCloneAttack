@@ -1,23 +1,25 @@
 package irdc.ex04_16;
 
-import static com.project.module.ProjectConfig.mAppContext;
-import static com.project.module.ProjectConfig.mContext;
-import static com.project.module.ProjectConfig.isShowTxt;
-import static com.project.module.ProjectConfig.fileName;
-import static com.project.module.SendPostRunnable.outputFilePath;
-import static com.project.module.ProjectConfig.loadFileName;
-import static com.project.module.ProjectConfig.personal_key;
-import static com.project.module.ProjectConfig.checkConnection;
-import static com.project.module.ProjectConfig.showCheckUserError;
-import static com.project.module.ProjectConfig.showPersonalKey;
-import static com.project.module.ProjectConfig.showPersonalKeyError;
+import static com.subprojecttwo.module.ProjectConfig.checkConnection;
+import static com.subprojecttwo.module.ProjectConfig.fileName;
+import static com.subprojecttwo.module.ProjectConfig.isShowTxt;
+import static com.subprojecttwo.module.ProjectConfig.loadFileName;
+import static com.subprojecttwo.module.ProjectConfig.mAppContext;
+import static com.subprojecttwo.module.ProjectConfig.mContext;
+import static com.subprojecttwo.module.ProjectConfig.personal_key;
+import static com.subprojecttwo.module.ProjectConfig.showCheckUserError;
+import static com.subprojecttwo.module.ProjectConfig.showPersonalKey;
+import static com.subprojecttwo.module.ProjectConfig.showPersonalKeyError;
+import static com.subprojecttwo.module.SendPostRunnable.outputFilePath;
 
-import com.project.interfaces.Load;
-import com.project.module.Decrypt;
-import com.project.module.PersonalKeyManager;
-import com.project.module.SendPostRunnable;
+import com.subprojecttwo.interfaces.Load;
+import com.subprojecttwo.module.Decrypt;
+import com.subprojecttwo.module.PersonalKeyManager;
+import com.subprojecttwo.module.SendPostRunnable;
 
 import java.io.File;
+
+
 
 
 

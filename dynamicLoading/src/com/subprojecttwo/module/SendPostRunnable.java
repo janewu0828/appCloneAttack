@@ -1,7 +1,7 @@
-package com.project.module;
+package com.subprojecttwo.module;
 
-import static com.project.module.ProjectConfig.mAppContext;
-import static com.project.module.ProjectConfig.personal_key;
+import static com.subprojecttwo.module.ProjectConfig.mAppContext;
+import static com.subprojecttwo.module.ProjectConfig.personal_key;
 
 import java.io.BufferedInputStream;
 import java.io.File;

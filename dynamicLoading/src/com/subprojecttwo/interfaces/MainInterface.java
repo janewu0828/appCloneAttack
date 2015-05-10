@@ -1,4 +1,4 @@
-package com.project.interfaces;
+package com.subprojecttwo.interfaces;
 
 import android.graphics.drawable.Drawable;
 

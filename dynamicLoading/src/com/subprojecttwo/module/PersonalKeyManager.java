@@ -1,8 +1,10 @@
-package com.project.module;
+package com.subprojecttwo.module;
 
-import static com.project.module.SendPostRunnable.outputFilePath;
+import static com.subprojecttwo.module.SendPostRunnable.outputFilePath;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
+
 import android.util.Log;
 
 public class PersonalKeyManager {

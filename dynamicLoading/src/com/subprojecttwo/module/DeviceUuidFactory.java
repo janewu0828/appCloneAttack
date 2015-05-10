@@ -1,4 +1,4 @@
-package com.project.module;
+package com.subprojecttwo.module;
 
 import android.content.Context;
 import android.content.SharedPreferences;

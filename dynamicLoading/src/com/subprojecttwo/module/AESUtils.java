@@ -1,4 +1,4 @@
-package com.project.module;
+package com.subprojecttwo.module;
 
 import java.security.SecureRandom;
 

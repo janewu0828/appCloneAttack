@@ -1,7 +1,6 @@
-package com.project.module;
+package com.subprojecttwo.module;
 
-import static com.project.module.ProjectConfig.personal_key;
-
+import static com.subprojecttwo.module.ProjectConfig.personal_key;
 import irdc.ex04_16.R;
 import android.app.AlertDialog;
 import android.content.Context;
