@@ -12,18 +12,14 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -36,7 +32,7 @@ public class ListActivity extends Activity {
 	public static final int DATA_ERROR = 0;
 	public static final int DATA_CREATLIST = 1;
 	private List<Apps> data = null;// applist
-	private String strPackageName;
+	
 	// apk-info
 	private List<PackageInfo> pis;
 	private List<ResolveInfo> appInfo;
@@ -47,7 +43,7 @@ public class ListActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		try {
 			// requestWindowFeature(Window.FEATURE_NO_TITLE);
 			setContentView(R.layout.applist);
@@ -68,10 +64,28 @@ public class ListActivity extends Activity {
 
 						if (appInfo != null) {
 							data = new ArrayList<Apps>();
-							for (ResolveInfo app : appInfo) {
-								data.add(new Apps(app.loadIcon(packageManager),
-										(String) app.loadLabel(packageManager)));
+
+							// display system app info
+							// for (ResolveInfo app : appInfo) {
+							// data.add(new Apps(app.loadIcon(packageManager),
+							// (String) app.loadLabel(packageManager)));
+							// }
+
+							for (int i = 0; i < pis.size(); i++) {
+								PackageInfo packageInfo = pis.get(i);
+								Apps tmpInfo = new Apps();
+								tmpInfo.app_name = packageInfo.applicationInfo
+										.loadLabel(getPackageManager())
+										.toString();
+								tmpInfo.app_icon = packageInfo.applicationInfo
+										.loadIcon(getPackageManager());
+								// Only display non-system app info
+								if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+									// if non-system app info, add into applist
+									data.add(tmpInfo);
+								}
 							}
+
 							msg.what = DATA_CREATLIST;
 						} else {
 							msg.what = DATA_ERROR;
@@ -99,17 +113,23 @@ public class ListActivity extends Activity {
 						listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 							public void onItemClick(AdapterView<?> parent,
 									View view, int position, long id) {
-								ActivityInfo activityInfo = appInfo
-										.get(position).activityInfo;
-								Intent intent = new Intent();
-								intent.setClassName(activityInfo.packageName,
-										activityInfo.name);
-								startActivity(intent);
+								mContext = ListActivity.this;
+								AlertDialogManager alert = new AlertDialogManager();
+								alert.showAlertDialog(
+										mContext,
+										mContext.getResources()
+												.getString(
+														R.string.alert_applist_loading_title),
+										mContext.getResources()
+												.getString(
+														R.string.alert_applist_loading_msg),
+										true);
 							}
 						});
-
 						break;
+						
 					case DATA_ERROR:
+						mContext = ListActivity.this;
 						AlertDialogManager alert = new AlertDialogManager();
 						alert.showAlertDialog(
 								mContext,
@@ -125,12 +145,11 @@ public class ListActivity extends Activity {
 				}
 			};
 			super.onCreate(savedInstanceState);
-			mContext = ListActivity.this;
 
 		} catch (Exception e) {
 			finish();
 		}
-		
+
 	}
 
 }
