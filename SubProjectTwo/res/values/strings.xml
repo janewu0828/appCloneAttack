@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SubProjectTwo</string>
+    <string name="app_name">App Clone Attack Prevention and Detection</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="applist_loading_msg">Application list is loading</string>
+    <string name="alert_applist_loading_title">Message</string>
+    <string name="alert_applist_loading_msg">Error Dialog.</string>
+    <string name="alert_internet_error_title">Network connection is failed</string>
+    <string name="alert_internet_error_msg">Please check out the connection.</string>
+    <string name="toast_checkuser_true">Authentication is successful, the process will continue.</string>
+    <string name="alert_checkuser_error_title">Message</string>
+    <string name="alert_checkuser_error_msg">Authentication is failed, the process will be terminated.</string>
 
 </resources>
