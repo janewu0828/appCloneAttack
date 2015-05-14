@@ -5,5 +5,8 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="lib" path="src/trustedappframework/subprojecttwo/interfaces/inputACAPD_dynamic_loading_20150515.jar"/>
+	<classpathentry kind="lib" path="src/trustedappframework/subprojecttwo/module/inputACAPD_checkuser_decrypt_20150515.jar"/>
+	<classpathentry kind="lib" path="src/trustedappframework/subprojecttwo/module/inputACAPD_tracing_20150515.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
