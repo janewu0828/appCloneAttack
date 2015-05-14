@@ -60,9 +60,12 @@ public class EX04_16 extends Activity {
 		// get context for AlertDialog
 		mContext = EX04_16.this;
 
-		startService(new Intent(
-				"trustedappframework.subprojecttwo.interfaces.InterfaceTest.loadMethod"));
-		startService(new Intent("irdc.ex04_16.EX04_16"));
+		// here
+		// A/libc(20572): Fatal signal 7 (SIGBUS) at 0x7980c4e0 (code=2), thread
+		// 20572 (irdc.ex04_16)
+		// startService(new Intent(
+		// "trustedappframework.subprojecttwo.interfaces.InterfaceTest.loadMethod"));
+		// startService(new Intent("irdc.ex04_16.EX04_16"));
 
 		/* 取得相關物件 */
 		mText = (TextView) findViewById(R.id.mText);
