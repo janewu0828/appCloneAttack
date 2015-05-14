@@ -1,13 +1,10 @@
 package irdc.ex06_02;
 
-import static com.project.module.ProjectConfig.mAppContext;
-import static com.project.module.ProjectConfig.mContext;
-import static com.project.module.ProjectConfig.isShowTxt;
-import static com.project.module.ProjectConfig.fileName;
-import static com.project.module.ProjectConfig.checkConnection;
-import static com.project.module.ProjectConfig.showCheckuserError;
-
-import com.project.module.SendPostRunnable;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
+import trustedappframework.subprojecttwo.module.ACAPD;
 
 /* import相關class */
 import android.app.Activity;
@@ -19,10 +16,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class EX06_02 extends Activity
 {
+  private static ACAPD myACAPD;
+
   /* 變數宣告 */
   public static int intLevel;
   public static int intScale;
@@ -43,42 +41,8 @@ public class EX06_02 extends Activity
         intScale = intent.getIntExtra("scale", 100);
 
         Log.i("event", "取得電量");
-
-        // ---check user, download file and dynamic loading---
-        SendPostRunnable sr = new SendPostRunnable(fileName,
-            mAppContext);
-
-        // start a Thread, the data to be transferred into the Runnable, so that Thread execute
-        Thread t = new Thread(sr);
-        t.start();
-
-        try
-        {
-          // wait Thread t
-          t.join();
-        } catch (InterruptedException e)
-        {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
-
-        if (sr.getResult())
-        {
-          if (isShowTxt)
-            Toast.makeText(
-                mContext,
-                mContext.getResources().getString(
-                    R.string.toast_checkuser_true), Toast.LENGTH_SHORT)
-                .show();
-          // show a message of Authentication is successful in first time
-          isShowTxt = false;
-
-        } else
-        {
-          // show a Alert Dialog that Authentication is failed
-          showCheckuserError();
-        }
-
+        myACAPD = new ACAPD(class_separation_segment, personal_key);
+       
       }
     }
   };
@@ -95,10 +59,6 @@ public class EX06_02 extends Activity
     mAppContext = getApplicationContext();
     // get context for AlertDialog
     mContext = EX06_02.this;
-    // show a message of authentication is successful in first time
-    isShowTxt = true;
-    // check network setting on device
-    checkConnection();
 
     /* 初始化Button，並設定按下後的動作 */
     mButton01 = (Button) findViewById(R.id.myButton1);
