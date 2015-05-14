@@ -1,6 +1,6 @@
 package trustedappframework.subprojecttwo.module;
 
-import static trustedappframework.subprojecttwo.module.SendPostRunnable.appSecurityEnhancer_url;
+import static trustedappframework.subprojecttwo.module.ACAPD.appSecurityEnhancer_url;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -25,27 +25,31 @@ public class CheckUser {
 
 	private String uri = appSecurityEnhancer_url + "php/app.php";
 	private String appId = null;
+	private String appId2 = null;
 	private String UUID = null;
-//	private String IMEI = null;
+	// private String IMEI = null;
 
-	// 主要是记录用户会话过程中的一些用户的基本信息
+	// 主要是記錄用戶會話過程中的一些用戶的基本訊息
 	private HashMap<String, String> session = new HashMap<String, String>();
 
 	/**
 	 * @param appId
+	 * @param appId2
 	 * @param UUID
 	 * @param IMEI
 	 */
-//	public CheckUser(String appId, String UUID, String IMEI) {
-//		super();
-//		this.appId = appId;
-//		this.UUID = UUID;
-//		this.IMEI = IMEI;
-//	}
+	// public CheckUser(String appId, String appId2,String UUID, String IMEI) {
+	// super();
+	// this.appId = appId;
+	// this.appId2 = appId2;
+	// this.UUID = UUID;
+	// this.IMEI = IMEI;
+	// }
 
-	public CheckUser(String appId, String UUID) {
+	public CheckUser(String appId, String appId2, String UUID) {
 		super();
 		this.appId = appId;
+		this.appId2 = appId2;
 		this.UUID = UUID;
 	}
 
@@ -56,13 +60,13 @@ public class CheckUser {
 
 		List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
 		pairs.add(new BasicNameValuePair("appId", appId));
+		pairs.add(new BasicNameValuePair("appId2", appId2));
 		pairs.add(new BasicNameValuePair("UUID", UUID));
-//		pairs.add(new BasicNameValuePair("IMEI", IMEI));
+		// pairs.add(new BasicNameValuePair("IMEI", IMEI));
 
 		try {
 			mPost.setEntity(new UrlEncodedFormEntity(pairs, HTTP.UTF_8));
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -76,38 +80,40 @@ public class CheckUser {
 				if (entity != null) {
 					String info = EntityUtils.toString(entity);
 					System.out.println("-----------info-----------" + info);
-					// 以下主要是对服务器端返回的数据进行解析
+					// 以下主要是對伺服器端傳回的資料進行解析
 					JSONObject jsonObject = null;
-					// flag为登录成功与否的标记,从服务器端返回的数据
+					// flag為身份鑑別成功與否的標記，是從伺服器端傳回的資料
 					String flag = "";
 					String app_id = "";
+					String app_id2 = "";
 					String deviceid = "";
-//					String androidid = "";
-					String enable_block="";
-					String enable_block2="";
-					String enable_block3="";
+					// String androidid = "";
+					String enable_block = "";
+					String enable_block2 = "";
+					String enable_block3 = "";
 					String sessionid = "";
 					try {
 						jsonObject = new JSONObject(info);
 						flag = jsonObject.getString("flag");
 						app_id = jsonObject.getString("app_id");
+						app_id2 = jsonObject.getString("app_id2");
 						deviceid = jsonObject.getString("deviceid");
-//						androidid = jsonObject.getString("androidid");
-						enable_block=jsonObject.getString("enable_block");
-						enable_block2=jsonObject.getString("enable_block2");
-						enable_block3=jsonObject.getString("enable_block3");
+						// androidid = jsonObject.getString("androidid");
+						enable_block = jsonObject.getString("enable_block");
+						enable_block2 = jsonObject.getString("enable_block2");
+						enable_block3 = jsonObject.getString("enable_block3");
 						sessionid = jsonObject.getString("sessionid");
 
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					// 根据服务器端返回的标记,判断服务端端验证是否成功
+					// 根據伺服器端返回的標記，判斷伺服器端鑑別是否成功
 					if (flag.equals("success")) {
-						// 为session传递相的值,用于在session过程中记录相关用户信息
+						// 為session傳遞的值，用於在session過程中記錄相關用戶訊息
 						session.put("s_app_id", app_id);
+						session.put("s_app_id2", app_id2);
 						session.put("s_deviceid", deviceid);
-//						session.put("s_androidid", androidid);
+						// session.put("s_androidid", androidid);
 						session.put("s_enable_block", enable_block);
 						session.put("s_enable_block2", enable_block2);
 						session.put("s_enable_block3", enable_block3);
@@ -126,10 +132,8 @@ public class CheckUser {
 			}
 
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
