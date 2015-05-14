@@ -34,7 +34,7 @@ public class ListActivity extends Activity {
 	public static final int DATA_ERROR = 0;
 	public static final int DATA_CREATLIST = 1;
 	private List<Apps> data = null;// applist
-	
+
 	// apk-info
 	private List<PackageInfo> pis;
 	private List<ResolveInfo> appInfo;
@@ -115,21 +115,22 @@ public class ListActivity extends Activity {
 						listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 							public void onItemClick(AdapterView<?> parent,
 									View view, int position, long id) {
-								mContext = ListActivity.this;
+
+								// here
 								AlertDialogManager alert = new AlertDialogManager();
 								alert.showAlertDialog(
-										mContext,
-										mContext.getResources()
+										ListActivity.this,
+										getResources()
 												.getString(
 														R.string.alert_applist_loading_title),
-										mContext.getResources()
+										getResources()
 												.getString(
 														R.string.alert_applist_loading_msg),
 										true);
 							}
 						});
 						break;
-						
+
 					case DATA_ERROR:
 						mContext = ListActivity.this;
 						AlertDialogManager alert = new AlertDialogManager();
