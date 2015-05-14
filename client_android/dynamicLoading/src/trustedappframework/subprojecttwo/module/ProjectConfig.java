@@ -1,4 +1,4 @@
-package com.subprojecttwo.module;
+package trustedappframework.subprojecttwo.module;
 
 import irdc.ex04_16.R;
 import android.content.Context;

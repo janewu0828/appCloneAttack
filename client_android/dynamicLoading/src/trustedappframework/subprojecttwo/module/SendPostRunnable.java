@@ -1,7 +1,7 @@
-package com.subprojecttwo.module;
+package trustedappframework.subprojecttwo.module;
 
-import static com.subprojecttwo.module.ProjectConfig.mAppContext;
-import static com.subprojecttwo.module.ProjectConfig.personal_key;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
 
 import java.io.BufferedInputStream;
 import java.io.File;

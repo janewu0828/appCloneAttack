@@ -1,21 +1,16 @@
 package irdc.ex04_16;
 
-import static com.subprojecttwo.module.ProjectConfig.checkConnection;
-import static com.subprojecttwo.module.ProjectConfig.fileName;
-import static com.subprojecttwo.module.ProjectConfig.isShowTxt;
-import static com.subprojecttwo.module.ProjectConfig.loadFileName;
-import static com.subprojecttwo.module.ProjectConfig.mAppContext;
-import static com.subprojecttwo.module.ProjectConfig.mContext;
-import static com.subprojecttwo.module.ProjectConfig.personal_key;
-import static com.subprojecttwo.module.ProjectConfig.showCheckUserError;
-import static com.subprojecttwo.module.ProjectConfig.showPersonalKey;
-import static com.subprojecttwo.module.ProjectConfig.showPersonalKeyError;
-import static com.subprojecttwo.module.SendPostRunnable.outputFilePath;
-
-import com.subprojecttwo.interfaces.Load;
-import com.subprojecttwo.module.Decrypt;
-import com.subprojecttwo.module.PersonalKeyManager;
-import com.subprojecttwo.module.SendPostRunnable;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.checkConnection;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.fileName;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.isShowTxt;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.loadFileName;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.showCheckUserError;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.showPersonalKey;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.showPersonalKeyError;
+import static trustedappframework.subprojecttwo.module.SendPostRunnable.outputFilePath;
 
 import java.io.File;
 
@@ -23,6 +18,12 @@ import java.io.File;
 
 
 
+
+
+import trustedappframework.subprojecttwo.interfaces.Load;
+import trustedappframework.subprojecttwo.module.Decrypt;
+import trustedappframework.subprojecttwo.module.PersonalKeyManager;
+import trustedappframework.subprojecttwo.module.SendPostRunnable;
 /* import相關class */
 import android.app.Activity;
 import android.graphics.drawable.Drawable;

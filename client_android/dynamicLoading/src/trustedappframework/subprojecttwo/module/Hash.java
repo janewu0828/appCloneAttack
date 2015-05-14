@@ -1,4 +1,4 @@
-package com.subprojecttwo.module;
+package trustedappframework.subprojecttwo.module;
 
 import java.io.File;
 import java.io.FileInputStream;

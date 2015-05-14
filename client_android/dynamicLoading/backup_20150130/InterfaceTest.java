@@ -1,6 +1,6 @@
-package com.subprojecttwo.interfaces;
+package trustedappframework.subprojecttwo.interfaces;
 
-import static com.subprojecttwo.module.ProjectConfig.mContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
 import irdc.ex04_16.EX04_16;
 import irdc.ex04_16.R;
 import android.graphics.drawable.Drawable;

@@ -1,4 +1,4 @@
-package com.subprojecttwo.module;
+package trustedappframework.subprojecttwo.module;
 
 import android.content.Context;
 import android.content.SharedPreferences;

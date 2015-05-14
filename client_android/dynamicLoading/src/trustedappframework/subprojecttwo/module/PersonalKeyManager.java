@@ -1,6 +1,6 @@
-package com.subprojecttwo.module;
+package trustedappframework.subprojecttwo.module;
 
-import static com.subprojecttwo.module.SendPostRunnable.outputFilePath;
+import static trustedappframework.subprojecttwo.module.SendPostRunnable.outputFilePath;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

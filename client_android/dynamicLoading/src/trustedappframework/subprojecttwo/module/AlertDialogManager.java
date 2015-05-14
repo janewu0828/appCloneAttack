@@ -1,6 +1,6 @@
-package com.subprojecttwo.module;
+package trustedappframework.subprojecttwo.module;
 
-import static com.subprojecttwo.module.ProjectConfig.personal_key;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
 import irdc.ex04_16.R;
 import android.app.AlertDialog;
 import android.content.Context;

@@ -1,6 +1,6 @@
-package com.subprojecttwo.module;
+package trustedappframework.subprojecttwo.module;
 
-import static com.subprojecttwo.module.SendPostRunnable.appSecurityEnhancer_url;
+import static trustedappframework.subprojecttwo.module.SendPostRunnable.appSecurityEnhancer_url;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
