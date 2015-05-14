@@ -71,20 +71,22 @@ session_start();
 
 $Action                         = isset($_GET["action"]) ? $_GET["action"] : null;
 // appId
-$app_id                         = htmlspecialchars($_POST["appId"]);
+$app_id                         = $_POST["appId"];
+$app_id2                        = htmlspecialchars($_POST["appId2"]);
 // UUID
 $deviceid=$_POST["UUID"];
 // IMEI
 // $androidid=$_POST["IMEI"];
 
-// 包含数据库连接文件
+// 包含資料庫連接文件
 include('conn.php');
 mysql_query("set names utf8");
-// 检测用户名及密码是否正确
-$check_query                    = mysql_query("select purchase.app_id2, member.deviceid from purchase, member where purchase.username=member.username and purchase.app_id2='$app_id' and member.deviceid='$deviceid' limit 1");
-$arr                            = array();   //空的数组
+// 檢測用戶身份是否正確
+$check_query                    = mysql_query("select purchase.app_id, purchase.app_id2, member.deviceid from purchase, member where purchase.username=member.username and purchase.app_id2='$app_id2' and member.deviceid='$deviceid' limit 1");
+$arr                            = array();   //空的陣列
 if($result                      = mysql_fetch_array($check_query)){
-    // 登录成功
+    // 登入成功
+    $_SESSION['app_id']         = $result['app_id'];
     $_SESSION['app_id2']        = $result['app_id2'];
     $_SESSION['deviceid']       = $result['deviceid'];
     // $_SESSION['androidid']      = $result['androidid'];
@@ -97,20 +99,24 @@ if($result                      = mysql_fetch_array($check_query)){
     // Encrypt(secret_value)
     // $enable_block = $mcrypt->encrypt("9999999999123456"); //java.lang.StringIndexOutOfBoundsException
     // $enable_block2 = $mcrypt->encrypt("888888888123456"); //java.lang.StringIndexOutOfBoundsException
-    $enable_block = $mcrypt->encrypt("1111111111123456");
-    $enable_block2 = $mcrypt->encrypt("222222222123456");
-    $enable_block3 = $mcrypt->encrypt("333333333123456");
+    $enable_block = $mcrypt->encrypt("1111111111123456"); //secret_value
+    $enable_block2 = $mcrypt->encrypt("222222222123456"); //secret_value2
+    $enable_block3 = $mcrypt->encrypt("333333333123456"); //secret_value3
 
     $arr                        = array(
 
     'flag'                      => 'success',
     
-    'app_id'=>$result['app_id2'],  
+    'app_id'=>$result['app_id'],  
+
+    'app_id2'=>$result['app_id2'],  
 
     'deviceid'=>$result['deviceid'],  
 
     'enable_block'=>$enable_block,
+
     'enable_block2'=>$enable_block2,
+    
     'enable_block3'=>$enable_block3,
 
     'sessionid'=>$sessionid  
