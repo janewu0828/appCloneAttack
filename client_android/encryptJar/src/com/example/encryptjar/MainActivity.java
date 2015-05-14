@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.support.v7.app.ActionBarActivity;
-import android.text.Editable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -26,13 +25,14 @@ public class MainActivity extends ActionBarActivity {
 	private static String seed = "guess"; // 种子
 
 	private TextView text_state;
-	private EditText edit_seed;
+	private EditText edit_seed,edit_input,edit_output;
 	private Button btn_Encryption;
 
-	private String outputFileName = "encrypted.jar";
+	private String inputFileName = null;
+	private String outputFileName = null;
 	private File sdCard = Environment.getExternalStorageDirectory();
 	// 欲加密檔案的路径，在res\raw\outputjar.jar.jar找到文件，再放到外部存储的目录下。用於测试
-	private File oldFile = new File(sdCard + "/project/", "output.jar");
+	private File oldFile;
 
 	private FileInputStream fis = null;
 	private FileOutputStream fos = null;
@@ -44,6 +44,10 @@ public class MainActivity extends ActionBarActivity {
 		@Override
 		public void onClick(View v) {
 			String str = edit_seed.getText().toString();
+			
+			inputFileName = edit_input.getText().toString();
+			oldFile = new File(sdCard + "/project/", inputFileName);
+			outputFileName = edit_output.getText().toString();
 
 			if (str == null || "".equals(str)) {
 				text_state.setText("seed is null !!!");
@@ -107,6 +111,8 @@ public class MainActivity extends ActionBarActivity {
 
 		text_state = (TextView) findViewById(R.id.text_state);
 		edit_seed = (EditText) findViewById(R.id.edit_seed);
+		edit_input = (EditText) findViewById(R.id.edit_input);
+		edit_output = (EditText) findViewById(R.id.edit_output);
 
 		btn_Encryption = (Button) findViewById(R.id.btn_encryption);
 		btn_Encryption.setOnClickListener(new MyClickListener());
