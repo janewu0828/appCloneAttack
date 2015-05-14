@@ -29,10 +29,10 @@ public class MainActivity extends ActionBarActivity {
 	private EditText edit_seed;
 	private Button btn_Encryption;
 
-	private String outputFileName = "encrypt.jar";
+	private String outputFileName = "encrypted.jar";
 	private File sdCard = Environment.getExternalStorageDirectory();
 	// 欲加密檔案的路径，在res\raw\outputjar.jar.jar找到文件，再放到外部存储的目录下。用於测试
-	private File oldFile = new File(sdCard + "/project/", "outputjar.jar");
+	private File oldFile = new File(sdCard + "/project/", "output.jar");
 
 	private FileInputStream fis = null;
 	private FileOutputStream fos = null;
