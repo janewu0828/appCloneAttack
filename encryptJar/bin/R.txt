@@ -334,6 +334,7 @@ int drawable abc_textfield_search_activated_mtrl_alpha 0x7f020030
 int drawable abc_textfield_search_default_mtrl_alpha 0x7f020031
 int drawable abc_textfield_search_material 0x7f020032
 int drawable ic_launcher 0x7f020033
+int id TextView01 0x7f0a0043
 int id action_bar 0x7f0a0031
 int id action_bar_activity_content 0x7f0a0003
 int id action_bar_container 0x7f0a0030
@@ -347,11 +348,11 @@ int id action_menu_presenter 0x7f0a0006
 int id action_mode_bar 0x7f0a002e
 int id action_mode_bar_stub 0x7f0a002d
 int id action_mode_close_button 0x7f0a0020
-int id action_settings 0x7f0a0043
+int id action_settings 0x7f0a0044
 int id activity_chooser_view_content 0x7f0a0021
 int id always 0x7f0a0014
 int id beginning 0x7f0a001b
-int id btn_encryption 0x7f0a0042
+int id btn_encryption 0x7f0a0041
 int id checkbox 0x7f0a0029
 int id collapseActionView 0x7f0a0015
 int id decor_content_parent 0x7f0a002f
@@ -360,7 +361,7 @@ int id dialog 0x7f0a0019
 int id disableHome 0x7f0a000d
 int id dropdown 0x7f0a001a
 int id edit_query 0x7f0a0033
-int id edit_seed 0x7f0a0041
+int id edit_seed 0x7f0a0042
 int id end 0x7f0a001c
 int id expand_activities_button 0x7f0a0022
 int id expanded_menu 0x7f0a0028

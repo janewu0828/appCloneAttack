@@ -1,6 +1,6 @@
-package com.project.interfaces;
+package com.subprojecttwo.interfaces;
 
-import static com.project.module.ProjectConfig.mContext;
+import static com.subprojecttwo.module.ProjectConfig.mContext;
 import irdc.ex04_16.EX04_16;
 import irdc.ex04_16.R;
 import android.graphics.drawable.Drawable;
