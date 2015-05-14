@@ -1,4 +1,4 @@
-package com.subprojecttwo.adapter;
+package trustedappframework.subprojecttwo.adapter;
 
 import com.trustedapp.subprojecttwo.R;
 

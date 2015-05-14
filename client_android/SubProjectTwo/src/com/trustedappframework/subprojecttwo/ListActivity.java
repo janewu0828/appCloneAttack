@@ -3,10 +3,11 @@ package com.trustedappframework.subprojecttwo;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.subprojecttwo.module.AlertDialogManager;
-import com.subprojecttwo.module.ProgressDialogManager;
-import com.subprojecttwo.adapter.AppListAdapter;
-import com.subprojecttwo.entity.Apps;
+import trustedappframework.subprojecttwo.adapter.AppListAdapter;
+import trustedappframework.subprojecttwo.entity.Apps;
+import trustedappframework.subprojecttwo.module.AlertDialogManager;
+import trustedappframework.subprojecttwo.module.ProgressDialogManager;
+
 import com.trustedapp.subprojecttwo.R;
 
 import android.app.Activity;

@@ -1,4 +1,4 @@
-package com.subprojecttwo.entity;
+package trustedappframework.subprojecttwo.entity;
 
 import android.graphics.drawable.Drawable;
 

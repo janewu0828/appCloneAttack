@@ -1,7 +1,8 @@
-package com.subprojecttwo.adapter;
+package trustedappframework.subprojecttwo.adapter;
 
 import java.util.List;
 
+import trustedappframework.subprojecttwo.entity.Apps;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.subprojecttwo.entity.Apps;
 import com.trustedapp.subprojecttwo.R;
 
 public class AppListAdapter extends ArrayAdapter<Apps> {
