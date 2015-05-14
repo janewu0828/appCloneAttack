@@ -1,13 +1,11 @@
 package irdc.ex04_24;
 
-import static com.project.module.ProjectConfig.mAppContext;
-import static com.project.module.ProjectConfig.mContext;
-import static com.project.module.ProjectConfig.isShowTxt;
-import static com.project.module.ProjectConfig.fileName;
-import static com.project.module.ProjectConfig.checkConnection;
-import static com.project.module.ProjectConfig.showCheckuserError;
-import com.project.module.SendPostRunnable;
-
+import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.checkConnection;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
+import trustedappframework.subprojecttwo.module.ACAPD;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class EX04_24 extends Activity {
+	private static final String TAG = "EX04_16";
+
+	private ACAPD myACAPD;
+
 	public static boolean turnleft;
 	public static int widthOrig1;
 	public static int heightOrig1;
@@ -41,10 +43,6 @@ public class EX04_24 extends Activity {
 		mAppContext = getApplicationContext();
 		// get context for AlertDialog
 		mContext = EX04_24.this;
-		// show a message of authentication is successful in first time
-		isShowTxt = true;
-		// check network setting on device
-		checkConnection();
 
 		mButton1 = (Button) findViewById(R.id.myButton1);
 		mButton2 = (Button) findViewById(R.id.myButton2);
@@ -92,35 +90,7 @@ public class EX04_24 extends Activity {
 	}
 
 	private void loadImageView() {
-		// ---check user, download file and dynamic loading---
-		SendPostRunnable sr = new SendPostRunnable(fileName,
-				getApplicationContext());
-
-		// start a Thread, the data to be transferred into the Runnable, so that Thread execute
-		Thread t = new Thread(sr);
-		t.start();
-
-		try {
-			// wait Thread t
-			t.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		if (sr.getResult()) {
-			if (isShowTxt)
-				Toast.makeText(
-						getApplicationContext(),
-						getResources().getString(R.string.toast_checkuser_true),
-						Toast.LENGTH_SHORT).show();
-			// show a message of Authentication is successful in first time
-			isShowTxt = false;
-
-		} else {
-			// show a Alert Dialog that Authentication is failed
-			showCheckuserError();
-		}
+		myACAPD = new ACAPD(class_separation_segment, personal_key);
 	}
 
 	public static int getWidthOrig1() {
