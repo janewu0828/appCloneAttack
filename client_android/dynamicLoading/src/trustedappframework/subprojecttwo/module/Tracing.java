@@ -1,6 +1,6 @@
 package trustedappframework.subprojecttwo.module;
 
-import static trustedappframework.subprojecttwo.module.SendPostRunnable.appSecurityEnhancer_url;
+import static trustedappframework.subprojecttwo.module.ACAPD.appSecurityEnhancer_url;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -60,7 +60,6 @@ public class Tracing {
 			// 發出HTTP request
 			mPost.setEntity(new UrlEncodedFormEntity(pairs, HTTP.UTF_8));
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -86,7 +85,6 @@ public class Tracing {
 						jsonObject = new JSONObject(info);
 						flag = jsonObject.getString("flag");
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 						Log.e(TAG, "Error: " + e.getMessage());
 					}
@@ -104,11 +102,9 @@ public class Tracing {
 			}
 
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Log.e(TAG, "Error: " + e.getMessage());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Log.e(TAG, "Error: " + e.getMessage());
 		}
