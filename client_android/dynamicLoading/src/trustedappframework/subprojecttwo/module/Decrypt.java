@@ -13,7 +13,7 @@ public class Decrypt {
 	private String seed = "";
 
 	private String fileName = "";
-	private String outputFileName = "decrypt.jar";
+	private String outputFileName = "decrypted.jar";
 	private String folderPath = "";
 	private File decryptFile;
 
@@ -41,9 +41,9 @@ public class Decrypt {
 	}
 
 	public static String decryptSessionKey(String code, String code2,
-			String code3, String personal_key) {
+			String code3, String personalKey) {
 		String str = null;
-		AESUtils mAES = new AESUtils(personal_key);
+		AESUtils mAES = new AESUtils(personalKey);
 		try {
 			String decrypted = new String(mAES.decryptEB(code));
 			String decrypted2 = new String(mAES.decryptEB(code2));
@@ -61,14 +61,14 @@ public class Decrypt {
 			long l1 = Long.parseLong(decrypted);
 			long l2 = Long.parseLong(c2.toString());
 			long l3 = Long.parseLong(c3.toString());
-			// System.out.println("l1= " + l1);
-			// System.out.println("l2= " + l2);
-			// System.out.println("l3= " + l3);
+			System.out.println("l1= " + l1);
+			System.out.println("l2= " + l2);
+			System.out.println("l3= " + l3);
 			long session_key = (l1 ^ l2) ^ l3;
 			str = String.valueOf(session_key);
+			// System.out.println("session_key= " + str);
 
 		} catch (Exception e) {
-			// TODO 自動產生的 catch 區塊
 			e.printStackTrace();
 		}
 
@@ -114,12 +114,10 @@ public class Decrypt {
 			Log.e(TAG, "NullPointerException Error: " + e.getMessage());
 		}
 
-		if (isSuccess)
-			Log.i(TAG, "解密成功");
-		// Log.i(TAG, "解密成功, decrypted path= "
-		// + decryptFile.getAbsolutePath().toString());
-		else {
-			Log.e(TAG, "解密失敗");
+		if (!isSuccess) {
+			Log.e(TAG, "decrypted error");
+			// Log.i(TAG, "decrypted path= "
+			// + decryptFile.getAbsolutePath().toString());
 		}
 	}
 
