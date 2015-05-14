@@ -8,14 +8,17 @@
     <string name="str_receive">Receiver: </string>
     <string name="str_cc">cc:</string>
     <string name="str_subject">Subject: </string>
-    <string name="alert_internet_error_title">Network connection is failed</string>
-    <string name="alert_internet_error_msg">Please check out the connection.</string>
-    <string name="toast_checkuser_true">Authentication is successful, the process will continue.</string>
-    <string name="alert_checkuser_error_title">Test result</string>
-    <string name="alert_checkuser_error_msg">Authentication is failed, the process will be terminated.</string>
     <string name="str_receive_hint">To</string>
     <string name="str_cc_hint">Please input compose emaill address</string>
     <string name="str_subject_hint">Please input your Subject.</string>
     <string name="str_message_hint">Please input contents.</string>
+    <string name="alert_internet_error_title">Network connection is failed</string>
+    <string name="alert_internet_error_msg">Please check out the connection.</string>
+    <string name="toast_checkuser_true">Authentication is successful, the process will continue.</string>
+    <string name="alert_checkuser_error_title">Message</string>
+    <string name="alert_checkuser_error_msg">Authentication is failed, the process will be terminated.</string>
+    <string name="alert_personal_key_error_title">Message</string>
+    <string name="alert_personal_key_error_msg">Personal Key Error!!</string>
+    <string name="loading_msg">Authenticating...</string>
 
 </resources>

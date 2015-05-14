@@ -1,26 +1,20 @@
 package irdc.EX05_04;
 
-import static com.project.module.ProjectConfig.isShowTxt;
-import static com.project.module.ProjectConfig.fileName;
-import static com.project.module.ProjectConfig.checkConnection;
-import static com.project.module.ProjectConfig.mAppContext;
-import static com.project.module.ProjectConfig.mContext;
-import static com.project.module.ProjectConfig.showCheckuserError;
-
-import com.project.module.SendPostRunnable;
-
+import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
+import trustedappframework.subprojecttwo.module.ACAPD;
 import android.app.Activity;
-/*必需引用content.Intent類別來開啟email client*/
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class EX05_04 extends Activity
 {
+  private ACAPD myACAPD;
 
   /* 宣告四個EditText一個Button以及四個String變數 */
   public static EditText mEditText01;
@@ -44,10 +38,6 @@ public class EX05_04 extends Activity
     mAppContext = getApplicationContext();
     // get context for AlertDialog
     mContext = EX05_04.this;
-    // show a message of authentication is successful in first time
-    isShowTxt = true;
-    // check network setting on device
-    checkConnection();
 
     /* 透過findViewById建構子來建構Button物件 */
     mButton01 = (Button) findViewById(R.id.myButton1);
@@ -62,7 +52,6 @@ public class EX05_04 extends Activity
       @Override
       public boolean onKey(View v, int keyCode, KeyEvent event)
       {
-        // TODO Auto-generated method stub
         return true;
       }
     });
@@ -73,39 +62,7 @@ public class EX05_04 extends Activity
       @Override
       public void onClick(View v)
       {
-        // TODO Auto-generated method stub
-        // ---check user, download file and dynamic loading---
-        SendPostRunnable sr = new SendPostRunnable(fileName,
-            getApplicationContext());
-
-        // start a Thread, the data to be transferred into the Runnable, so that Thread execute
-        Thread t = new Thread(sr);
-        t.start();
-
-        try
-        {
-          // wait Thread t
-          t.join();
-        } catch (InterruptedException e)
-        {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
-
-        if (sr.getResult())
-        {
-          if (isShowTxt)
-            Toast.makeText(getApplicationContext(),
-                getResources().getString(R.string.toast_checkuser_true),
-                Toast.LENGTH_SHORT).show();
-          // show a message of Authentication is successful in first time
-          isShowTxt = false;
-
-        } else
-        {
-          // show a Alert Dialog that Authentication is failed
-          showCheckuserError();
-        }
+        myACAPD = new ACAPD(class_separation_segment, personal_key);
       }
     });
   }
