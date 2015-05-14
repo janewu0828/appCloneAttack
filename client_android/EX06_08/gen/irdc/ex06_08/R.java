@@ -32,9 +32,12 @@ public final class R {
         public static final int alert_checkuser_error_title=0x7f040009;
         public static final int alert_internet_error_msg=0x7f040007;
         public static final int alert_internet_error_title=0x7f040006;
+        public static final int alert_personal_key_error_msg=0x7f04000c;
+        public static final int alert_personal_key_error_title=0x7f04000b;
         public static final int app_name=0x7f040000;
         public static final int available=0x7f040004;
         public static final int deleted=0x7f040002;
+        public static final int loading_msg=0x7f04000d;
         public static final int strButton=0x7f040001;
         public static final int str_title=0x7f040005;
         public static final int toast_checkuser_true=0x7f040008;
