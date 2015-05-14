@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <string name="app_name">SD Card Info</string>
     <string name="strButton">Click me to get SD Card Info</string>
     <string name="deleted">SD Card was deleted.</string>
     <string name="total">Total</string>
     <string name="available">Available</string>
     <string name="str_title">How to get SD Card info ?</string>
-    
     <string name="alert_internet_error_title">Network connection is failed</string>
     <string name="alert_internet_error_msg">Please check out the connection.</string>
-   
     <string name="toast_checkuser_true">Authentication is successful, the process will continue.</string>
-   
-    <string name="alert_checkuser_error_title">Test result</string>
+    <string name="alert_checkuser_error_title">Message</string>
     <string name="alert_checkuser_error_msg">Authentication is failed, the process will be terminated.</string>
+    <string name="alert_personal_key_error_title">Message</string>
+    <string name="alert_personal_key_error_msg">Personal Key Error!!</string>
+    <string name="loading_msg">Authenticating...</string>
+
 </resources>
