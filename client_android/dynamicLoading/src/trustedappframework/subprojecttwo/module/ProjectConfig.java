@@ -2,6 +2,7 @@ package trustedappframework.subprojecttwo.module;
 
 import irdc.ex04_16.R;
 import android.content.Context;
+import android.widget.Toast;
 
 public class ProjectConfig {
 	// get global Application object of the current process
@@ -13,17 +14,17 @@ public class ProjectConfig {
 	// show AlertDialog
 	public static AlertDialogManager alert = new AlertDialogManager();
 
-	// show a message of authentication is successful in first time
-	public static boolean isShowTxt;
+	// dynamic loading class separation (JAR) -----
+	public static String class_separation_segment = "encrypted.jar";
+	public static String class_separation_segment2 = "encrypted20150514.jar";
+	public static String class_separation_segment3 = ".jar";
 
-	// dynamic loading filename(JAR) -----
-	public static String fileName = "encrypt.jar";
-	public static String loadFileName = "";
-
-	public static String personal_key = "";
+	// tracing traitors -----
+	public static String personal_key = "personal_key.txt";
+	public static String personal_key2 = "personal_key2.txt";
+	public static String personal_key3 = "personal_key3.txt";
 
 	public static void checkConnection() {
-		// TODO Auto-generated method stub
 		// check network setting on device
 		ConnectionDetector cd = new ConnectionDetector(mAppContext);
 		if (!cd.isConnectingToInternet()) {
@@ -34,8 +35,20 @@ public class ProjectConfig {
 		}
 	}
 
+	public static void showCheckUserCorrect() {
+		// show a message of Authentication is successful in first time
+		if (ACAPD.isShowTxt) {
+			Toast.makeText(
+					mAppContext,
+					mAppContext.getResources().getString(
+							R.string.toast_checkuser_true), Toast.LENGTH_SHORT)
+					.show();
+
+			ACAPD.isShowTxt = false;
+		}
+	}
+
 	public static void showCheckUserError() {
-		// TODO Auto-generated method stub
 		// show a Alert Dialog that Authentication is failed
 		alert.showAlertDialog(
 				mContext,
@@ -45,22 +58,14 @@ public class ProjectConfig {
 						R.string.alert_checkuser_error_msg), false);
 	}
 
-	public static void showPersonalKey() {
-		// TODO Auto-generated method stub
-		personal_key = PersonalKeyManager.read();
-		// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		// System.out.println("personal_key= " + personal_key);
-		// System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-		// AlertDialogManager alert = new AlertDialogManager();
-		// alert.showAlertEditDialog(mContext, "Input Personal Key",
-		// "0123456789abcdef", false);
-	}
-
-	public static void showPersonalKeyError(String msg) {
-		// TODO Auto-generated method stub
+	public static void showPersonalKeyError() {
 		// show a Alert Dialog that Personal Key is failed
-		alert.showAlertDialog(mContext, "Personal Key Error", msg, false);
+		alert.showAlertDialog(
+				mContext,
+				mContext.getResources().getString(
+						R.string.alert_personal_key_error_title),
+				mContext.getResources().getString(
+						R.string.alert_personal_key_error_msg), false);
 	}
 
 }
