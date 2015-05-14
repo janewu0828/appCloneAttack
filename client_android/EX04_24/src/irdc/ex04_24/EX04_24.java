@@ -3,7 +3,6 @@ package irdc.ex04_24;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
-import static trustedappframework.subprojecttwo.module.ProjectConfig.checkConnection;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
 import trustedappframework.subprojecttwo.module.ACAPD;
 import android.app.Activity;
@@ -14,11 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class EX04_24 extends Activity {
-	private static final String TAG = "EX04_16";
-
 	private ACAPD myACAPD;
 
 	public static boolean turnleft;
