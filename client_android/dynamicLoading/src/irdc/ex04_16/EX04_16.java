@@ -111,21 +111,22 @@ public class EX04_16 extends Activity {
 			public void onClick(View v) {
 				Log.i(TAG, "new");
 
-				myACAPD = new ACAPD(class_separation_segment2, personal_key2);
+				// myACAPD = new ACAPD(class_separation_segment2,
+				// personal_key2);
 
-				// mText.setText(getResources().getString(R.string.str_title));
-				//
-				// mImageView01.setImageDrawable(getResources().getDrawable(
-				// R.drawable.p04));
-				// mImageView02.setImageDrawable(getResources().getDrawable(
-				// R.drawable.p04));
-				// mImageView03.setImageDrawable(getResources().getDrawable(
-				// R.drawable.p04));
-				// mImageView01.setAlpha(255);
-				// mImageView02.setAlpha(255);
-				// mImageView03.setAlpha(255);
-				// randon();
-				// choiceStatus = 0;
+				mText.setText(getResources().getString(R.string.str_title));
+
+				mImageView01.setImageDrawable(getResources().getDrawable(
+						R.drawable.p04));
+				mImageView02.setImageDrawable(getResources().getDrawable(
+						R.drawable.p04));
+				mImageView03.setImageDrawable(getResources().getDrawable(
+						R.drawable.p04));
+				mImageView01.setAlpha(255);
+				mImageView02.setAlpha(255);
+				mImageView03.setAlpha(255);
+				randon();
+				choiceStatus = 0;
 
 			}
 		});
