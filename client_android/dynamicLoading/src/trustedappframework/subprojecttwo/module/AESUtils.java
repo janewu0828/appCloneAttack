@@ -30,10 +30,8 @@ public class AESUtils {
 		try {
 			cipher2 = Cipher.getInstance("AES/CBC/NoPadding");
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoSuchPaddingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
