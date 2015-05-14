@@ -38,7 +38,7 @@ public class InterfaceTest implements MainInterface {
 	}
 
 	@SuppressWarnings("deprecation")
-	public String loadMethod() {
+	public void loadMethod() {
 		/* 三張牌同時翻面，並將未選擇的兩張牌變透明 */
 		mImageView01.setImageDrawable(d01);
 		mImageView02.setImageDrawable(d02);
@@ -64,8 +64,6 @@ public class InterfaceTest implements MainInterface {
 		System.out.println("result=" + result);
 
 		choiceStatus = getChoiceStatus();
-
-		return result;
 	}
 
 	public int getS1() {
