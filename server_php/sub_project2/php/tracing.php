@@ -37,22 +37,24 @@ if (!function_exists("GetSQLValueString")) {
 }
 
 header("Content-Type: text/html; charset=utf-8") ;
-// 包含数据库连接文件
+// 包含資料庫連接文件
 include('conn.php');
-//获取从客户端传递的参数，接收POST/GET的資料
+//獲取從客戶端傳遞的參數，接收POST/GET的資料
 $deviceid=@$_REQUEST["sess_deviceid"];
 $load_file_name=@$_REQUEST["sess_load_file_name"];
 $personal_key=@$_REQUEST["sess_personal_key"];
-//获取客户端传递的session标识
+//獲取客戶端傳遞的session標識
 $sessionid=$_POST['sess_sessionid'];
 
 session_id($sessionid);
-//将会根据session id获得原来的session
+//將會根據session id獲得原來的session
 session_start(); 
-//获取服务器端原来session记录的username,并且根据客户端传过来的username比较进行验证操作
-$sess_app_id=$_SESSION['app_id2'];
+//獲取服務器端原來session記錄的username,並且根據客戶端傳過來的username比較進行驗證操作
+$sess_app_id=$_SESSION['app_id'];
+$sess_app_id2=$_SESSION['app_id2'];
 $sess_deviceid=$_SESSION['deviceid'];
 
+// $database_dblink                    = "islab";
 $database_dblink                    = "islab22222";
 $username_dblink                    = "root";
 $password_dblink                    = "";
@@ -66,15 +68,15 @@ mysql_select_db($database_dblink, $dblink);
 
 if($deviceid==$sess_deviceid){
 
-    $arr                            = array();   //空的数组
+    $arr                            = array();   //空的陣列
 
     // 如果有資料
     if (strcmp(trim($load_file_name), "")!=0)
     { 
         // 將資料輸入進資料庫
         $insertSQL                  = sprintf(
-            "INSERT INTO `tracing_log` (`app_id2`, `deviceid`, `load_file_name`, `personal_key`) 
-            VALUES ('%s','%s','%s','%s');", $sess_app_id,$deviceid,$load_file_name,$personal_key);
+            "INSERT INTO `tracing_log` (`app_id`,`app_id2`, `deviceid`, `load_file_name`, `personal_key`) 
+            VALUES ('%s','%s','%s','%s','%s');", $sess_app_id,$sess_app_id2,$deviceid,$load_file_name,$personal_key);
         
         mysql_query($insertSQL, $dblink) or die(mysql_error());
     }
@@ -89,6 +91,8 @@ if($deviceid==$sess_deviceid){
     'flag'                          => 'notempty',
 
     'app_id'=>$sess_app_id, 
+
+    'app_id2'=>$sess_app_id2, 
 
     'deviceid'=>$sess_deviceid,
 
