@@ -1,4 +1,6 @@
-package com.trustedapp.subprojecttwo;
+package com.trustedappframework.subprojecttwo;
+
+import com.trustedapp.subprojecttwo.R;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
