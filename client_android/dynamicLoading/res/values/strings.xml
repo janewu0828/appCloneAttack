@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">dynamic loading</string>
+    
+    <string name="str_title">Guess which one is A of hearts?</string>
+    <string name="str_button">Play Again</string>
+    
+    <string name="guess_result_true">Wow! You guessed it!! Clap your hands!</string>
+    <string name="guess_result_false">Oh, you guessed wrong!! Do you want to try again?</string>
+    
+    <string name="alert_internet_error_title">Network connection is failed</string>
+    <string name="alert_internet_error_msg">Please check out the connection.</string>
+    
+    <string name="toast_checkuser_true">Authentication is successful, the process will continue.</string>
+    
+    <string name="alert_checkuser_error_title">Message</string>
+    <string name="alert_checkuser_error_msg">Authentication is failed, the process will be terminated.</string>
+
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">抗複製偵測</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">設定</string>
+    <string name="applist_loading_msg">正在加載應用程式列表</string>
+    <string name="alert_applist_loading_title">提示訊息</string>
+    <string name="alert_applist_loading_msg">載入錯誤</string>
+    <string name="alert_internet_error_title">網路連線異常</string>
+    <string name="alert_internet_error_msg">請確認網路環境設置正確後，再次嘗試。</string>
+    <string name="toast_checkuser_true">鑑別成功，將繼續程式。</string>
+    <string name="alert_checkuser_error_title">檢測結果</string>
+    <string name="alert_checkuser_error_msg">身分鑑別失敗，程式將停止執行。</string>
+
+</resources>
