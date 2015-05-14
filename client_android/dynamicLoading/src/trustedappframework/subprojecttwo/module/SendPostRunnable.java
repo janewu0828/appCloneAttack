@@ -1,8 +1,8 @@
 package trustedappframework.subprojecttwo.module;
 
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
-import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
-
+import static trustedappframework.subprojecttwo.module.ACAPD.appSecurityEnhancer_url;
+import static trustedappframework.subprojecttwo.module.ACAPD.outputFilePath;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,65 +13,70 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.UUID;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.telephony.TelephonyManager;
+import android.provider.Settings.Secure;
 import android.util.Log;
 
 public class SendPostRunnable implements Runnable {
 	private static final String TAG = "SendPostRunnable";
 
 	private String appId = null;
+	private String appId2 = null;
 	private String UUID = null;
 	// private String IMEI = null;
 
-	private boolean result = false;
+	private boolean authStatus = false;
+	private boolean tracingStatus = false;
+
+	// 主要是記錄用戶會話過程中的一些用戶的基本訊息
 	private HashMap<String, String> session;
 
 	// download file from server
 	private String fileName = null;
 	private String personalKey = null;
-	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/sub_project2/";
 	private String file_url = appSecurityEnhancer_url + "download/" + fileName;
-	public static String outputFilePath = Environment
-			.getExternalStorageDirectory().getAbsolutePath() + "/project/";
 
 	public SendPostRunnable(String fileName) {
 		super();
 		this.fileName = fileName;
-		this.appId = getAppId2(mAppContext);
+		this.appId = getAppId(mAppContext);
+		this.appId2 = getAppId2(mAppContext);
 		this.UUID = getUUID(mAppContext);
 		// this.IMEI = getIMEI(mAppContext);
 	}
 
-	public SendPostRunnable(String fileName, String personalKey,
-			HashMap<String, String> session) {
-		this.fileName = fileName;
-		this.personalKey = personalKey;
-		this.session = session;
+	@Override
+	public void run() {
+		if (personalKey == null)
+			sendPostDataToInternet();
+		else
+			sendPostDataToInternet2();
 	}
 
 	private void sendPostDataToInternet() {
 
 		// System.out.println("appId= " + appId + ", appId length= "
 		// + appId.length());
-		String appId2 = getAppId(mAppContext);
-		System.out.println("appId2= " + appId2 + ", appId2 length= "
-				+ appId2.length());
-
-		// System.out.println("IMEI= " + IMEI + ", IMEI length= " +
-		// IMEI.length());
+		// System.out.println("appId2= " + appId2 + ", appId2 length= "
+		// + appId2.length());
 		// System.out.println("UUID= " + UUID + ", UUID length= " +
 		// UUID.length());
+		// System.out.println("IMEI= " + IMEI + ", IMEI length= " +
+		// IMEI.length());
 
 		// check user -----
-		CheckUser cu = new CheckUser(appId, UUID);
-		result = cu.checkUser();
-		Log.i(TAG, "auth= " + result);
+		// CheckUser cu = new CheckUser(appId, appId2, UUID, IMEI);
+		CheckUser cu = new CheckUser(appId, appId2, UUID);
+		authStatus = cu.checkUser();
+		// Log.i(TAG, "auth= " + auth);
 
-		if (result) {
+		if (authStatus) {
 			if (!(new File(outputFilePath + fileName).exists())) {
 				// Asnyc Dowload -----
 				new DownloadFileFromURL().execute(file_url);
@@ -84,19 +89,9 @@ public class SendPostRunnable implements Runnable {
 	}
 
 	private void sendPostDataToInternet2() {
-		Tracing trace = new Tracing(fileName, personal_key, session);
-		boolean result = trace.tracingLog();
-		// Log.e(TAG, "Tracing: " + result);
-
-	}
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		if (personalKey == null)
-			sendPostDataToInternet();
-		else
-			sendPostDataToInternet2();
+		Tracing trace = new Tracing(fileName, personalKey, session);
+		tracingStatus = trace.tracingLog();
+		// Log.i(TAG, "Tracing: " + tracingStatus);
 	}
 
 	// AsynTask
@@ -183,8 +178,24 @@ public class SendPostRunnable implements Runnable {
 		}
 	}
 
-	public boolean getResult() {
-		return result;
+	public void setSession(HashMap<String, String> session) {
+		this.session = session;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public void setPersonalKey(String personalKey) {
+		this.personalKey = personalKey;
+	}
+
+	public boolean getAuthStatus() {
+		return authStatus;
+	}
+	
+	public boolean getTracingStatus() {
+		return tracingStatus;
 	}
 
 	public HashMap<String, String> getSession() {
@@ -226,10 +237,8 @@ public class SendPostRunnable implements Runnable {
 			str = Hash.sha256(apkFile);
 
 		} catch (Exception e) {
-			// TODO 自動產生的 catch 區塊
 			e.printStackTrace();
 			Log.e(TAG, "Error: " + e.getMessage());
-
 		}
 
 		return str;
@@ -244,26 +253,43 @@ public class SendPostRunnable implements Runnable {
 		try {
 			str = AeSimpleSHA1.SHA1(PACKAGE_NAME);
 		} catch (NoSuchAlgorithmException e) {
-			// TODO 自動產生的 catch 區塊
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			// TODO 自動產生的 catch 區塊
 			e.printStackTrace();
 		}
 
 		return str;
 	}
 
-	private String getUUID(Context context) {
-		// TODO Auto-generated method stub
-		DeviceUuidFactory DFactory = new DeviceUuidFactory(context);
-		String str = DFactory.getDeviceUuid().toString();
+	private static String uniqueID = null;
+	private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
 
-		return str;
+	public synchronized static String getUUID(Context context) {
+		if (uniqueID == null) {
+			SharedPreferences sharedPrefs = context.getSharedPreferences(
+					PREF_UNIQUE_ID, Context.MODE_PRIVATE);
+			uniqueID = Secure.getString(context.getContentResolver(),
+					Secure.ANDROID_ID);
+			if (uniqueID == null) {
+				uniqueID = Secure.getString(context.getContentResolver(),
+						Secure.ANDROID_ID);
+				Editor editor = sharedPrefs.edit();
+				editor.putString(PREF_UNIQUE_ID, uniqueID);
+				editor.commit();
+			}
+		}
+
+		return uniqueID;
 	}
 
+	// private String getUUID2(Context context) {
+	// DeviceUuidFactory DFactory = new DeviceUuidFactory(context);
+	// String str = DFactory.getDeviceUuid().toString();
+	//
+	// return str;
+	// }
+
 	// private String getIMEI(Context context) {
-	// // TODO Auto-generated method stub
 	// TelephonyManager tM = (TelephonyManager) context
 	// .getSystemService(Context.TELEPHONY_SERVICE);
 	// String str = tM.getDeviceId();
