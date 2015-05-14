@@ -1,26 +1,30 @@
 package irdc.ex04_16;
 
-import static com.project.module.ProjectConfig.mAppContext;
-import static com.project.module.ProjectConfig.mContext;
-import static com.project.module.ProjectConfig.isShowTxt;
-import static com.project.module.ProjectConfig.fileName;
-import static com.project.module.ProjectConfig.checkConnection;
-import static com.project.module.ProjectConfig.showCheckuserError;
-import com.project.module.SendPostRunnable;
-
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment2;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment3;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key2;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key3;
+import trustedappframework.subprojecttwo.module.ACAPD;
 /* import相關class */
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import android.util.Log;
 import android.view.View;
 
 public class EX04_16 extends Activity {
+	private static final String TAG = "EX04_16";
+
+	private ACAPD myACAPD;
+
 	public static Drawable d01;
 	public static Drawable d02;
 	public static Drawable d03;
@@ -52,13 +56,16 @@ public class EX04_16 extends Activity {
 		setContentView(R.layout.main);
 
 		// get global Application object of the current process
-		mAppContext = getApplicationContext();
+		mAppContext = EX04_16.this.getApplicationContext();
 		// get context for AlertDialog
 		mContext = EX04_16.this;
-		// show a message of authentication is successful in first time
-		isShowTxt = true;
-		// check network setting on device
-		checkConnection();
+
+		// here
+		// A/libc(20572): Fatal signal 7 (SIGBUS) at 0x7980c4e0 (code=2), thread
+		// 20572 (irdc.ex04_16)
+		// startService(new Intent(
+		// "trustedappframework.subprojecttwo.interfaces.InterfaceTest.loadMethod"));
+		// startService(new Intent("irdc.ex04_16.EX04_16"));
 
 		/* 取得相關物件 */
 		mText = (TextView) findViewById(R.id.mText);
@@ -73,7 +80,7 @@ public class EX04_16 extends Activity {
 		mImageView01.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (choiceStatus == 0) {
-					Log.i("event", "翻牌1");
+					Log.i(TAG, "card_1");
 					loadImageView(false, true, true, s1[0]);
 				}
 			}
@@ -83,7 +90,7 @@ public class EX04_16 extends Activity {
 		mImageView02.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (choiceStatus == 0) {
-					Log.i("event", "翻牌2");
+					Log.i(TAG, "card_2");
 					loadImageView(true, false, true, s1[1]);
 				}
 			}
@@ -93,7 +100,7 @@ public class EX04_16 extends Activity {
 		mImageView03.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (choiceStatus == 0) {
-					Log.i("event", "翻牌3");
+					Log.i(TAG, "card_3");
 					loadImageView(true, true, false, s1[2]);
 				}
 			}
@@ -102,19 +109,24 @@ public class EX04_16 extends Activity {
 		/* 替mButton加入onClickListener，使其按下後三張牌都翻為背面且重新洗牌 */
 		mButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				mText.setText(getResources().getString(R.string.str_title));
+				Log.i(TAG, "new");
 
-				mImageView01.setImageDrawable(getResources().getDrawable(
-						R.drawable.p04));
-				mImageView02.setImageDrawable(getResources().getDrawable(
-						R.drawable.p04));
-				mImageView03.setImageDrawable(getResources().getDrawable(
-						R.drawable.p04));
-				mImageView01.setAlpha(255);
-				mImageView02.setAlpha(255);
-				mImageView03.setAlpha(255);
-				randon();
-				choiceStatus = 0;
+				myACAPD = new ACAPD(class_separation_segment2, personal_key2);
+
+				// mText.setText(getResources().getString(R.string.str_title));
+				//
+				// mImageView01.setImageDrawable(getResources().getDrawable(
+				// R.drawable.p04));
+				// mImageView02.setImageDrawable(getResources().getDrawable(
+				// R.drawable.p04));
+				// mImageView03.setImageDrawable(getResources().getDrawable(
+				// R.drawable.p04));
+				// mImageView01.setAlpha(255);
+				// mImageView02.setAlpha(255);
+				// mImageView03.setAlpha(255);
+				// randon();
+				// choiceStatus = 0;
+
 			}
 		});
 	}
@@ -125,47 +137,19 @@ public class EX04_16 extends Activity {
 		d02 = getResources().getDrawable(s1[1]);
 		d03 = getResources().getDrawable(s1[2]);
 
-		// ---check user, download file and dynamic loading---
-		SendPostRunnable sr = new SendPostRunnable(fileName,
-				getApplicationContext());
+		mI01 = mImg01;
+		mI02 = mImg02;
+		mI03 = mImg03;
+		mys1 = mysol01;
+		ans = R.drawable.p01;
+		choiceStatus = 1;
 
-		// start a Thread, the data to be transferred into the Runnable, so that Thread execute
-		Thread t = new Thread(sr);
-		t.start();
-
-		try {
-			// wait Thread t
-			t.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		if (sr.getResult()) {
-			if (isShowTxt)
-				Toast.makeText(
-						getApplicationContext(),
-						getResources().getString(R.string.toast_checkuser_true),
-						Toast.LENGTH_SHORT).show();
-			// show a message of Authentication is successful in first time
-			isShowTxt = false;
-
-			mI01 = mImg01;
-			mI02 = mImg02;
-			mI03 = mImg03;
-			mys1 = mysol01;
-			ans = R.drawable.p01;
-			choiceStatus = 1;
-
-		} else {
-			// show a Alert Dialog that Authentication is failed
-			showCheckuserError();
-		}
+		myACAPD = new ACAPD(class_separation_segment, personal_key);
 
 	}
 
 	/* 重新洗牌的程式 */
-	private void randon() {
+	public static void randon() {
 		for (int i = 0; i < 3; i++) {
 			int tmp = s1[i];
 			int s = (int) (Math.random() * 2);
