@@ -11,13 +11,13 @@
     <string name="str_radio_op3">吉他英雄：世界巡迴 樂團</string>
     <string name="str_guess_correct">猜對了！</string>
     <string name="str_guess_error">猜錯，再猜看看......</string>
-    
     <string name="alert_internet_error_title">網路連線異常</string>
     <string name="alert_internet_error_msg">請確認網路環境設置正確後，再次嘗試。</string>
-    
     <string name="toast_checkuser_true">鑑別成功，將繼續程式。</string>
-    
     <string name="alert_checkuser_error_title">檢測結果</string>
     <string name="alert_checkuser_error_msg">身分鑑別失敗，程式將停止執行。</string>
+    <string name="alert_personal_key_error_title">個人金鑰異常</string>
+    <string name="alert_personal_key_error_msg">請確認已付費後，再次嘗試。</string>
+    <string name="loading_msg">與App安全強化伺服器檢查授權...</string>
 
 </resources>

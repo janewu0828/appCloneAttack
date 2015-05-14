@@ -1,13 +1,10 @@
 package irdc.ex04_25;
 
-import static com.project.module.ProjectConfig.mAppContext;
-import static com.project.module.ProjectConfig.mContext;
-import static com.project.module.ProjectConfig.isShowTxt;
-import static com.project.module.ProjectConfig.fileName;
-import static com.project.module.ProjectConfig.checkConnection;
-import static com.project.module.ProjectConfig.showCheckuserError;
-import com.project.module.SendPostRunnable;
-
+import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
+import trustedappframework.subprojecttwo.module.ACAPD;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,10 +12,11 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class EX04_25 extends Activity
 {
+  private ACAPD myACAPD;
+  
   public static View myview;
   
   protected Button mButton1, mButton2;
@@ -40,10 +38,7 @@ public class EX04_25 extends Activity
     mAppContext = getApplicationContext();
     // get context for AlertDialog
     mContext = EX04_25.this;
-    // show a message of authentication is successful in first time
-    isShowTxt = true;
-    // check network setting on device
-    checkConnection();
+
     
     mButton1 = (Button) findViewById(R.id.myButton1);
     mButton2 = (Button) findViewById(R.id.myButton2);
@@ -82,7 +77,6 @@ public class EX04_25 extends Activity
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId)
     {
-      // TODO Auto-generated method stub
       if (checkedId == mMyChoice)
       {
         /* User猜對了 */
@@ -102,43 +96,7 @@ public class EX04_25 extends Activity
     @Override
     public void onClick(View v)
     {
-      // TODO Auto-generated method stub
-      // ---check user, download file and dynamic loading---
-      SendPostRunnable sr = new SendPostRunnable(fileName,
-          getApplicationContext());
-      
-      // start a Thread, the data to be transferred into the Runnable, so that Thread execute
-      Thread t = new Thread(sr);
-      t.start();
-      
-      try
-      {
-        // wait Thread t
-        t.join();
-      }
-      catch (InterruptedException e)
-      {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-      
-      if (sr.getResult())
-      {
-        if (isShowTxt)
-          Toast.makeText(mContext,
-              mContext.getResources().getString(R.string.toast_checkuser_true),
-              Toast.LENGTH_SHORT).show();
-        // show a message of Authentication is successful in first time
-        isShowTxt = false;
-        
-        myview = v;
-        
-      }
-      else
-      {
-        // show a Alert Dialog that Authentication is failed
-        showCheckuserError();
-      }
+      myACAPD = new ACAPD(class_separation_segment, personal_key);
     }
   };
   
@@ -148,7 +106,6 @@ public class EX04_25 extends Activity
     @Override
     public void onClick(View v)
     {
-      // TODO Auto-generated method stub
       mUserChoice = false;
       intTimes = 0;
       mRadio1 = (RadioButton) findViewById(R.id.myOption1);
