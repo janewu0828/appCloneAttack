@@ -60,7 +60,6 @@ public class EX04_24 extends Activity {
 		mButton1.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				ScaleAngle--;
 				turnleft = true;
 				setWidthOrig1(widthOrig);
@@ -74,7 +73,6 @@ public class EX04_24 extends Activity {
 		mButton2.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				ScaleAngle++;
 				turnleft = false;
 				setWidthOrig1(widthOrig);
