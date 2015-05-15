@@ -6,15 +6,11 @@ class MCrypt {
     private $iv = 'fedcba9876543210'; 
     // AES加解密的密鑰(personal_key)
     private $key = '0123456789abcdef'; 
-    // private $iv = '9876543210'; 
-    // private $key = '0123456789'; 
-
 
     function __construct() {
     }
 
     function encrypt($str) {
-
       //$key = $this->hex2bin($key);    
       $iv = $this->iv;
 
@@ -72,6 +68,7 @@ session_start();
 $Action                         = isset($_GET["action"]) ? $_GET["action"] : null;
 // appId
 $app_id                         = $_POST["appId"];
+// appId2
 $app_id2                        = htmlspecialchars($_POST["appId2"]);
 // UUID
 $deviceid=$_POST["UUID"];
@@ -96,12 +93,12 @@ if($result                      = mysql_fetch_array($check_query)){
 
     // AES
     $mcrypt = new MCrypt();
-    // Encrypt(secret_value)
-    // $enable_block = $mcrypt->encrypt("9999999999123456"); //java.lang.StringIndexOutOfBoundsException
-    // $enable_block2 = $mcrypt->encrypt("888888888123456"); //java.lang.StringIndexOutOfBoundsException
+    // AES Encrypt(secret_value)
     $enable_block = $mcrypt->encrypt("1111111111123456"); //secret_value
     $enable_block2 = $mcrypt->encrypt("222222222123456"); //secret_value2
     $enable_block3 = $mcrypt->encrypt("333333333123456"); //secret_value3
+    // $enable_block = $mcrypt->encrypt("9999999999123456"); //java.lang.StringIndexOutOfBoundsException
+    // $enable_block2 = $mcrypt->encrypt("888888888123456"); //java.lang.StringIndexOutOfBoundsException
 
     $arr                        = array(
 
