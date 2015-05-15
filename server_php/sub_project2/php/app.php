@@ -5,7 +5,7 @@ class MCrypt {
     // 初始化向量(IV, Initialization Vector)
     private $iv = 'fedcba9876543210'; 
     // AES加解密的密鑰(personal_key)
-    private $key = '0123456789abcdef'; 
+    private $key = '0123456789abcdef'; //personal_key
 
     function __construct() {
     }
