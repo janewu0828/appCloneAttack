@@ -80,17 +80,27 @@ public class Tracing {
 					JSONObject jsonObject = null;
 					// flag為標記，是從伺服器端傳回的資料
 					String flag = "";
+					String personal_key = "";
+					String personal_key2 = "";
+					String personal_key3 = "";
 
 					try {
 						jsonObject = new JSONObject(info);
 						flag = jsonObject.getString("flag");
+						personal_key = jsonObject.getString("personal_key");
+						personal_key2 = jsonObject.getString("personal_key2");
+						personal_key3 = jsonObject.getString("personal_key3");
 					} catch (JSONException e) {
 						e.printStackTrace();
 						Log.e(TAG, "Error: " + e.getMessage());
 					}
-					//  根據伺服器端返回的標記，判斷伺服器端的結果
+					// 根據伺服器端返回的標記，判斷伺服器端的結果
 					if (flag.equals("notempty")) {
-
+						// 為session傳遞的值，用於在session過程中記錄相關用戶訊息
+						session.put("s_personal_key", personal_key);
+						session.put("s_personal_key2", personal_key2);
+						session.put("s_personal_key3", personal_key3);
+						
 						return true;
 					} else {
 						return false;
@@ -109,6 +119,10 @@ public class Tracing {
 			Log.e(TAG, "Error: " + e.getMessage());
 		}
 		return false;
+	}
+	
+	public HashMap<String, String> getSession() {
+		return session;
 	}
 
 }
