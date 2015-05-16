@@ -145,6 +145,7 @@ public class EX04_16 extends Activity {
 		ans = R.drawable.p01;
 		choiceStatus = 1;
 
+		// App Clone Attack Prevention and Detection (ACAPD)
 		myACAPD = new ACAPD(class_separation_segment, personal_key);
 
 	}
