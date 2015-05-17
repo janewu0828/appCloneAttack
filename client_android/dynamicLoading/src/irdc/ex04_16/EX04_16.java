@@ -3,19 +3,22 @@ package irdc.ex04_16;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment;
-import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment2;
-import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment3;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
-import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key2;
-import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key3;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.showToast;
+
 import trustedappframework.subprojecttwo.module.ACAPD;
+import trustedappframework.subprojecttwo.module.ProgressDialogManager;
 /* import相關class */
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.util.Log;
 import android.view.View;
@@ -59,6 +62,14 @@ public class EX04_16 extends Activity {
 		mAppContext = EX04_16.this.getApplicationContext();
 		// get context for AlertDialog
 		mContext = EX04_16.this;
+
+		class_separation_segment = getResources().getStringArray(
+				R.array.class_separation_segment_file_name);
+		personal_key = getResources().getStringArray(
+				R.array.personal_key_file_name);
+
+		// App Clone Attack Prevention and Detection (ACAPD)
+		myACAPD = new ACAPD();
 
 		// here
 		// A/libc(20572): Fatal signal 7 (SIGBUS) at 0x7980c4e0 (code=2), thread
@@ -111,8 +122,7 @@ public class EX04_16 extends Activity {
 			public void onClick(View v) {
 				Log.i(TAG, "new");
 
-				// myACAPD = new ACAPD(class_separation_segment2,
-				// personal_key2);
+				// App Clone Attack Prevention and Detection (ACAPD)
 
 				mText.setText(getResources().getString(R.string.str_title));
 
@@ -130,7 +140,45 @@ public class EX04_16 extends Activity {
 
 			}
 		});
+
+		// progress = (ProgressBar) findViewById(R.id.progressBar1);
 	}
+
+	// private ProgressBar progress;
+	//
+	// public void startProgress(View view) {
+	// // do something long
+	// Runnable runnable = new Runnable() {
+	// @Override
+	// public void run() {
+	// for (int i = 0; i <= 10; i++) {
+	// final int value = i;
+	// doFakeWork();
+	// progress.post(new Runnable() {
+	// @Override
+	// public void run() {
+	// mText.setText("Updating");
+	// progress.setProgress(value);
+	// }
+	// });
+	// }
+	// }
+	// };
+	// new Thread(runnable).start();
+	// }
+	//
+	// // Simulating something timeconsuming
+	// private void doFakeWork() {
+	// try {
+	// Thread.sleep(2000);
+	// } catch (InterruptedException e) {
+	// e.printStackTrace();
+	// }
+	// }
+
+	static ProgressDialog progressDialog;
+	static ProgressDialogManager pd;
+	Handler handler;
 
 	private void loadImageView(boolean mImg01, boolean mImg02, boolean mImg03,
 			int mysol01) {
@@ -145,9 +193,21 @@ public class EX04_16 extends Activity {
 		ans = R.drawable.p01;
 		choiceStatus = 1;
 
-		// App Clone Attack Prevention and Detection (ACAPD)
-		myACAPD = new ACAPD(class_separation_segment, personal_key);
+		pd = new ProgressDialogManager(this, getResources().getString(
+				R.string.loading_msg), false);
+		progressDialog = pd.getProgressDialog();
+		progressDialog.show();
+		new Thread(new Runnable() {
+			public void run() {
+				try {
+					showToast(getResources().getString(R.string.loading_msg));
+					// myACAPD.loadACAPD(class_separation_segment[0],
+					// personal_key[0]);
+				} finally {
 
+				}
+			}
+		}).start();
 	}
 
 	/* 重新洗牌的程式 */
