@@ -43,6 +43,8 @@ include('conn.php');
 $deviceid=@$_REQUEST["sess_deviceid"];
 $load_file_name=@$_REQUEST["sess_load_file_name"];
 $personal_key=@$_REQUEST["sess_personal_key"];
+$personal_key2=@$_REQUEST["sess_personal_key2"];
+$personal_key3=@$_REQUEST["sess_personal_key3"];
 //獲取客戶端傳遞的session標識
 $sessionid=$_POST['sess_sessionid'];
 
@@ -75,8 +77,8 @@ if($deviceid==$sess_deviceid){
     { 
         // 將資料輸入進資料庫
         $insertSQL                  = sprintf(
-            "INSERT INTO `tracing_log` (`app_id`,`app_id2`, `deviceid`, `load_file_name`, `personal_key`) 
-            VALUES ('%s','%s','%s','%s','%s');", $sess_app_id,$sess_app_id2,$deviceid,$load_file_name,$personal_key);
+            "INSERT INTO `tracing_log` (`app_id`,`app_id2`, `deviceid`, `load_file_name`, `personal_key`, `personal_key2`, `personal_key3`) 
+            VALUES ('%s','%s','%s','%s','%s','%s','%s');", $sess_app_id,$sess_app_id2,$deviceid,$load_file_name,$personal_key,$personal_key2,$personal_key3);
         
         mysql_query($insertSQL, $dblink) or die(mysql_error());
     }
@@ -85,22 +87,25 @@ if($deviceid==$sess_deviceid){
     $query_rs                       = "SELECT * FROM `tracing_log` order by t_id desc limit 0,1";
     $rs                             = mysql_query($query_rs, $dblink) or die(mysql_error());
     $row                            = mysql_fetch_assoc($rs);
+
+    $personal_key_update_status=TRUE;
+    $new_personal_key="0123456789abcdef";
+    $new_personal_key2="0123456789abcdef";
+    $new_personal_key3="0123456789abcdef";
          
     $arr                            = array(
 
     'flag'                          => 'notempty',
 
-    'app_id'=>$sess_app_id, 
-
-    'app_id2'=>$sess_app_id2, 
-
-    'deviceid'=>$sess_deviceid,
-
-    'load_file_name'=>$row['load_file_name'],
-
-    'personal_key'=>$row['personal_key'],
-
     'time'=>$row['post_time'],
+
+    'personal_key_update_status'=>$personal_key_update_status,
+
+    'new_personal_key'=>$new_personal_key,
+
+    'new_personal_key2'=>$new_personal_key2,
+
+    'new_personal_key3'=>$new_personal_key3,
 
     'sessionid'=>$sessionid
 
@@ -114,8 +119,6 @@ else {
     $arr                            = array(
 
     'flag'                          => 'empty',
-
-    'deviceid'=>$deviceid,  
 
     'sessionid'=>$sessionid
 

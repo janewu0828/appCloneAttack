@@ -103,12 +103,6 @@ if($result                      = mysql_fetch_array($check_query)){
     $arr                        = array(
 
     'flag'                      => 'success',
-    
-    'app_id'=>$result['app_id'],  
-
-    'app_id2'=>$result['app_id2'],  
-
-    'deviceid'=>$result['deviceid'],  
 
     'enable_block'=>$enable_block,
 
