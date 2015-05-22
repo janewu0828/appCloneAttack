@@ -34,3 +34,19 @@ Icon
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+
+client_android/SubProjectTwo/bin/SubProjectTwo.apk
+
+client_android/SubProjectTwo/bin/classes.dex
+
+client_android/SubProjectTwo/bin/dexedLibs/appcompat_v7-268c610568e8c5f13da68c4968a22b66.jar
+
+client_android/SubProjectTwo/bin/classes/trustedappframework/subprojecttwo/module/ProgressDialogManager.class
+
+client_android/SubProjectTwo/bin/SubProjectTwo.apk
+
+client_android/SubProjectTwo/bin/SubProjectTwo.apk
+
+client_android/SubProjectTwo/bin/resources.ap_
+
+client_android/SubProjectTwo/bin/resources.ap_
