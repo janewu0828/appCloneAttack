@@ -1,11 +1,14 @@
 package irdc.ex06_02;
 
+import static trustedappframework.subprojecttwo.module.ACAPD.personalKey;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.ProgressDialog;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.checkConnection;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.checkPersonalKey;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
-import trustedappframework.subprojecttwo.module.ACAPD;
-
+import trustedappframework.subprojecttwo.module.ACAPDAsyncTask;
 /* import相關class */
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -19,7 +22,7 @@ import android.widget.Button;
 
 public class EX06_02 extends Activity
 {
-  private static ACAPD myACAPD;
+  private static ACAPDAsyncTask task;
 
   /* 變數宣告 */
   public static int intLevel;
@@ -41,8 +44,11 @@ public class EX06_02 extends Activity
         intScale = intent.getIntExtra("scale", 100);
 
         Log.i("event", "取得電量");
-        myACAPD = new ACAPD(class_separation_segment, personal_key);
-       
+        // App Clone Attack Prevention and Detection (ACAPD)
+        task = new ACAPDAsyncTask(class_separation_segment[0],
+            personalKey[0], 0);
+        task.execute((Void[]) null);
+
       }
     }
   };
@@ -55,10 +61,7 @@ public class EX06_02 extends Activity
     /* 載入main.xml Layout */
     setContentView(R.layout.main);
 
-    // get global Application object of the current process
-    mAppContext = getApplicationContext();
-    // get context for AlertDialog
-    mContext = EX06_02.this;
+    initACAPD();
 
     /* 初始化Button，並設定按下後的動作 */
     mButton01 = (Button) findViewById(R.id.myButton1);
@@ -73,6 +76,28 @@ public class EX06_02 extends Activity
       }
     });
 
+  }
+
+  private void initACAPD()
+  {
+    // get global Application object of the current process
+    mAppContext = getApplicationContext();
+    // get context for AlertDialog
+    mContext = EX06_02.this;
+
+    ProgressDialog();
+
+    // get array
+    class_separation_segment = getResources().getStringArray(
+        R.array.class_separation_segment_file_name);
+    personal_key = getResources().getStringArray(
+        R.array.personal_key_file_name);
+
+    // check network setting on device
+    checkConnection();
+
+    // check personal key on device
+    checkPersonalKey();
   }
 
 }
