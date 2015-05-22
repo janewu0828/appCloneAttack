@@ -64,6 +64,7 @@ public class InterfaceTest implements MainInterface {
 		System.out.println("result=" + result);
 
 		choiceStatus = getChoiceStatus();
+		System.out.println("choiceStatus=" + choiceStatus);
 	}
 
 	public int getS1() {
