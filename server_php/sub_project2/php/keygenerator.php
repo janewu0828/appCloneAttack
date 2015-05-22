@@ -12,6 +12,12 @@
 		$sql = "UPDATE `app` SET personal_key='".serialize($key_set)."' WHERE note='".$appname."';";
 		$result = mysql_query($sql) or die(mysql_error());
 		
+		for($k=0;$k<5;$k++){
+			$secret[$k]=substr(md5(uniqid(rand(), true)),0,16);
+		}
+		$sql = "UPDATE `app` SET secret_value='".serialize($secret)."' WHERE note='".$appname."';";
+		$result = mysql_query($sql) or die(mysql_error());
+		
 	}
 	
 ?>
