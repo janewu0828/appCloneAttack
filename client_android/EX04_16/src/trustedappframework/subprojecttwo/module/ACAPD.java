@@ -6,7 +6,6 @@ import static trustedappframework.subprojecttwo.module.ProjectConfig.showCheckUs
 import static trustedappframework.subprojecttwo.module.ProjectConfig.showCheckUserError;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.showPersonalKeyError;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.showToast;
-import irdc.ex04_16.R;
 
 import java.io.File;
 
