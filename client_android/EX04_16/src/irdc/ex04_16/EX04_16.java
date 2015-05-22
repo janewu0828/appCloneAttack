@@ -107,10 +107,23 @@ public class EX04_16 extends Activity {
 			public void onClick(View v) {
 				Log.i(TAG, "new");
 
-				// App Clone Attack Prevention and Detection (ACAPD)
-				task = new ACAPDAsyncTask(class_separation_segment[1],
-						personalKey[1], 1);
-				task.execute((Void[]) null);
+				// // App Clone Attack Prevention and Detection (ACAPD)
+				// task = new ACAPDAsyncTask(class_separation_segment[1],
+				// personalKey[1], 1);
+				// task.execute((Void[]) null);
+
+				mText.setText(getResources().getString(R.string.str_title));
+				mImageView01.setImageDrawable(getResources().getDrawable(
+						R.drawable.p04));
+				mImageView02.setImageDrawable(getResources().getDrawable(
+						R.drawable.p04));
+				mImageView03.setImageDrawable(getResources().getDrawable(
+						R.drawable.p04));
+				mImageView01.setAlpha(255);
+				mImageView02.setAlpha(255);
+				mImageView03.setAlpha(255);
+				randon();
+				choiceStatus = 0;
 			}
 		});
 
