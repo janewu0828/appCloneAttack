@@ -1,24 +1,21 @@
 package irdc.ex04_16;
 
+import static trustedappframework.subprojecttwo.module.ProjectConfig.ProgressDialog;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.checkConnection;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.checkPersonalKey;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
-import static trustedappframework.subprojecttwo.module.ProjectConfig.showToast;
-
-import trustedappframework.subprojecttwo.module.ACAPD;
-import trustedappframework.subprojecttwo.module.ProgressDialogManager;
+import static trustedappframework.subprojecttwo.module.ACAPD.personalKey;
+import trustedappframework.subprojecttwo.module.ACAPDAsyncTask;
 /* import相關class */
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +23,7 @@ import android.view.View;
 public class EX04_16 extends Activity {
 	private static final String TAG = "EX04_16";
 
-	private ACAPD myACAPD;
+	private ACAPDAsyncTask task;
 
 	public static Drawable d01;
 	public static Drawable d02;
@@ -58,19 +55,7 @@ public class EX04_16 extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		// get global Application object of the current process
-		mAppContext = EX04_16.this.getApplicationContext();
-		// get context for AlertDialog
-		mContext = EX04_16.this;
-
-		class_separation_segment = getResources().getStringArray(
-				R.array.class_separation_segment_file_name);
-		personal_key = getResources().getStringArray(
-				R.array.personal_key_file_name);
-
-		// App Clone Attack Prevention and Detection (ACAPD)
-		myACAPD = new ACAPD();
-
+		initACAPD();
 		// here
 		// A/libc(20572): Fatal signal 7 (SIGBUS) at 0x7980c4e0 (code=2), thread
 		// 20572 (irdc.ex04_16)
@@ -123,62 +108,13 @@ public class EX04_16 extends Activity {
 				Log.i(TAG, "new");
 
 				// App Clone Attack Prevention and Detection (ACAPD)
-
-				mText.setText(getResources().getString(R.string.str_title));
-
-				mImageView01.setImageDrawable(getResources().getDrawable(
-						R.drawable.p04));
-				mImageView02.setImageDrawable(getResources().getDrawable(
-						R.drawable.p04));
-				mImageView03.setImageDrawable(getResources().getDrawable(
-						R.drawable.p04));
-				mImageView01.setAlpha(255);
-				mImageView02.setAlpha(255);
-				mImageView03.setAlpha(255);
-				randon();
-				choiceStatus = 0;
-
+				task = new ACAPDAsyncTask(class_separation_segment[1],
+						personalKey[1], 1);
+				task.execute((Void[]) null);
 			}
 		});
 
-		// progress = (ProgressBar) findViewById(R.id.progressBar1);
 	}
-
-	// private ProgressBar progress;
-	//
-	// public void startProgress(View view) {
-	// // do something long
-	// Runnable runnable = new Runnable() {
-	// @Override
-	// public void run() {
-	// for (int i = 0; i <= 10; i++) {
-	// final int value = i;
-	// doFakeWork();
-	// progress.post(new Runnable() {
-	// @Override
-	// public void run() {
-	// mText.setText("Updating");
-	// progress.setProgress(value);
-	// }
-	// });
-	// }
-	// }
-	// };
-	// new Thread(runnable).start();
-	// }
-	//
-	// // Simulating something timeconsuming
-	// private void doFakeWork() {
-	// try {
-	// Thread.sleep(2000);
-	// } catch (InterruptedException e) {
-	// e.printStackTrace();
-	// }
-	// }
-
-	// static ProgressDialog progressDialog;
-	// static ProgressDialogManager pd;
-	// Handler handler;
 
 	private void loadImageView(boolean mImg01, boolean mImg02, boolean mImg03,
 			int mysol01) {
@@ -193,20 +129,31 @@ public class EX04_16 extends Activity {
 		ans = R.drawable.p01;
 		choiceStatus = 1;
 
-		// pd = new ProgressDialogManager(this, getResources().getString(
-		// R.string.loading_msg), false);
-		// progressDialog = pd.getProgressDialog();
-		// progressDialog.show();
-		// new Thread(new Runnable() {
-		// public void run() {
-		// try {
-		showToast(getResources().getString(R.string.loading_msg));
-		myACAPD.loadACAPD(class_separation_segment[0], personal_key[0]);
-		// } finally {
-		//
-		// }
-		// }
-		// }).start();
+		// App Clone Attack Prevention and Detection (ACAPD)
+		task = new ACAPDAsyncTask(class_separation_segment[0], personalKey[0],
+				0);
+		task.execute((Void[]) null);
+	}
+
+	private void initACAPD() {
+		// get global Application object of the current process
+		mAppContext = getApplicationContext();
+		// get context for AlertDialog
+		mContext = EX04_16.this;
+
+		ProgressDialog();
+
+		// get array
+		class_separation_segment = getResources().getStringArray(
+				R.array.class_separation_segment_file_name);
+		personal_key = getResources().getStringArray(
+				R.array.personal_key_file_name);
+
+		// check network setting on device
+		checkConnection();
+
+		// check personal key on device
+		checkPersonalKey();
 	}
 
 	/* 重新洗牌的程式 */

@@ -13,6 +13,9 @@
     <string name="alert_checkuser_error_msg">身分鑑別失敗，程式將停止執行。</string>
     <string name="alert_personal_key_error_title">個人金鑰異常</string>
     <string name="alert_personal_key_error_msg">請確認已付費後，再次嘗試。</string>
-    <string name="loading_msg">與App安全強化伺服器檢查授權…</string>
+    <string name="progress_loading_title">抗複製偵測 (ACAPD)</string>
+    <string name="progress_loading_msg">與App安全強化伺服器檢查授權…</string>
+    <string name="progress_checkJar">檢查授權物件…</string>
+    <string name="progress_dynamicLoadingJar">動態載入…</string>
 
 </resources>
