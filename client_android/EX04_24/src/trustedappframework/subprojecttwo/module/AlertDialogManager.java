@@ -81,34 +81,4 @@ public class AlertDialogManager {
 		}
 	}
 
-//	public void showAlertEditDialog(Context context, String title,
-//			String message, Boolean status) {
-//
-//		AlertDialog.Builder editDialog = new AlertDialog.Builder(context);
-//		editDialog.setTitle("--- " + title + " ---");
-//
-//		final EditText editText = new EditText(context);
-//		editText.setText(message);
-//		editDialog.setView(editText);
-//
-//		editDialog.setPositiveButton("OK",
-//				new DialogInterface.OnClickListener() {
-//					// do something when the button is clicked
-//					public void onClick(DialogInterface arg0, int arg1) {
-//						personal_key = editText.getText().toString();
-//					}
-//				});
-//
-//		editDialog.setNegativeButton("Cancel",
-//				new DialogInterface.OnClickListener() {
-//					// do something when the button is clicked
-//					public void onClick(DialogInterface arg0, int arg1) {
-//						// ...
-//					}
-//				});
-//
-//		editDialog.show();
-//
-//	}
-
 }

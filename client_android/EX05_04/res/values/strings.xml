@@ -19,6 +19,9 @@
     <string name="alert_checkuser_error_msg">Authentication is failed, the process will be terminated.</string>
     <string name="alert_personal_key_error_title">Message</string>
     <string name="alert_personal_key_error_msg">Personal Key Error!!</string>
-    <string name="loading_msg">Authenticating...</string>
+    <string name="progress_loading_title">App Clone Attack Prevention and Detection (ACAPD)</string>
+    <string name="progress_loading_msg">Check App authorization status with App Security Enhancer…</string>
+    <string name="progress_checkJar">Check Jar…</string>
+    <string name="progress_dynamicLoadingJar">Dynamic LoadingJar…</string>
 
 </resources>
