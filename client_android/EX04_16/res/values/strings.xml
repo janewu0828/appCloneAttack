@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Guess A of hearts</string>
+    <string name="app_name">(Test)Guess A of hearts</string>
     <string name="str_title">Guess which one is A of hearts?</string>
     <string name="str_button">Play Again</string>
     <string name="guess_result_true">Wow! You guessed it!! Clap your hands!</string>
