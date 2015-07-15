@@ -13,8 +13,8 @@ if (!$conn){
 }
 
 mysql_select_db($database_dblink, $conn);
-//字符转换，读库
+//字符轉換，讀取資料庫
 mysql_query("set character set 'utf-8'");
-//写库
+//寫入資料庫
 mysql_query("set names 'utf-8'");
 ?>
