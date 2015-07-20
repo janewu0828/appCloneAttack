@@ -1,7 +1,6 @@
 package trustedappframework.subprojecttwo.module;
 
-import com.trustedapp.subprojecttwo.R;
-
+import trustedappframework.subprojecttwo.R;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;

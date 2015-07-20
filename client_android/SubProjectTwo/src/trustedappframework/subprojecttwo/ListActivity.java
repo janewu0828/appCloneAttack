@@ -1,4 +1,8 @@
-package com.trustedappframework.subprojecttwo;
+package trustedappframework.subprojecttwo;
+
+import static trustedappframework.subprojecttwo.module.ProjectConfig.checkConnection;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +11,8 @@ import trustedappframework.subprojecttwo.adapter.AppListAdapter;
 import trustedappframework.subprojecttwo.entity.Apps;
 import trustedappframework.subprojecttwo.module.AlertDialogManager;
 import trustedappframework.subprojecttwo.module.ProgressDialogManager;
-
-import com.trustedapp.subprojecttwo.R;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -39,12 +39,12 @@ public class ListActivity extends Activity {
 	private List<PackageInfo> pis;
 	private List<ResolveInfo> appInfo;
 
-	private Context mContext;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		initACAPD();
 
 		try {
 			// requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -126,13 +126,12 @@ public class ListActivity extends Activity {
 										getResources()
 												.getString(
 														R.string.alert_applist_loading_msg),
-										true);
+										false);
 							}
 						});
 						break;
 
 					case DATA_ERROR:
-						mContext = ListActivity.this;
 						AlertDialogManager alert = new AlertDialogManager();
 						alert.showAlertDialog(
 								mContext,
@@ -155,4 +154,12 @@ public class ListActivity extends Activity {
 
 	}
 
+	private void initACAPD() {
+		// get global Application object of the current process
+		mAppContext = getApplicationContext();
+		// get context for AlertDialog
+		mContext = ListActivity.this;	
+		// check network setting on device
+		checkConnection();
+	}
 }

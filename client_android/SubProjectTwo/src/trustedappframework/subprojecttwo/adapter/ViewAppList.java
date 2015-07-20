@@ -1,7 +1,6 @@
 package trustedappframework.subprojecttwo.adapter;
 
-import com.trustedapp.subprojecttwo.R;
-
+import trustedappframework.subprojecttwo.R;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;

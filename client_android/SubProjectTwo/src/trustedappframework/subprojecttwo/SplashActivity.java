@@ -1,6 +1,4 @@
-package com.trustedappframework.subprojecttwo;
-
-import com.trustedapp.subprojecttwo.R;
+package trustedappframework.subprojecttwo;
 
 import android.app.Activity;
 import android.content.Intent;
