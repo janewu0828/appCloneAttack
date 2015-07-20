@@ -100,7 +100,7 @@ public class DownloadFileFromURL extends AsyncTask<String, String, String> {
 		// Log.i(TAG, "completed download, downloadStatus= "
 		// + ACAPD.downloadStatus);
 
-		ACAPD.loadACAPD2(fileName, ACAPD.loadPersonalKey, ACAPD.classStatus);
+		ACAPD.loadACAPD2(fileName, ACAPD.personalKey, ACAPD.classStatus);
 		// Log.i(TAG, "fileName= " + fileName + ", key="
 		// + ACAPD.loadPersonalKey);
 	}
