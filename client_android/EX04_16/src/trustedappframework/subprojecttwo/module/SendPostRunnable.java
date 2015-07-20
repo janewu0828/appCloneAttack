@@ -68,7 +68,7 @@ public class SendPostRunnable implements Runnable {
 		// IMEI.length());
 
 		// check user -----
-		cu = new CheckUser(appId, appId2, UUID, ACAPD.fileName);
+		cu = new CheckUser(appId, appId2, UUID, ACAPD.fileName,ACAPD.jarFlag);
 		authStatus = cu.checkUser();
 		session = cu.getSession();
 	}
