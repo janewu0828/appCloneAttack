@@ -43,7 +43,7 @@ public class ProjectConfig {
 
 			if (ACAPD.personalKey[i].length() > 0
 					&& !ACAPD.personalKey[i].trim().isEmpty()) {
-				// Log.i(TAG, "personalKey= " + ACAPD.personalKey[i]);
+				// Log.e(TAG, "personalKey= " + ACAPD.personalKey[i]);
 
 			} else {
 				showPersonalKeyError();
