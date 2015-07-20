@@ -20,6 +20,7 @@ public class ACAPD {
 	public static String outputFilePath = Environment
 			.getExternalStorageDirectory().getAbsolutePath() + "/project/";
 	public static String fileName = null;
+	public static String jarFlag = "0";
 	public static int classStatus = 0;
 
 	public static SendPostRunnable sr;
@@ -75,10 +76,10 @@ public class ACAPD {
 		}
 		// broadcast encryption, dynamic loading, tracing log, key
 		// update
-		loadACAPD2(fileName, loadPersonalKey, classStatus);
+		loadACAPD2(fileName, personalKey, classStatus);
 	}
 
-	public static void loadACAPD2(String fileName, String key, int classStatus) {
+	public static void loadACAPD2(String fileName, String[] key, int classStatus) {
 		if (downloadStatus) {
 			updateProgressDialog(progressDialog_checkJar);
 
@@ -124,7 +125,7 @@ public class ACAPD {
 
 	}
 
-	public static String broadcastEncryption(String fileName, String key) {
+	public static String broadcastEncryption(String fileName, String[] key) {
 		String str = null;
 		Decrypt decfile = new Decrypt();
 
