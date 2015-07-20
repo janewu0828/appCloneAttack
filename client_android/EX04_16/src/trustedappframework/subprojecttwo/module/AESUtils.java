@@ -156,4 +156,11 @@ public class AESUtils {
 		byte[] decrypted = cipher.doFinal(encrypted);
 		return decrypted;
 	}
+
+	public void setPersonalKey(String key2) {
+		this.key2 = key2;
+		keyspec2 = new SecretKeySpec(key2.getBytes(), "AES");
+	}
+	
+	
 }
