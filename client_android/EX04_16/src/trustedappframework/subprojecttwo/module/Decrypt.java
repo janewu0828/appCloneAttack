@@ -29,45 +29,71 @@ public class Decrypt {
 		return result;
 	}
 
-	public String decryptSessionKey(String[] code, String personalKey) {
+	public String decryptSessionKey(String[] code, String[] personalKey) {
 		String str = null;
-		AESUtils mAES = new AESUtils(personalKey);
+		AESUtils mAES = new AESUtils(personalKey[0]);
 		try {
 
 			// Log.i(TAG, "code=" + code[0]);
 			// Log.i(TAG, "code=" + code[1]);
 			// Log.i(TAG, "code=" + code[2]);
-			String decrypted = new String(mAES.decryptEB(code[0]));
-			String decrypted2 = new String(mAES.decryptEB(code[1]));
-			String decrypted3 = new String(mAES.decryptEB(code[2]));
-			// System.out.println("decrypted= " + decrypted);
-			// System.out.println("decrypted2= " + decrypted2);
-			// System.out.println("decrypted3= " + decrypted3);
-
-			// XOR (decimal)
-			CharSequence c2 = decrypted2.subSequence(0, 15);
-			CharSequence c3 = decrypted3.subSequence(0, 15);
-			// System.out.println("c2= " + c2);
-			// System.out.println("c3= " + c3);
-
-			long session_key = 0;
-			long[] secret_value = new long[code.length];
-			secret_value[0] = Long.parseLong(decrypted);
-			secret_value[1] = Long.parseLong(c2.toString());
-			secret_value[2] = Long.parseLong(c3.toString());
-			for (int i = 0; i < secret_value.length; i++) {
-				// System.out.println("secret_value= " + i + ", "
-				// + secret_value[i]);
-				session_key = session_key ^ secret_value[i];
+			String[] decrypted = new String[code.length];
+			for (int i = 0; i < decrypted.length; i++) {
+				mAES.setPersonalKey(personalKey[i]);
+				decrypted[i] = new String(mAES.decryptEB(code[i]));
+				Log.i(TAG, "decrypted[" + i + "]" + "= " + decrypted[i]);
+			}
+//			String decrypted = new String(mAES.decryptEB(code[0]));
+//			mAES.setPersonalKey(personalKey[1]);
+//			String decrypted2 = new String(mAES.decryptEB(code[1]));
+//			mAES.setPersonalKey(personalKey[2]);
+//			String decrypted3 = new String(mAES.decryptEB(code[2]));
+//			Log.i(TAG, "decrypted= " + decrypted);
+//			Log.i(TAG, "decrypted2= " + decrypted2);
+//			Log.i(TAG, "decrypted3= " + decrypted3);
+			for (int i = 1; i < decrypted.length; i++) {
+				str = xorHex(decrypted[i-1], decrypted[i]);
 			}
 
-			str = String.valueOf(session_key);
+//			str = xorHex(decrypted, decrypted2);
+//			str = xorHex(str, decrypted3);
+			Log.i(TAG, "session_key= " + str);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		return str;
+	}
+
+	public String xorHex(String a, String b) {
+		// TODO: Validation
+		char[] chars = new char[a.length()];
+		for (int i = 0; i < chars.length; i++) {
+			chars[i] = toHex(fromHex(a.charAt(i)) ^ fromHex(b.charAt(i)));
+		}
+		return new String(chars);
+	}
+
+	private static int fromHex(char c) {
+		if (c >= '0' && c <= '9') {
+			return c - '0';
+		}
+		if (c >= 'A' && c <= 'F') {
+			return c - 'A' + 10;
+		}
+		if (c >= 'a' && c <= 'f') {
+			return c - 'a' + 10;
+		}
+		throw new IllegalArgumentException();
+	}
+
+	private char toHex(int nybble) {
+		if (nybble < 0 || nybble > 15) {
+			throw new IllegalArgumentException();
+		}
+		// return "0123456789ABCDEF".charAt(nybble);
+		return "0123456789abcdef".charAt(nybble);
 	}
 
 	public void decryptJar(String fileName, String folderPath, String seed) {
