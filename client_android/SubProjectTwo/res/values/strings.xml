@@ -4,6 +4,8 @@
     <string name="app_name">App Clone Attack Prevention and Detection</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="ACAPD">App Clone Attack Prevention and Detection</string>
+    <string name="copyright">copyright © NTUST TWISC 2015</string>
     <string name="applist_loading_msg">Application list is loading</string>
     <string name="alert_applist_loading_title">Message</string>
     <string name="alert_applist_loading_msg">Error Dialog.</string>
