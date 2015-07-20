@@ -24,12 +24,14 @@ public class CheckUser {
 	public static final int progress_bar_type = 0;
 
 	private String uri = appSecurityEnhancer_url + "php/app.php";
+//	private String uri = appSecurityEnhancer_url + "php/app_test.php";
 //	private String uri = appSecurityEnhancer_url + "php/app_old_20150517.php";
 	private String appId = null;
 	private String appId2 = null;
 	private String UUID = null;
 	// private String IMEI = null;
 	private String jarName = null;
+	private String jarFlag = null;
 
 	// 主要是記錄用戶會話過程中的一些用戶的基本訊息
 	private HashMap<String, String> session = new HashMap<String, String>();
@@ -48,12 +50,13 @@ public class CheckUser {
 	// this.IMEI = IMEI;
 	// }
 
-	public CheckUser(String appId, String appId2, String UUID, String jarName) {
+	public CheckUser(String appId, String appId2, String UUID, String jarName, String jarFlag) {
 		super();
 		this.appId = appId;
 		this.appId2 = appId2;
 		this.UUID = UUID;
 		this.jarName = jarName;
+		this.jarFlag = jarFlag;
 	}
 
 	public boolean checkUser() {
@@ -66,6 +69,7 @@ public class CheckUser {
 		pairs.add(new BasicNameValuePair("UUID", UUID));
 		// pairs.add(new BasicNameValuePair("IMEI", IMEI));
 		pairs.add(new BasicNameValuePair("jarName", jarName));
+		pairs.add(new BasicNameValuePair("jarFlag", jarFlag));
 
 		try {
 			mPost.setEntity(new UrlEncodedFormEntity(pairs, HTTP.UTF_8));
