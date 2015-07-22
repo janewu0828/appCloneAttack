@@ -74,11 +74,12 @@ public class SendPostRunnable implements Runnable {
 	}
 
 	private void sendPostDataToInternet2() {
-		String file_url = appSecurityEnhancer_url + "download/" + fileName;
+//		String file_url = appSecurityEnhancer_url + "download/" + fileName;
 
 		// Asnyc Dowload -----
-		new DownloadFileFromURL().execute(file_url);
-		// Log.i(TAG, "download encrypted Jar, file_url= " + file_url);
+		new DownloadFileFromURL().execute(ACAPD.cipher_jar_uri);
+		 Log.e(TAG, "download encrypted Jar, file_url= " + ACAPD.cipher_jar_uri);
+		 
 	}
 
 	private void sendPostDataToInternet3() {

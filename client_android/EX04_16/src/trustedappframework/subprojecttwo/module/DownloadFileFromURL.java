@@ -50,10 +50,12 @@ public class DownloadFileFromURL extends AsyncTask<String, String, String> {
 			if (!outputFileDir.exists()) {
 				outputFileDir.mkdir();
 			}
-			// Log.i(TAG, "outputFileDir= " + outputFileDir.toString());
+			Log.e(TAG, "outputFileDir= " + outputFileDir.toString());
 
 			// Output stream
 			OutputStream output = new FileOutputStream(outputFilePath
+					+ fileName);
+			Log.e(TAG, "outputFilePath= " + outputFilePath + ", fileName= "
 					+ fileName);
 
 			byte data[] = new byte[2048];

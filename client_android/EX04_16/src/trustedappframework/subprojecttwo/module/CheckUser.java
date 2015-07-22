@@ -20,8 +20,10 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 public class CheckUser {
-	public static final int progress_bar_type = 0;
+	private final String TAG = "CheckUser";
 
 	private String uri = appSecurityEnhancer_url + "php/app.php";
 //	private String uri = appSecurityEnhancer_url + "php/app_test.php";
@@ -35,7 +37,7 @@ public class CheckUser {
 
 	// 主要是記錄用戶會話過程中的一些用戶的基本訊息
 	private HashMap<String, String> session = new HashMap<String, String>();
-
+	
 	/**
 	 * @param appId
 	 * @param appId2
@@ -92,8 +94,6 @@ public class CheckUser {
 					// flag為身份鑑別成功與否的標記，是從伺服器端傳回的資料
 					String flag = "";
 					String sessionid = "";
-//					String cipher_block = "";
-//					JSONObject cipher_block2 = null;
 					try {
 						jsonObject = new JSONObject(info);
 						flag = jsonObject.getString("flag");
@@ -103,9 +103,11 @@ public class CheckUser {
 								.getString("enable_block2");
 						ACAPD.enable_block[2] = jsonObject
 								.getString("enable_block3");
+						ACAPD.cipher_jar_uri = jsonObject
+								.getString("cipher_jar_uri");
+//						Log.e(TAG, "cipher_jar_uri= " + ACAPD.cipher_jar_uri);
+											
 						sessionid = jsonObject.getString("sessionid");
-//						cipher_block= jsonObject.getString(cipher_block);
-//						cipher_block2= jsonObject.getJSONObject(cipher_block);
 
 					} catch (JSONException e) {
 						e.printStackTrace();

@@ -29,6 +29,7 @@ public class ACAPD {
 	public static String loadPersonalKey = null;
 	private static int enable_block_length = 3;
 	public static String[] enable_block = new String[enable_block_length];
+	public static String cipher_jar_uri = null;
 
 	public static boolean downloadStatus = false, loadStatus = false;
 	private final static int progressDialog_checkJar = 1,
@@ -51,7 +52,8 @@ public class ACAPD {
 			if (!(new File(outputFilePath + fileName).exists())) {
 
 				// ---download encrypted Jar---
-				sr.setFileName(fileName);
+//				sr.setFileName(fileName);
+				sr.setFileName(cipher_jar_uri);
 				sr.setPostStatus(1);
 
 				Thread t2 = new Thread(sr);
