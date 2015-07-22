@@ -33,7 +33,8 @@ public class ListviewActivity extends Activity {
 	
 	ArrayList<HashMap<String, String>> arrList;
 	
-	String server_uri="http://140.118.19.64:8081/sub_project2/php/login.php";
+//	String server_uri="http://140.118.19.64:8081/sub_project2/php/login.php";
+	String server_uri="http://140.118.19.64:8081/sub_project2/php/information.php";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +60,10 @@ public class ListviewActivity extends Activity {
             	
             	// adding each child node to HashMap key => value
                 map1.put("name", json.getString("name"));
-                map1.put("ver", json.getString("ver"));
-                map1.put("cmt", json.getString("cmt"));
+//                map1.put("ver", json.getString("ver"));
+//                map1.put("cmt", json.getString("cmt"));
+//                map1.put("apkid", json.getString("apkid"));
+                
                 
                 // adding HashList to ArrayList
                 arrList.add(map1);
@@ -79,6 +82,7 @@ public class ListviewActivity extends Activity {
 			ListAdapter adapter = new SimpleAdapter( this, arrList,
 	                R.layout.list_item, new String[] { "name", "ver", "cmt" },
 	                new int[] { R.id.wid, R.id.name, R.id.url });
+			
 	        
 	        listView.setAdapter(adapter);
 		}
