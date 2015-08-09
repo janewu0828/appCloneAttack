@@ -121,7 +121,7 @@ public class ListActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		try {
-			requestWindowFeature(Window.FEATURE_NO_TITLE);
+			requestWindowFeature(Window.FEATURE_ACTION_BAR);
 			setContentView(R.layout.applist);
 
 			initACAPD();
