@@ -1,9 +1,10 @@
 package trustedappframework.subprojecttwo.adapter;
 
-import trustedappframework.subprojecttwo.R;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import trustedappframework.subprojecttwo.R;
 
 class ViewAppList {
 	View baseView;

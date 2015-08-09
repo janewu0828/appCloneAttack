@@ -3,16 +3,14 @@ package trustedappframework.subprojecttwo.entity;
 import android.graphics.drawable.Drawable;
 
 public class Apps {
-	public Drawable app_icon = null;
-	public String app_name = null;
+	private Drawable app_icon;
+	private String app_name;
+	private String pkg_name;
 
-	public Apps(Drawable app_icon, String app_name) {
+	public Apps(Drawable app_icon, String app_name,String pkg_name) {
 		this.app_icon = app_icon;
 		this.app_name = app_name;
-	}
-
-	public Apps() {
-		// TODO 自動產生的建構子 Stub
+		this.pkg_name = pkg_name;		
 	}
 
 	public Drawable getApp_icon() {
@@ -29,5 +27,9 @@ public class Apps {
 
 	public void setApp_name(String app_name) {
 		this.app_name = app_name;
+	}
+	
+	public String getPkg_name() {
+		return pkg_name;
 	}
 }

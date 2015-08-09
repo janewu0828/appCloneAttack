@@ -50,5 +50,9 @@
             android:label="@string/app_name" >
         </activity>
     </application>
+    
+<!--         <category android:name="android.intent.category.LAUNCHER" /> -->
+
+<!--     <action android:name="android.intent.action.CREATE_SHORTCUT" /> -->
 
 </manifest>

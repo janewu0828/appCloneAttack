@@ -18,12 +18,13 @@ public class ProjectConfig {
 	private static AlertDialogManager alert = new AlertDialogManager();
 
 	public static ProgressDialogManager pd;
-
-	// dynamic loading class separation (JAR) -----
-	public static String[] class_separation_segment = null;
-
-	// tracing traitors -----
-	public static String[] personal_key = null;
+	
+	public static void ProgressDialog() {
+		pd = new ProgressDialogManager(mContext);
+		pd.onCreateDialog(R.drawable.acapd,
+				mContext.getString(R.string.progress_loading_title),
+				mContext.getString(R.string.progress_loading_msg), false);
+	}
 
 	public static void checkConnection() {
 		// check network setting on device
@@ -38,11 +39,13 @@ public class ProjectConfig {
 	}
 
 	public static void showCheckUserCorrect() {
-		Toast.makeText(mAppContext,
-				mAppContext.getString(R.string.toast_checkuser_true),
-				Toast.LENGTH_SHORT).show();
-
-		Log.e(TAG, "showCheckUserCorrect, " + "toast_checkuser_true");
+		alert.showAlertDialog(
+				mContext,
+				mContext.getResources().getString(
+						R.string.alert_checkuser_title),
+				mContext.getResources().getString(
+						R.string.alert_checkuser_true_msg), true);
+		Log.e(TAG, "showCheckUserCorrect");
 	}
 
 	public static void showCheckUserError() {
@@ -50,7 +53,7 @@ public class ProjectConfig {
 		alert.showAlertDialog(
 				mContext,
 				mContext.getResources().getString(
-						R.string.alert_checkuser_error_title),
+						R.string.alert_checkuser_title),
 				mContext.getResources().getString(
 						R.string.alert_checkuser_error_msg), false);
 		Log.e(TAG, "showCheckUserError");

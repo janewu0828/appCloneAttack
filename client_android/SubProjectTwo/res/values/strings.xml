@@ -11,8 +11,10 @@
     <string name="alert_applist_loading_msg">Error Dialog.</string>
     <string name="alert_internet_error_title">Network connection is failed</string>
     <string name="alert_internet_error_msg">Please check out the connection.</string>
-    <string name="toast_checkuser_true">Authentication is successful, the process will continue.</string>
-    <string name="alert_checkuser_error_title">Message</string>
+    <string name="alert_checkuser_true_msg">Authentication is successful.</string>
+    <string name="alert_checkuser_title">Message</string>
     <string name="alert_checkuser_error_msg">Authentication is failed, the process will be terminated.</string>
-
+    <string name="progress_loading_title">App Clone Attack Prevention and Detection (ACAPD)</string>
+    <string name="progress_loading_msg">Check App authorization status with App Security Enhancer…</string>
+    
 </resources>
