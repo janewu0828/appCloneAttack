@@ -50,7 +50,7 @@ public class DownloadFileFromURL extends AsyncTask<String, String, String> {
 			if (!outputFileDir.exists()) {
 				outputFileDir.mkdir();
 			}
-			Log.e(TAG, "outputFileDir= " + outputFileDir.toString());
+//			Log.i(TAG, "outputFileDir= " + outputFileDir.toString());
 
 			// Output stream
 			OutputStream output = new FileOutputStream(outputFilePath
@@ -102,7 +102,7 @@ public class DownloadFileFromURL extends AsyncTask<String, String, String> {
 		// Log.i(TAG, "completed download, downloadStatus= "
 		// + ACAPD.downloadStatus);
 
-		ACAPD.loadACAPD2(fileName, ACAPD.personalKey, ACAPD.classStatus);
+		ACAPD.loadACAPD2(fileName, ACAPD.personalKey, ACAPD.classStatus,ACAPD.test_id);
 		// Log.i(TAG, "fileName= " + fileName + ", key="
 		// + ACAPD.loadPersonalKey);
 	}

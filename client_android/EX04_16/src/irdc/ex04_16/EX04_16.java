@@ -6,8 +6,10 @@ import static trustedappframework.subprojecttwo.module.ProjectConfig.checkPerson
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.test;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
 import static trustedappframework.subprojecttwo.module.ACAPD.personalKey;
+import trustedappframework.subprojecttwo.module.ACAPD;
 import trustedappframework.subprojecttwo.module.ACAPDAsyncTask;
 /* import相關class */
 import android.app.Activity;
@@ -24,6 +26,7 @@ public class EX04_16 extends Activity {
 	private static final String TAG = "EX04_16";
 
 	private ACAPDAsyncTask task;
+	public int[] jarFlag = {0,2,3};
 
 	public static Drawable d01;
 	public static Drawable d02;
@@ -144,7 +147,7 @@ public class EX04_16 extends Activity {
 
 		// App Clone Attack Prevention and Detection (ACAPD)
 		task = new ACAPDAsyncTask(class_separation_segment[0], personalKey[0],
-				0);
+				jarFlag[0],0);
 		task.execute((Void[]) null);
 	}
 
@@ -159,6 +162,8 @@ public class EX04_16 extends Activity {
 		// get array
 		class_separation_segment = getResources().getStringArray(
 				R.array.class_separation_segment_file_name);
+		test = getResources().getStringArray(
+				R.array.test_file_name);
 		personal_key = getResources().getStringArray(
 				R.array.personal_key_file_name);
 

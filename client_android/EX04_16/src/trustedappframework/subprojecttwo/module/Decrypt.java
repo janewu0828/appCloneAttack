@@ -30,33 +30,24 @@ public class Decrypt {
 	}
 
 	public String decryptSessionKey(String[] code, String[] personalKey) {
-		String str = null;
+		String str = "0000000000000000";
 		AESUtils mAES = new AESUtils(personalKey[0]);
 		try {
 
-			// Log.i(TAG, "code=" + code[0]);
-			// Log.i(TAG, "code=" + code[1]);
-			// Log.i(TAG, "code=" + code[2]);
+//			 Log.i(TAG, "code=" + code[0]);
+//			 Log.i(TAG, "code=" + code[1]);
+//			 Log.i(TAG, "code=" + code[2]);
 			String[] decrypted = new String[code.length];
 			for (int i = 0; i < decrypted.length; i++) {
 				mAES.setPersonalKey(personalKey[i]);
 				decrypted[i] = new String(mAES.decryptEB(code[i]));
 				Log.i(TAG, "decrypted[" + i + "]" + "= " + decrypted[i]);
 			}
-//			String decrypted = new String(mAES.decryptEB(code[0]));
-//			mAES.setPersonalKey(personalKey[1]);
-//			String decrypted2 = new String(mAES.decryptEB(code[1]));
-//			mAES.setPersonalKey(personalKey[2]);
-//			String decrypted3 = new String(mAES.decryptEB(code[2]));
-//			Log.i(TAG, "decrypted= " + decrypted);
-//			Log.i(TAG, "decrypted2= " + decrypted2);
-//			Log.i(TAG, "decrypted3= " + decrypted3);
-			for (int i = 1; i < decrypted.length; i++) {
-				str = xorHex(decrypted[i-1], decrypted[i]);
+			for (int i = 0; i < decrypted.length; i++) {
+				str = xorHex(str, decrypted[i]);
+				Log.i(TAG, "str = " + str);
 			}
 
-//			str = xorHex(decrypted, decrypted2);
-//			str = xorHex(str, decrypted3);
 			Log.i(TAG, "session_key= " + str);
 
 		} catch (Exception e) {

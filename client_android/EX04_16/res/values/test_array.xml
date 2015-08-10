@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="test_file_name">
+        <item>output123.jar</item>
+        <item>output20150514.JAR</item>
+        <item>.jar</item>
+    </string-array>
+
+</resources>

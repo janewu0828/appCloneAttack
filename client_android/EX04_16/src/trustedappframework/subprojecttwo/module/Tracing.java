@@ -35,7 +35,7 @@ public class Tracing {
 	}
 
 	public boolean tracingLog(String loadFileName) {
-		String deviceid = SendPostRunnable.UUID;
+		String UUID = SendPostRunnable.UUID;
 		String[] personalKey = ACAPD.personalKey;
 		String sess_id = session.get("s_sessionid");
 		// System.out.println("sess_id= " + sess_id);
@@ -45,7 +45,7 @@ public class Tracing {
 
 		// Post運作傳送變數用NameValuePair[]陣列儲存
 		List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
-		pairs.add(new BasicNameValuePair("sess_deviceid", deviceid));
+		pairs.add(new BasicNameValuePair("sess_deviceid", UUID));
 		pairs.add(new BasicNameValuePair("sess_load_file_name", loadFileName));
 		pairs.add(new BasicNameValuePair("sess_personal_key", personalKey[0]));
 		pairs.add(new BasicNameValuePair("sess_personal_key2", personalKey[1]));

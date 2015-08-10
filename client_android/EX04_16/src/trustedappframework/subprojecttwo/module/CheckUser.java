@@ -52,13 +52,13 @@ public class CheckUser {
 	// this.IMEI = IMEI;
 	// }
 
-	public CheckUser(String appId, String appId2, String UUID, String jarName, String jarFlag) {
+	public CheckUser(String appId, String appId2, String UUID, String jarName, int jarFlag2) {
 		super();
 		this.appId = appId;
 		this.appId2 = appId2;
 		this.UUID = UUID;
 		this.jarName = jarName;
-		this.jarFlag = jarFlag;
+		this.jarFlag = String.valueOf(jarFlag2);
 	}
 
 	public boolean checkUser() {
@@ -105,7 +105,7 @@ public class CheckUser {
 								.getString("enable_block3");
 						ACAPD.cipher_jar_uri = jsonObject
 								.getString("cipher_jar_uri");
-//						Log.e(TAG, "cipher_jar_uri= " + ACAPD.cipher_jar_uri);
+						Log.e(TAG, "cipher_jar_uri= " + ACAPD.cipher_jar_uri);
 											
 						sessionid = jsonObject.getString("sessionid");
 

@@ -15,14 +15,16 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 	private ACAPD myACAPD = null;
 	private String fileName = null;
 	private int classStatus = 0;
+	private int test_id = 0;
 	private String key = null;
 
-	public ACAPDAsyncTask(String fileName, String key, int classStatus) {
+	public ACAPDAsyncTask(String fileName, String key, int classStatus,int test_id) {
 		super();
 
 		this.fileName = fileName;
 		this.key = key;
 		this.classStatus = classStatus;
+		this.test_id = test_id;
 
 		myACAPD = new ACAPD(fileName);
 		sr = ACAPD.sr;
@@ -62,7 +64,7 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected void onPostExecute(Void result) {
 		// App Clone Attack Prevention and Detection (ACAPD)
-		myACAPD.loadACAPD(fileName, key, classStatus);
+		myACAPD.loadACAPD(fileName, key, classStatus, test_id);
 
 		if (progressDialog != null) {
 			progressDialog.dismiss();

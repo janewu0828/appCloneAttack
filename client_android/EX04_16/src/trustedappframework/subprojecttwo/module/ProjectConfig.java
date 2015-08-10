@@ -21,6 +21,7 @@ public class ProjectConfig {
 
 	// dynamic loading class separation (JAR) -----
 	public static String[] class_separation_segment = null;
+	public static String[] test = null;
 
 	// tracing traitors -----
 	public static String[] personal_key = null;
