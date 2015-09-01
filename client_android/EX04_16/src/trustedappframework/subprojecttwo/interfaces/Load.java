@@ -13,7 +13,8 @@ public class Load {
 	private static final String TAG = "Load";
 
 	@SuppressLint("NewApi")
-	public boolean loadJar(String fileName, String folderPath, int classStatus) {
+	public boolean loadJar(String fileName, String folderPath,
+			String classStatus_str) {
 		Context context = mAppContext;
 		try {
 			String sourceFilePath = folderPath + fileName;
@@ -35,10 +36,13 @@ public class Load {
 					"trustedappframework.subprojecttwo.interfaces.InterfaceTest",
 					"trustedappframework.subprojecttwo.interfaces.InterfaceTest2",
 					"trustedappframework.subprojecttwo.interfaces.InterfaceTest3" };
+
+			int classStatus = Integer.parseInt(classStatus_str);
+			Log.i(TAG, "classStatus= " + classStatus);
 			for (int i = 0; i < strClassName.length; i++)
 				if (classStatus == i)
 					className = strClassName[i];
-			// Log.i(TAG, "className= " + className);
+			Log.i(TAG, "className= " + className);
 
 			Class<?> libProviderClazz = classLoader.loadClass(className);
 
@@ -55,13 +59,14 @@ public class Load {
 
 			// exe
 			mMainInterface.loadMethod();
-			 Log.i(TAG, "finished");
+			Log.i(TAG, "finished");
 
 			File deleteFile = new File(sourceFile.getAbsolutePath());
 			deleteFile.delete();
-//			 boolean deleted = deleteFile.delete();
-//			 Log.e(TAG, "deleted= " + String.valueOf(deleted) + ", file= "
-//			 + sourceFile.getAbsolutePath());
+
+			boolean deleted = deleteFile.delete();
+			Log.e(TAG, "deleted= " + String.valueOf(deleted) + ", file= "
+					+ sourceFile.getAbsolutePath());
 
 			return true;
 		} catch (Exception e) {

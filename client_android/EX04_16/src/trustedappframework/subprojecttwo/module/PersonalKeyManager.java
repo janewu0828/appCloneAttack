@@ -1,6 +1,6 @@
 package trustedappframework.subprojecttwo.module;
 
-import static trustedappframework.subprojecttwo.module.ACAPD.outputFilePath;
+import static trustedappframework.subprojecttwo.module.TracingTraitor.outputFilePath;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

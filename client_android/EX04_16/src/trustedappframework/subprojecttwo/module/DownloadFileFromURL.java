@@ -1,7 +1,7 @@
 package trustedappframework.subprojecttwo.module;
 
-import static trustedappframework.subprojecttwo.module.ACAPD.outputFilePath;
-import static trustedappframework.subprojecttwo.module.ACAPD.fileName;
+import static trustedappframework.subprojecttwo.module.TracingTraitor.outputFilePath;
+import static trustedappframework.subprojecttwo.module.TracingTraitor.fileName;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -98,12 +98,12 @@ public class DownloadFileFromURL extends AsyncTask<String, String, String> {
 	 * **/
 	@Override
 	protected void onPostExecute(String paramString) {
-		ACAPD.downloadStatus = true;
+		TracingTraitor.downloadStatus = true;
 		// Log.i(TAG, "completed download, downloadStatus= "
-		// + ACAPD.downloadStatus);
+		// + TracingTraitor.downloadStatus);
 
-		ACAPD.loadACAPD2(fileName, ACAPD.personalKey, ACAPD.classStatus,ACAPD.test_id);
+		TracingTraitor.myTracingTraitor(fileName, ProjectConfig.personal_key, ACAPDAsyncTask.classStatus);
 		// Log.i(TAG, "fileName= " + fileName + ", key="
-		// + ACAPD.loadPersonalKey);
+		// + TracingTraitor.loadPersonalKey);
 	}
 }

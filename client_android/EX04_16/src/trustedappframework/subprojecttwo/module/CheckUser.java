@@ -1,7 +1,5 @@
 package trustedappframework.subprojecttwo.module;
 
-import static trustedappframework.subprojecttwo.module.ACAPD.appSecurityEnhancer_url;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -25,7 +23,7 @@ import android.util.Log;
 public class CheckUser {
 	private final String TAG = "CheckUser";
 
-	private String uri = appSecurityEnhancer_url + "php/app.php";
+	private String uri = ACAPDAsyncTask.appSecurityEnhancer_url + "php/app.php";
 //	private String uri = appSecurityEnhancer_url + "php/app_test.php";
 //	private String uri = appSecurityEnhancer_url + "php/app_old_20150517.php";
 	private String appId = null;
@@ -52,13 +50,13 @@ public class CheckUser {
 	// this.IMEI = IMEI;
 	// }
 
-	public CheckUser(String appId, String appId2, String UUID, String jarName, int jarFlag2) {
+	public CheckUser(String appId, String appId2, String UUID, String jarName, String jarFlag) {
 		super();
 		this.appId = appId;
 		this.appId2 = appId2;
 		this.UUID = UUID;
 		this.jarName = jarName;
-		this.jarFlag = String.valueOf(jarFlag2);
+		this.jarFlag = jarFlag;
 	}
 
 	public boolean checkUser() {
@@ -97,15 +95,16 @@ public class CheckUser {
 					try {
 						jsonObject = new JSONObject(info);
 						flag = jsonObject.getString("flag");
-						ACAPD.enable_block[0] = jsonObject
+						
+						TracingTraitor.enable_block[0] = jsonObject
 								.getString("enable_block");
-						ACAPD.enable_block[1] = jsonObject
+						TracingTraitor.enable_block[1] = jsonObject
 								.getString("enable_block2");
-						ACAPD.enable_block[2] = jsonObject
+						TracingTraitor.enable_block[2] = jsonObject
 								.getString("enable_block3");
-						ACAPD.cipher_jar_uri = jsonObject
+						TracingTraitor.cipher_jar_uri = jsonObject
 								.getString("cipher_jar_uri");
-						Log.e(TAG, "cipher_jar_uri= " + ACAPD.cipher_jar_uri);
+						Log.e(TAG, "cipher_jar_uri= " + TracingTraitor.cipher_jar_uri);
 											
 						sessionid = jsonObject.getString("sessionid");
 
@@ -115,9 +114,6 @@ public class CheckUser {
 					// 根據伺服器端返回的標記，判斷伺服器端鑑別是否成功
 					if (flag.equals("success")) {
 						// 為session傳遞的值，用於在session過程中記錄相關用戶訊息
-						session.put("s_enable_block", ACAPD.enable_block[0]);
-						session.put("s_enable_block2", ACAPD.enable_block[1]);
-						session.put("s_enable_block3", ACAPD.enable_block[2]);
 						session.put("s_sessionid", sessionid);
 
 						return true;

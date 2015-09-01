@@ -1,6 +1,6 @@
 package trustedappframework.subprojecttwo.module;
 
-import static trustedappframework.subprojecttwo.module.ACAPD.appSecurityEnhancer_url;
+import static trustedappframework.subprojecttwo.module.ACAPDAsyncTask.appSecurityEnhancer_url;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
 
 import java.io.IOException;
@@ -23,20 +23,20 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
-public class Tracing {
-	private static final String TAG = "Tracing";
+public class TracingLog {
+	private static final String TAG = "TracingLog";
 
 	private String uri = appSecurityEnhancer_url + "php/tracing.php";
 	private HashMap<String, String> session;
 
-	public Tracing(HashMap<String, String> session) {
+	public TracingLog(HashMap<String, String> session) {
 		super();
 		this.session = session;
 	}
 
-	public boolean tracingLog(String loadFileName) {
+	public boolean sendTracingLog(String loadFileName) {
 		String UUID = SendPostRunnable.UUID;
-		String[] personalKey = ACAPD.personalKey;
+		String[] personalKey = TracingTraitor.personalKey;
 		String sess_id = session.get("s_sessionid");
 		// System.out.println("sess_id= " + sess_id);
 

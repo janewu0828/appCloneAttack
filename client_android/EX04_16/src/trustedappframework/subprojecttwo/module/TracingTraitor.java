@@ -12,11 +12,9 @@ import trustedappframework.subprojecttwo.interfaces.Load;
 import android.os.Environment;
 import android.util.Log;
 
-// App Clone Attack Prevention and Detection (ACAPD)
-public class ACAPD {
-	private static final String TAG = "ACAPD";
-
-	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/sub_project2/";
+public class TracingTraitor {
+	private static final String TAG = "TracingTraitor";
+	
 	public static String outputFilePath = Environment
 			.getExternalStorageDirectory().getAbsolutePath() + "/project/";
 	public static String fileName = null;
@@ -35,70 +33,47 @@ public class ACAPD {
 	public static boolean downloadStatus = false, loadStatus = false;
 	private final static int progressDialog_checkJar = 1,
 			progressDialog_dynamicLoadingJar = 2;
+	
+	public static String broadcastDecryption(String fileName, String[] key) {
+		String str = null;
+		personalKey=ProjectConfig.personal_key;
+		Decrypt decfile = new Decrypt();
 
-	public ACAPD(String fileName) {
-		// prepare http post Runnable
-		this.fileName = fileName;
-		sr = new SendPostRunnable();
-	}
+//		if (new File(outputFilePath + fileName).exists()) {
+			// decrypt EB(session_key) -----
+			String session_key = decfile.decryptSessionKey(enable_block, key);
+			Log.i(TAG, "session_key= " + session_key);
 
-	public void loadACAPD(String fileName, String key, int classStatus,
-			int test_id) {
-		ACAPD.fileName = fileName;
-		ACAPD.loadPersonalKey = key;
-		ACAPD.jarFlag = classStatus;
-		ACAPD.test_id = test_id;
-		// ---check user ---
-
-		// ---check encrypted Jar ---
-		if (sr.getAuthStatus()) {
-			showCheckUserCorrect();
-			// if (!(new File(outputFilePath + fileName).exists())) {
-
-			// ---download encrypted Jar---
-			// sr.setFileName(fileName);
-			// sr.setFileName(cipher_jar_uri);
-			sr.setFileName(appSecurityEnhancer_url + "download/"
-					+ ProjectConfig.test[test_id]);
-			// Log.i(TAG,"ProjectConfig.test[test_id]= "+ProjectConfig.test[test_id]);
-			sr.setPostStatus(1);
-
-			Thread t2 = new Thread(sr);
-			t2.start();
-			// Log.i(TAG, "download start");
-
-			try {
-				// wait Thread t
-				t2.join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				Log.e(TAG, e.getMessage());
+			if (session_key != null) {
+				/** here **/
+				// decrypt CB(Jar) -----
+				// decfile.decryptJar(fileName, outputFilePath, session_key);
+				str = decfile.getOutputFileName();
+			} else {
+				showPersonalKeyError();
+				Log.e(TAG, "session_key is null");
 			}
 
-			// } else {
-			downloadStatus = true;
-			//
-			// }
-		} else {
-			/** here **/
-			showCheckUserError();
+//		} else {
+//			Log.i(TAG, "encrypted Jar is not exist");
+//		}
 
-		}
-		// broadcast encryption, dynamic loading, tracing log, key
-		// update
-		loadACAPD2(fileName, personalKey, classStatus, test_id);
+		return str;
 	}
 
-	public static void loadACAPD2(String fileName, String[] key,
-			int classStatus, int test_id) {
-		if (downloadStatus) {
-			updateProgressDialog(progressDialog_checkJar);
+	public static void myTracingTraitor(String fileName, String[] key,
+			String classStatus) {
+//		if (downloadStatus) {
+//			updateProgressDialog(progressDialog_checkJar);
 
+		if (new File(outputFilePath + fileName).exists()) {
 			// ---broadcast encryption---
-//			String decryptFileName = broadcastEncryption(fileName, key);
-			 String decryptFileName =
-			 ProjectConfig.class_separation_segment[test_id];
+			String decryptFileName = broadcastDecryption(fileName, key);
+//			int test_id=0;
+//			 String decryptFileName =
+//			 ProjectConfig.class_separation_segment[test_id];
 			 Log.i(TAG,"decryptFileName= "+decryptFileName);
+			 
 			// ---dynamic loading---
 			if (decryptFileName != null) {
 				updateProgressDialog(progressDialog_dynamicLoadingJar);
@@ -113,7 +88,7 @@ public class ACAPD {
 
 				if (loadStatus) {
 					// ---tracing traitors---
-					tracingLog(fileName);
+					tracing(fileName);
 
 					// ---key update---
 					String keyStatus = sr.getSession().get(
@@ -135,38 +110,16 @@ public class ACAPD {
 
 				Log.i(TAG, "decryptFileName= null");
 			}
-		}
-
-	}
-
-	public static String broadcastEncryption(String fileName, String[] key) {
-		String str = null;
-		Decrypt decfile = new Decrypt();
-
-		if (new File(outputFilePath + fileName).exists()) {
-			// decrypt EB(session_key) -----
-			String session_key = decfile.decryptSessionKey(enable_block, key);
-			Log.i(TAG, "session_key= " + session_key);
-
-			if (session_key != null) {
-				/** here **/
-				// decrypt CB(Jar) -----
-				// decfile.decryptJar(fileName, outputFilePath, session_key);
-				str = decfile.getOutputFileName();
-			} else {
-				showPersonalKeyError();
-			}
-
 		} else {
 			Log.i(TAG, "encrypted Jar is not exist");
 		}
+//		}
 
-		return str;
 	}
 
-	public static void tracingLog(String fileName) {
-		sr.setFileName(fileName);
-		sr.setPostStatus(2);
+	public static void tracing(String fileName) {
+		ACAPDAsyncTask.sr.setFileName(fileName);
+		ACAPDAsyncTask.sr.setPostStatus(2);
 
 		Thread t = new Thread(sr);
 		t.start();

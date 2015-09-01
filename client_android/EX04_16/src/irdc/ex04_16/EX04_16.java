@@ -1,15 +1,16 @@
 package irdc.ex04_16;
 
-import static trustedappframework.subprojecttwo.module.ProjectConfig.ProgressDialog;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.initProgressDialog;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.checkConnection;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.checkPersonalKey;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment;
-import static trustedappframework.subprojecttwo.module.ProjectConfig.test;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.jarFlag;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.classStatus;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.test_class_separation_segment;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.test_jarFlag;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
-import static trustedappframework.subprojecttwo.module.ACAPD.personalKey;
-import trustedappframework.subprojecttwo.module.ACAPD;
 import trustedappframework.subprojecttwo.module.ACAPDAsyncTask;
 /* import相關class */
 import android.app.Activity;
@@ -26,7 +27,6 @@ public class EX04_16 extends Activity {
 	private static final String TAG = "EX04_16";
 
 	private ACAPDAsyncTask task;
-	public int[] jarFlag = {0,2,3};
 
 	public static Drawable d01;
 	public static Drawable d02;
@@ -51,6 +51,35 @@ public class EX04_16 extends Activity {
 	 */
 	public static int[] s1 = new int[] { R.drawable.p01, R.drawable.p02,
 			R.drawable.p03 };
+	
+	private void initACAPD() {
+		// get global Application object of the current process
+		mAppContext = getApplicationContext();
+		// get context for AlertDialog
+		mContext = EX04_16.this;
+
+		initProgressDialog();
+
+		// get array
+		class_separation_segment = getResources().getStringArray(
+				R.array.class_separation_segment_file_name);
+		jarFlag= getResources().getStringArray(
+				R.array.jarFlag);
+		classStatus= getResources().getStringArray(
+				R.array.classStatus);
+		test_class_separation_segment = getResources().getStringArray(
+				R.array.test_file_name);
+		test_jarFlag= getResources().getStringArray(
+				R.array.test_jarFlag);
+		personal_key = getResources().getStringArray(
+				R.array.personal_key_file_name);
+
+		// check network setting on device
+		checkConnection();
+
+		// check personal key on device
+		checkPersonalKey();
+	}
 
 	/** Called when the activity is first created. */
 	@Override
@@ -59,12 +88,13 @@ public class EX04_16 extends Activity {
 		setContentView(R.layout.main);
 
 		initACAPD();
-		// here
+		// here ---
 		// A/libc(20572): Fatal signal 7 (SIGBUS) at 0x7980c4e0 (code=2), thread
 		// 20572 (irdc.ex04_16)
-		startService(new Intent(
-				"trustedappframework.subprojecttwo.interfaces.InterfaceTest.loadMethod"));
-		startService(new Intent("irdc.ex04_16.EX04_16"));
+		// startService(new Intent(
+		// "trustedappframework.subprojecttwo.interfaces.InterfaceTest.loadMethod"));
+		// startService(new Intent("irdc.ex04_16.EX04_16"));
+		// here ---
 
 		/* 取得相關物件 */
 		mText = (TextView) findViewById(R.id.mText);
@@ -110,7 +140,7 @@ public class EX04_16 extends Activity {
 			public void onClick(View v) {
 				Log.i(TAG, "new");
 
-				// // App Clone Attack Prevention and Detection (ACAPD)
+				// // App Clone Attack Prevention and Detection (TracingTraitor)
 				// task = new ACAPDAsyncTask(class_separation_segment[1],
 				// personalKey[1], 1);
 				// task.execute((Void[]) null);
@@ -145,34 +175,14 @@ public class EX04_16 extends Activity {
 		ans = R.drawable.p01;
 		choiceStatus = 1;
 
-		// App Clone Attack Prevention and Detection (ACAPD)
-		task = new ACAPDAsyncTask(class_separation_segment[0], personalKey[0],
-				jarFlag[0],0);
+		// App Clone Attack Prevention and Detection (TracingTraitor)
+//		task = new ACAPDAsyncTask(class_separation_segment[0], personalKey[0],
+//				jarFlag[0],test_jarFlag[0]);
+		task = new ACAPDAsyncTask(test_class_separation_segment[0],classStatus[0],test_jarFlag[0]);
 		task.execute((Void[]) null);
 	}
 
-	private void initACAPD() {
-		// get global Application object of the current process
-		mAppContext = getApplicationContext();
-		// get context for AlertDialog
-		mContext = EX04_16.this;
 
-		ProgressDialog();
-
-		// get array
-		class_separation_segment = getResources().getStringArray(
-				R.array.class_separation_segment_file_name);
-		test = getResources().getStringArray(
-				R.array.test_file_name);
-		personal_key = getResources().getStringArray(
-				R.array.personal_key_file_name);
-
-		// check network setting on device
-		checkConnection();
-
-		// check personal key on device
-		checkPersonalKey();
-	}
 
 	/* 重新洗牌的程式 */
 	public static void randon() {
