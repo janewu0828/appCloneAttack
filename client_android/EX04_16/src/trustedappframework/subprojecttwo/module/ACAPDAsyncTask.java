@@ -19,7 +19,8 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 //	private String key = null;
 	private String jarFlag = null;
 	
-	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/sub_project2/";
+//	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/sub_project2/";
+	public static String appSecurityEnhancer_url = "http://10.211.55.8/sub_project2/";
 
 //	public ACAPDAsyncTask(String fileName, String key, String jarFlag,String test_id) {
 	public ACAPDAsyncTask(String fileName, String classStatus, String jarFlag) {
