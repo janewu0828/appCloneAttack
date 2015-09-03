@@ -58,8 +58,14 @@ public class SendPostRunnable implements Runnable {
 
 		// check user -----
 		appId = AuthInfo.getAppId(mAppContext);
+		Log.i(TAG, "appId="+ appId + ", appId length= "
+		 + appId.length());
 		appId2 = AuthInfo.getAppId2(mAppContext);
+		Log.i(TAG, "appId2="+ appId2 + ", appId2 length= "
+				 + appId2.length());
 		UUID = AuthInfo.getUUID(mAppContext);
+		Log.i(TAG, "UUID="+ UUID + ", UUID length= "
+				 + UUID.length());
 		
 		cu = new CheckUser(appId, appId2, UUID, fileName,jarFlag);
 		authStatus = cu.checkUser();

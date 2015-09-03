@@ -5,7 +5,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -20,9 +22,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+//import trustedappframework.subprojecttwo.module.DownloadFileFromURL;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -30,100 +34,120 @@ import android.widget.SimpleAdapter;
 public class ListviewActivity extends Activity {
 
 	ListView listView;
-	
+
 	ArrayList<HashMap<String, String>> arrList;
-	
-//	String server_uri="http://140.118.19.64:8081/sub_project2/php/login.php";
-	String server_uri="http://140.118.19.64:8081/sub_project2/php/information.php";
-	
+
+	// String server_uri="http://140.118.19.64:8081/sub_project2/php/login.php";
+	String server_uri = "http://140.118.19.64:8081/sub_project2/php/information.php";
+
+	private static final String TAG = "ListviewActivity";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		setContentView(R.layout.activity_list);
-		
+
 		listView = (ListView) findViewById(R.id.listview);
 		arrList = new ArrayList<HashMap<String, String>>();
-		
-		
+
 		String json_str = getJsonData();
 		System.out.println("json_str= " + json_str);
-		
-		try{
-        	JSONArray jArray = new JSONArray(json_str);
-        	
-        	for (int i = 0; i < jArray.length(); i++) {
-        		JSONObject json = null;
-        		json = jArray.getJSONObject(i);
-        		
-	        	HashMap<String, String> map1 = new HashMap<String, String>();
-            	
-            	// adding each child node to HashMap key => value
-                map1.put("name", json.getString("name"));
-//                map1.put("ver", json.getString("ver"));
-//                map1.put("cmt", json.getString("cmt"));
-//                map1.put("apkid", json.getString("apkid"));
-                
-                
-                // adding HashList to ArrayList
-                arrList.add(map1);
-        	}
-        	
-        	
-        } catch ( JSONException e) {
-        	e.printStackTrace();            	
-        }
-		
-		
-		if(!arrList.isEmpty()){
-//			ListAdapter adapter = new SimpleAdapter( this, arrList,
-//	                R.layout.list_item, new String[] { "id", "name", "url" },
-//	                new int[] { R.id.wid, R.id.name, R.id.url });
-			ListAdapter adapter = new SimpleAdapter( this, arrList,
-	                R.layout.list_item, new String[] { "name", "ver", "cmt" },
-	                new int[] { R.id.wid, R.id.name, R.id.url });
+
+		try {
+			JSONArray jArray = new JSONArray(json_str);
+
+			for (int i = 0; i < jArray.length(); i++) {
+				JSONObject json = null;
+				json = jArray.getJSONObject(i);
+
+				HashMap<String, String> map1 = new HashMap<String, String>();
+
+				// adding each child node to HashMap key => value
+				map1.put("name", json.getString("name"));
+				// map1.put("ver", json.getString("ver"));
+				// map1.put("cmt", json.getString("cmt"));
+				// map1.put("apkid", json.getString("apkid"));
+
+				String app_icon_url = json.getString("img_url");
+				map1.put("img_url", app_icon_url);
+
+				String filename = json.getString("filename");
+				String[] temp = app_icon_url.split("icons/");
+				int temp_length = temp.length;
+				filename = temp[temp_length - 1];
+				// Log.i(TAG, "filename= " + filename);
+				map1.put("filename", filename);
+
+				// adding HashList to ArrayList
+				arrList.add(map1);
+			}
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		if (!arrList.isEmpty()) {
+			// ListAdapter adapter = new SimpleAdapter( this, arrList,
+			// R.layout.list_item, new String[] { "id", "name", "url" },
+			// new int[] { R.id.wid, R.id.name, R.id.url });
+
+			Log.e(TAG,arrList+"");
 			
-	        
-	        listView.setAdapter(adapter);
+			// // Asnyc Dowload -----
+			// new DownloadFileFromURL().execute(ACAPD.cipher_jar_uri);
+			// Log.e(TAG, "download encrypted Jar, file_url= "
+			// + ACAPD.cipher_jar_uri);
+
+			ListAdapter adapter = new SimpleAdapter(this, arrList,
+					R.layout.list_item, new String[] { "name", "ver", "cmt",
+							"icon" }, new int[] { R.id.wid, R.id.name,
+							R.id.url, R.id.app_icon });
+
+			listView.setAdapter(adapter);
 		}
 	}
-	
-	
-	private String getJsonData(){
+
+	private String getJsonData() {
 		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-        .detectDiskReads()
-        .detectDiskWrites()
-        .detectNetwork()   // or .detectAll() for all detectable problems
-        .penaltyLog()
-        .build());
-		
+				.detectDiskReads().detectDiskWrites().detectNetwork() // or
+																		// .detectAll()
+																		// for
+																		// all
+																		// detectable
+																		// problems
+				.penaltyLog().build());
+
 		String str = "";
 		HttpResponse response;
-        HttpClient myClient = new DefaultHttpClient();
-		//        HttpPost myConnection = new HttpPost("http://demos.tricksofit.com/files/json2.php");
-        HttpPost myConnection = new HttpPost(server_uri);
-        
-        List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
-		pairs.add(new BasicNameValuePair("appId", "fc9c1707a25b6c0efb6c92df2f8c51a8d1a529726d317a04a62d9afa03efe0af"));
-		pairs.add(new BasicNameValuePair("appId2", "1ee950b8e251b77104418721bd16e96312720bdc"));
+		HttpClient myClient = new DefaultHttpClient();
+		// HttpPost myConnection = new
+		// HttpPost("http://demos.tricksofit.com/files/json2.php");
+		HttpPost myConnection = new HttpPost(server_uri);
+
+		List<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
+		pairs.add(new BasicNameValuePair("appId",
+				"fc9c1707a25b6c0efb6c92df2f8c51a8d1a529726d317a04a62d9afa03efe0af"));
+		pairs.add(new BasicNameValuePair("appId2",
+				"1ee950b8e251b77104418721bd16e96312720bdc"));
 		pairs.add(new BasicNameValuePair("UUID", "fb70ea33d5f40a81"));
 		try {
 			myConnection.setEntity(new UrlEncodedFormEntity(pairs, HTTP.UTF_8));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-        
-        try {
-        	response = myClient.execute(myConnection);
-            str = EntityUtils.toString(response.getEntity(), "UTF-8");
-            System.out.println("-----------info-----------" + str);
-            
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        return str;
+
+		try {
+			response = myClient.execute(myConnection);
+			str = EntityUtils.toString(response.getEntity(), "UTF-8");
+//			System.out.println("-----------info-----------" + str);
+
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return str;
 	}
 }
