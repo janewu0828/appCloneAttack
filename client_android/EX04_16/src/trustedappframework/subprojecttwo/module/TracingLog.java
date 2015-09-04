@@ -1,7 +1,6 @@
 package trustedappframework.subprojecttwo.module;
 
 import static trustedappframework.subprojecttwo.module.ACAPDAsyncTask.appSecurityEnhancer_url;
-import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -26,7 +25,7 @@ import android.util.Log;
 public class TracingLog {
 	private static final String TAG = "TracingLog";
 
-	private String uri = appSecurityEnhancer_url + "php/tracing.php";
+	private String uri = appSecurityEnhancer_url + "php/tracing_20150905.php";
 	private HashMap<String, String> session;
 
 	public TracingLog(HashMap<String, String> session) {
@@ -36,7 +35,7 @@ public class TracingLog {
 
 	public boolean sendTracingLog(String loadFileName) {
 		String UUID = SendPostRunnable.UUID;
-		String[] personalKey = TracingTraitor.personalKey;
+		String[] personalKey = ACAPDAsyncTask.personalKey;
 		String sess_id = session.get("s_sessionid");
 		// System.out.println("sess_id= " + sess_id);
 
@@ -77,7 +76,7 @@ public class TracingLog {
 					// flag為標記，是從伺服器端傳回的資料
 					String flag = "";
 					String personal_key_update_status = "";
-					String[] new_personal_key = new String[personal_key.length];
+					String[] new_personal_key = new String[personalKey.length];
 
 					try {
 						jsonObject = new JSONObject(info);

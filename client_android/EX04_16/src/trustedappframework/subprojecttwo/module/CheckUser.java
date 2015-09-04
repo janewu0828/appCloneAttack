@@ -18,14 +18,10 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
-
 public class CheckUser {
-	private final String TAG = "CheckUser";
+//	private String uri = ACAPDAsyncTask.appSecurityEnhancer_url + "php/app.php";
+	private String uri = ACAPDAsyncTask.appSecurityEnhancer_url + "php/app_20150903.php";
 
-	private String uri = ACAPDAsyncTask.appSecurityEnhancer_url + "php/app.php";
-//	private String uri = appSecurityEnhancer_url + "php/app_test.php";
-//	private String uri = appSecurityEnhancer_url + "php/app_old_20150517.php";
 	private String appId = null;
 	private String appId2 = null;
 	private String UUID = null;
@@ -35,22 +31,15 @@ public class CheckUser {
 
 	// 主要是記錄用戶會話過程中的一些用戶的基本訊息
 	private HashMap<String, String> session = new HashMap<String, String>();
-	
+
 	/**
 	 * @param appId
 	 * @param appId2
 	 * @param UUID
 	 * @param IMEI
 	 */
-	// public CheckUser(String appId, String appId2,String UUID, String IMEI) {
-	// super();
-	// this.appId = appId;
-	// this.appId2 = appId2;
-	// this.UUID = UUID;
-	// this.IMEI = IMEI;
-	// }
-
-	public CheckUser(String appId, String appId2, String UUID, String jarName, String jarFlag) {
+	public CheckUser(String appId, String appId2, String UUID, String jarName,
+			String jarFlag) {
 		super();
 		this.appId = appId;
 		this.appId2 = appId2;
@@ -95,17 +84,20 @@ public class CheckUser {
 					try {
 						jsonObject = new JSONObject(info);
 						flag = jsonObject.getString("flag");
-						
-						TracingTraitor.enable_block[0] = jsonObject
+
+						ACAPDAsyncTask.enable_block[0] = jsonObject
 								.getString("enable_block");
-						TracingTraitor.enable_block[1] = jsonObject
+						ACAPDAsyncTask.enable_block[1] = jsonObject
 								.getString("enable_block2");
-						TracingTraitor.enable_block[2] = jsonObject
+						ACAPDAsyncTask.enable_block[2] = jsonObject
 								.getString("enable_block3");
-						TracingTraitor.cipher_jar_uri = jsonObject
+						ACAPDAsyncTask.cipher_jar_uri = jsonObject
 								.getString("cipher_jar_uri");
-						Log.e(TAG, "cipher_jar_uri= " + TracingTraitor.cipher_jar_uri);
-											
+						ACAPDAsyncTask.test_session_key = jsonObject
+								.getString("hahaha");
+						// Log.i(TAG, "cipher_jar_uri= " +
+						// TracingTraitor.cipher_jar_uri);
+
 						sessionid = jsonObject.getString("sessionid");
 
 					} catch (JSONException e) {

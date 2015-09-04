@@ -1,7 +1,9 @@
 package trustedappframework.subprojecttwo.module;
 
-import static trustedappframework.subprojecttwo.module.TracingTraitor.outputFilePath;
-import static trustedappframework.subprojecttwo.module.TracingTraitor.fileName;
+import static trustedappframework.subprojecttwo.module.ACAPDAsyncTask.personalKey;
+import static trustedappframework.subprojecttwo.module.ACAPDAsyncTask.classStatus;
+import static trustedappframework.subprojecttwo.module.ACAPDAsyncTask.outputFilePath;
+import static trustedappframework.subprojecttwo.module.ACAPDAsyncTask.fileName;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -50,7 +52,7 @@ public class DownloadFileFromURL extends AsyncTask<String, String, String> {
 			if (!outputFileDir.exists()) {
 				outputFileDir.mkdir();
 			}
-//			Log.i(TAG, "outputFileDir= " + outputFileDir.toString());
+			// Log.i(TAG, "outputFileDir= " + outputFileDir.toString());
 
 			// Output stream
 			OutputStream output = new FileOutputStream(outputFilePath
@@ -98,12 +100,9 @@ public class DownloadFileFromURL extends AsyncTask<String, String, String> {
 	 * **/
 	@Override
 	protected void onPostExecute(String paramString) {
-		TracingTraitor.downloadStatus = true;
-		// Log.i(TAG, "completed download, downloadStatus= "
-		// + TracingTraitor.downloadStatus);
-
-		TracingTraitor.myTracingTraitor(fileName, ProjectConfig.personal_key, ACAPDAsyncTask.classStatus);
+		TracingTraitor.myTracingTraitor(fileName, personalKey, classStatus);
 		// Log.i(TAG, "fileName= " + fileName + ", key="
 		// + TracingTraitor.loadPersonalKey);
+
 	}
 }

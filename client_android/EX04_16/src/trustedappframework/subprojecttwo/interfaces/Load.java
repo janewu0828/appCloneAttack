@@ -3,7 +3,6 @@ package trustedappframework.subprojecttwo.interfaces;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
 
 import java.io.File;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;

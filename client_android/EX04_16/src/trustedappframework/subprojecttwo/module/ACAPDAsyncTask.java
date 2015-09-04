@@ -1,47 +1,49 @@
 package trustedappframework.subprojecttwo.module;
 
 import static trustedappframework.subprojecttwo.module.ProjectConfig.pd;
+import static trustedappframework.subprojecttwo.module.PersonalKeyManager.personal_key;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.showCheckUserCorrect;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.showCheckUserError;
-import static trustedappframework.subprojecttwo.module.ProjectConfig.updateProgressDialog;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.util.Log;
 
+//App Clone Attack Prevention and Detection (ACAPD)
 public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 	private static final String TAG = "ACAPDAsyncTask";
 
-	private ProgressDialog progressDialog;
+	private static ProgressDialog progressDialog;
+
+	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/sub_project2/";
+	public static String outputFilePath = Environment
+			.getExternalStorageDirectory().getAbsolutePath() + "/project/";
 
 	public static SendPostRunnable sr = null;
-	private String fileName = null;
+	public static String fileName = null;
 	public static String classStatus = null;
-//	private String key = null;
 	private String jarFlag = null;
-	
-//	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/sub_project2/";
-	public static String appSecurityEnhancer_url = "http://10.211.55.8:8081/sub_project2/";
 
-//	public ACAPDAsyncTask(String fileName, String key, String jarFlag,String test_id) {
+	public static String[] personalKey = new String[personal_key.length];
+	private static int enable_block_length = 3;
+	public static String[] enable_block = new String[enable_block_length];
+	public static String cipher_jar_uri = null;
+	/** here **/
+	public static String test_session_key = null;
+
 	public ACAPDAsyncTask(String fileName, String classStatus, String jarFlag) {
 		super();
 
-		this.fileName = fileName;
-//		this.key = key;
-		this.classStatus=classStatus;
+		ACAPDAsyncTask.fileName = fileName;
+		ACAPDAsyncTask.classStatus = classStatus;
 		this.jarFlag = jarFlag;
-
-//		myACAPD = new TracingTraitor(fileName);
-//		sr = TracingTraitor.sr;
 	}
 
 	@Override
 	protected void onPreExecute() {
 		sr = new SendPostRunnable();
-		
+
 		progressDialog = pd.getProgressDialog();
-		int progressDialog_checkUser = 0;
-		updateProgressDialog(progressDialog_checkUser);
 		progressDialog.show();
 
 	}
@@ -71,16 +73,13 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected void onPostExecute(Void result) {
-//		// App Clone Attack Prevention and Detection (TracingTraitor)
-//		myACAPD.loadACAPD(fileName, key, classFlag, testFlag);
-		
+
 		if (sr.getAuthStatus()) {
 			showCheckUserCorrect();
 
 			// ---download encrypted Jar---
 			sr.setJarFlag(jarFlag);
-			sr.setFilePath(appSecurityEnhancer_url + "download/"
-					+ fileName);
+			sr.setFilePath(appSecurityEnhancer_url + "download/" + fileName);
 			// Log.i(TAG,"ProjectConfig.test[test_id]= "+ProjectConfig.test[test_id]);
 			sr.setPostStatus(1);
 
@@ -101,13 +100,27 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 
 		}
 		
-		TracingTraitor.myTracingTraitor(fileName, ProjectConfig.personal_key, classStatus);
+//		TracingTraitor.myTracingTraitor(fileName, personalKey, classStatus);
+	}
 
+	public static void pd_del() {
 		// --- dismiss progressDialog ---
 		if (progressDialog != null) {
 			progressDialog.dismiss();
 
 		}
+	}
+
+	public static String[] getPersonalKey() {
+		return personalKey;
+	}
+
+	public static String getPersonalKey(int i) {
+		return personalKey[i];
+	}
+
+	public static void setPersonalKey(String personalKey, int i) {
+		ACAPDAsyncTask.personalKey[i] = personalKey;
 	}
 
 }

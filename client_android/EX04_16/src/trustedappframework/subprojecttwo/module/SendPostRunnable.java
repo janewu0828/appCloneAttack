@@ -16,7 +16,7 @@ public class SendPostRunnable implements Runnable {
 	private int postStatus = 0;
 	private boolean authStatus = false;
 	private boolean tracingStatus = false;
-	private String jarFlag=null;
+	private String jarFlag = null;
 
 	// 主要是記錄用戶會話過程中的一些用戶的基本訊息
 	private HashMap<String, String> session;
@@ -28,7 +28,7 @@ public class SendPostRunnable implements Runnable {
 	private CheckUser cu;
 
 	public SendPostRunnable() {
-		
+
 	}
 
 	@Override
@@ -47,27 +47,15 @@ public class SendPostRunnable implements Runnable {
 	}
 
 	private void sendPostCheckUser() {
-		// System.out.println("appId= " + appId + ", appId length= "
-		// + appId.length());
-		// System.out.println("appId2= " + appId2 + ", appId2 length= "
-		// + appId2.length());
-		// System.out.println("UUID= " + UUID + ", UUID length= " +
-		// UUID.length());
-		// System.out.println("IMEI= " + IMEI + ", IMEI length= " +
-		// IMEI.length());
-
 		// check user -----
 		appId = AuthInfo.getAppId(mAppContext);
-		Log.i(TAG, "appId="+ appId + ", appId length= "
-		 + appId.length());
+		Log.i(TAG, "appId=" + appId + ", appId length= " + appId.length());
 		appId2 = AuthInfo.getAppId2(mAppContext);
-		Log.i(TAG, "appId2="+ appId2 + ", appId2 length= "
-				 + appId2.length());
+		Log.i(TAG, "appId2=" + appId2 + ", appId2 length= " + appId2.length());
 		UUID = AuthInfo.getUUID(mAppContext);
-		Log.i(TAG, "UUID="+ UUID + ", UUID length= "
-				 + UUID.length());
-		
-		cu = new CheckUser(appId, appId2, UUID, fileName,jarFlag);
+		Log.i(TAG, "UUID=" + UUID + ", UUID length= " + UUID.length());
+
+		cu = new CheckUser(appId, appId2, UUID, fileName, jarFlag);
 		authStatus = cu.checkUser();
 		session = cu.getSession();
 	}
@@ -75,8 +63,7 @@ public class SendPostRunnable implements Runnable {
 	private void sendPostDownload() {
 		// Asnyc Dowload -----
 		new DownloadFileFromURL().execute(filePath);
-		 Log.e(TAG, "download encrypted Jar, file_url= " + filePath);
-		 
+		Log.i(TAG, "download encrypted Jar, file_url= " + filePath);
 	}
 
 	private void sendPostTrancing() {
@@ -88,16 +75,18 @@ public class SendPostRunnable implements Runnable {
 	public void setPostStatus(int postStatus) {
 		this.postStatus = postStatus;
 	}
+
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
-	
+
 	public void setJarFlag(String jarFlag) {
-		this.jarFlag=jarFlag;
-		
+		this.jarFlag = jarFlag;
+
 	}
 
 	public boolean getAuthStatus() {
@@ -111,7 +100,5 @@ public class SendPostRunnable implements Runnable {
 	public HashMap<String, String> getSession() {
 		return session;
 	}
-
-	
 
 }

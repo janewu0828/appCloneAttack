@@ -6,6 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+
 import android.util.Log;
 
 public class Decrypt {
@@ -30,25 +33,31 @@ public class Decrypt {
 	}
 
 	public String decryptSessionKey(String[] code, String[] personalKey) {
-		String str = "0000000000000000";
+		String str = "0";
+
+		// MCrypt mAES = new MCrypt(personalKey[0]);
 		AESUtils mAES = new AESUtils(personalKey[0]);
 		try {
+			// for (int i = 0; i < code.length; i++) {
+			// Log.i(TAG, "code= " + code[i]);
+			// Log.i(TAG, "key= " + personalKey[i]);
+			// }
 
-//			 Log.i(TAG, "code=" + code[0]);
-//			 Log.i(TAG, "code=" + code[1]);
-//			 Log.i(TAG, "code=" + code[2]);
 			String[] decrypted = new String[code.length];
 			for (int i = 0; i < decrypted.length; i++) {
+				// mAES.setKey(personalKey[i]);
 				mAES.setPersonalKey(personalKey[i]);
 				decrypted[i] = new String(mAES.decryptEB(code[i]));
 				Log.i(TAG, "decrypted[" + i + "]" + "= " + decrypted[i]);
 			}
+
+			for (int i = 1; i < decrypted[0].length(); i++)
+				str += "0";
+			// Log.i(TAG, "init_str= " + str);
 			for (int i = 0; i < decrypted.length; i++) {
 				str = xorHex(str, decrypted[i]);
-				Log.i(TAG, "str = " + str);
+				Log.i(TAG, "str= " + str);
 			}
-
-			Log.i(TAG, "session_key= " + str);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,55 +92,133 @@ public class Decrypt {
 		if (nybble < 0 || nybble > 15) {
 			throw new IllegalArgumentException();
 		}
-		// return "0123456789ABCDEF".charAt(nybble);
 		return "0123456789abcdef".charAt(nybble);
 	}
 
-	public void decryptJar(String fileName, String folderPath, String seed) {
+	/** here **/
+	public void decryptJar3(String fileName, String folderPath, String seed) {
+		// MCrypt mAES = new MCrypt();
+		// mAES.setKey(seed);
+		AESUtils mAES = new AESUtils(seed);
+
+		// try {
+		// byte[] key = mAES.getKey().getBytes("UTF-8");
+		// byte[] iv = mAES.getIv().getBytes("UTF-8");
+		// byte[] b = null;
+		// byte[] decryptedData = mAES.decryptCB2(key, iv, b);
+		// } catch (Exception e) {
+		// // TODO 自動產生的 catch 區塊
+		// e.printStackTrace();
+		// }
+
+	}
+
+	public void decryptJar2(String fileName, String folderPath, String seed) {
 		// 解密保存
 		isSuccess = true;
 
 		decryptFile = new File(folderPath, fileName);
 		byte[] oldByte = new byte[(int) decryptFile.length()];
 
+		// MCrypt mAES = new MCrypt(seed);
+		AESUtils mAES = new AESUtils(seed);
+		// byte[] decrypted = null;
 		try {
 			fis = new FileInputStream(decryptFile);
 			fis.read(oldByte);
 
+			/** here **/
+			byte[] newByte = mAES.decryptCB(oldByte);
+			// decrypted = mAES.decrypt2(oldByte);
+
 			// 解密
-			byte[] newByte = AESUtils.decryptFile(seed, oldByte);
+			// byte[] newByte = AESUtils.decryptFile(seed, oldByte);
 			decryptFile = new File(folderPath, outputFileName);
 			fos = new FileOutputStream(decryptFile);
 			fos.write(newByte);
-
-		} catch (FileNotFoundException e) {
-			isSuccess = false;
-			e.printStackTrace();
-		} catch (IOException e) {
-			isSuccess = false;
-			e.printStackTrace();
-		} catch (Exception e) {
-			isSuccess = false;
-			e.printStackTrace();
-		}
-
-		try {
-			fis.close();
-			fos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-			Log.e(TAG, "IOException Error: " + e.getMessage());
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 			Log.e(TAG, "NullPointerException Error: " + e.getMessage());
+		} catch (FileNotFoundException e) {
+			isSuccess = false;
+			e.printStackTrace();
+			Log.e(TAG, "FileNotFoundException Error: " + e.getMessage());
+		} catch (IOException e) {
+			isSuccess = false;
+			e.printStackTrace();
+			Log.e(TAG, "IOException Error: " + e.getMessage());
+		} catch (Exception e) {
+			isSuccess = false;
+			e.printStackTrace();
+			Log.e(TAG, "Exception Error: " + e.getMessage());
+		} finally {
+			try {
+				fis.close();
+				fos.close();
+			} catch (IOException e) {
+				System.out.println("IOException Error while closing stream: "
+						+ e.getMessage());
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+				Log.e(TAG, "NullPointerException Error: " + e.getMessage());
+			} catch (Exception e) {
+				isSuccess = false;
+				e.printStackTrace();
+				Log.e(TAG, "Exception Error: " + e.getMessage());
+			}
 		}
 
 		if (!isSuccess) {
-			Log.e(TAG, "decrypted error");
-			// Log.i(TAG, "decrypted path= "
-			// + decryptFile.getAbsolutePath().toString());
+			Log.e(TAG, "decrypted error, decryptFile path= "
+					+ decryptFile.getAbsolutePath().toString());
 		}
 	}
+
+	// public void decryptJar(String fileName, String folderPath, String seed) {
+	// // 解密保存
+	// isSuccess = true;
+	//
+	// decryptFile = new File(folderPath, fileName);
+	// byte[] oldByte = new byte[(int) decryptFile.length()];
+	//
+	// try {
+	// fis = new FileInputStream(decryptFile);
+	// fis.read(oldByte);
+	//
+	// // 解密
+	// byte[] newByte = AESUtils.decryptFile(seed, oldByte);
+	// decryptFile = new File(folderPath, outputFileName);
+	// fos = new FileOutputStream(decryptFile);
+	// fos.write(newByte);
+	//
+	// } catch (FileNotFoundException e) {
+	// isSuccess = false;
+	// e.printStackTrace();
+	// } catch (IOException e) {
+	// isSuccess = false;
+	// e.printStackTrace();
+	// } catch (Exception e) {
+	// isSuccess = false;
+	// e.printStackTrace();
+	// }
+	//
+	// try {
+	// fis.close();
+	// fos.close();
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// Log.e(TAG, "IOException Error: " + e.getMessage());
+	// } catch (NullPointerException e) {
+	// e.printStackTrace();
+	// Log.e(TAG, "NullPointerException Error: " + e.getMessage());
+	// }
+	//
+	// if (!isSuccess) {
+	// Log.e(TAG, "decrypted error");
+	// // Log.i(TAG, "decrypted path= "
+	// // + decryptFile.getAbsolutePath().toString());
+	// }
+	// }
 
 	public String getOutputFileName() {
 		return outputFileName;

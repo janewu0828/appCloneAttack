@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">(Test)Guess A of hearts</string>
+    <string name="app_name">Guess A of hearts</string>
     <string name="str_title">Guess which one is A of hearts?</string>
     <string name="str_button">Play Again</string>
     <string name="guess_result_true">Wow! You guessed it!! Clap your hands!</string>
@@ -15,7 +15,5 @@
     <string name="alert_personal_key_error_msg">Personal Key Error!!</string>
     <string name="progress_loading_title">App Clone Attack Prevention and Detection (ACAPD)</string>
     <string name="progress_loading_msg">Check App authorization status with App Security Enhancer…</string>
-    <string name="progress_checkJar">Check Jar…</string>
-    <string name="progress_dynamicLoadingJar">Dynamic LoadingJar…</string>
 
 </resources>

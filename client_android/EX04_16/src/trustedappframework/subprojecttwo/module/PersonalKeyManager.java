@@ -1,6 +1,7 @@
 package trustedappframework.subprojecttwo.module;
 
-import static trustedappframework.subprojecttwo.module.TracingTraitor.outputFilePath;
+import static trustedappframework.subprojecttwo.module.ACAPDAsyncTask.outputFilePath;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.showPersonalKeyError;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,6 +15,26 @@ import android.util.Log;
 
 public class PersonalKeyManager {
 	private static final String TAG = "PersonalKeyManager";
+	
+	// tracing traitors -----
+	public static String[] personal_key = null;
+	
+	public static void checkPersonalKey() {
+		for (int i = 0; i < personal_key.length; i++) {
+			String key = PersonalKeyManager.read(personal_key[i]);
+			ACAPDAsyncTask.setPersonalKey(key, i);
+
+			if (ACAPDAsyncTask.getPersonalKey(i).length() > 0
+					&& !ACAPDAsyncTask.getPersonalKey(i).trim().isEmpty()) {
+				// Log.e(TAG, "personalKey[" + i + "]= "
+				// + ACAPDAsyncTask.getPersonalKey(i));
+			} else {
+				showPersonalKeyError();
+				Log.e(TAG, "Error: " + "personalKey= null");
+			}
+		}
+
+	}
 
 	public static String read(String fileName) {
 		String str = "";
