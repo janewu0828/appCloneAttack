@@ -19,10 +19,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CheckUser {
-	// private String uri = ACAPDAsyncTask.appSecurityEnhancer_url +
-	// "php/app.php";
-	private String uri = ACAPDAsyncTask.appSecurityEnhancer_url
-			+ "php/app_20150905.php";
+	private String uri = ACAPDAsyncTask.appSecurityEnhancer_url + "php/app.php";
+	// private String uri = ACAPDAsyncTask.appSecurityEnhancer_url
+	// + "php/app_20150905.php";
 
 	private String appId = null;
 	private String appId2 = null;
@@ -75,7 +74,7 @@ public class CheckUser {
 
 				if (entity != null) {
 					String info = EntityUtils.toString(entity);
-					 System.out.println("-----------info-----------" + info);
+					System.out.println("-----------info-----------" + info);
 					// 以下主要是對伺服器端傳回的資料進行解析
 					JSONObject jsonObject = null;
 					// flag為身份鑑別成功與否的標記，是從伺服器端傳回的資料
