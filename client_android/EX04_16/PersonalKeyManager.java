@@ -15,13 +15,13 @@ import android.util.Log;
 
 public class PersonalKeyManager {
 	private static final String TAG = "PersonalKeyManager";
-	
+
 	// tracing traitors -----
 	public static String[] personal_key = null;
-	
+
 	public static void checkPersonalKey() {
 		for (int i = 0; i < personal_key.length; i++) {
-			String key = PersonalKeyManager.read(personal_key[i]);
+			String key = read(personal_key[i]);
 			ACAPDAsyncTask.setPersonalKey(key, i);
 
 			if (ACAPDAsyncTask.getPersonalKey(i).length() > 0
@@ -71,8 +71,9 @@ public class PersonalKeyManager {
 				// System.out
 				// .println("newKeyList=" + i + ", " + newKeyList.get(i));
 
-				FileWriter fw = new FileWriter(
-						outputFilePath + personal_key[i], false);
+				// Log.e(TAG,"PersonalKeyManager.personal_key= "+PersonalKeyManager.personal_key);
+				FileWriter fw = new FileWriter(outputFilePath
+						+ PersonalKeyManager.personal_key[i], false);
 				BufferedWriter bw = new BufferedWriter(fw); // 將BufferedWeiter與FileWrite物件做連結
 				bw.write(newKeyList.get(i));
 				bw.newLine();
