@@ -19,13 +19,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CheckUser {
-//	private String uri = ACAPDAsyncTask.appSecurityEnhancer_url + "php/app.php";
-	private String uri = ACAPDAsyncTask.appSecurityEnhancer_url + "php/app_20150903.php";
+	// private String uri = ACAPDAsyncTask.appSecurityEnhancer_url +
+	// "php/app.php";
+	private String uri = ACAPDAsyncTask.appSecurityEnhancer_url
+			+ "php/app_20150903.php";
 
 	private String appId = null;
 	private String appId2 = null;
 	private String UUID = null;
-	// private String IMEI = null;
 	private String jarName = null;
 	private String jarFlag = null;
 
@@ -56,7 +57,6 @@ public class CheckUser {
 		pairs.add(new BasicNameValuePair("appId", appId));
 		pairs.add(new BasicNameValuePair("appId2", appId2));
 		pairs.add(new BasicNameValuePair("UUID", UUID));
-		// pairs.add(new BasicNameValuePair("IMEI", IMEI));
 		pairs.add(new BasicNameValuePair("jarName", jarName));
 		pairs.add(new BasicNameValuePair("jarFlag", jarFlag));
 
@@ -75,7 +75,7 @@ public class CheckUser {
 
 				if (entity != null) {
 					String info = EntityUtils.toString(entity);
-					System.out.println("-----------info-----------" + info);
+					// System.out.println("-----------info-----------" + info);
 					// 以下主要是對伺服器端傳回的資料進行解析
 					JSONObject jsonObject = null;
 					// flag為身份鑑別成功與否的標記，是從伺服器端傳回的資料
@@ -93,8 +93,6 @@ public class CheckUser {
 								.getString("enable_block3");
 						ACAPDAsyncTask.cipher_jar_uri = jsonObject
 								.getString("cipher_jar_uri");
-						ACAPDAsyncTask.test_session_key = jsonObject
-								.getString("hahaha");
 						// Log.i(TAG, "cipher_jar_uri= " +
 						// TracingTraitor.cipher_jar_uri);
 

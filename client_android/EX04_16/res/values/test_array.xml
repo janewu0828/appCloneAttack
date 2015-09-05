@@ -3,7 +3,7 @@
 
     <string-array name="test_file_name">
         <item>output123.jar</item>
-        <item>output20150514.JAR</item>
+        <item>output20150905.jar</item>
         <item>.jar</item>
     </string-array>
     <string-array name="test_jarFlag">

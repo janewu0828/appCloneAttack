@@ -3,7 +3,7 @@
 
     <string-array name="class_separation_segment_file_name">
         <item>encrypted123.jar</item>
-        <item>encrypted20150514.JAR</item>
+        <item>encrypted20150905.jar</item>
         <item>.jar</item>
     </string-array>
     <string-array name="jarFlag">

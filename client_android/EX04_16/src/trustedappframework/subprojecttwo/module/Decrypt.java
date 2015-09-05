@@ -8,9 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-
 import android.util.Log;
 
 public class Decrypt {
@@ -37,7 +34,7 @@ public class Decrypt {
 	public String decryptSessionKey(String[] code, String[] personalKey) {
 		String str = "0";
 
-		 MCrypt mAES = new MCrypt(personalKey[0]);
+		MCrypt mAES = new MCrypt(personalKey[0]);
 		try {
 			// for (int i = 0; i < code.length; i++) {
 			// Log.i(TAG, "code= " + code[i]);
@@ -47,7 +44,7 @@ public class Decrypt {
 			String[] decrypted = new String[code.length];
 			for (int i = 0; i < decrypted.length; i++) {
 				mAES.setKey(personalKey[i]);
-//				Log.i(TAG, "key= " + mAES.getKey());
+				// Log.i(TAG, "key= " + mAES.getKey());
 				decrypted[i] = new String(mAES.decryptEB(code[i]));
 				Log.i(TAG, "decrypted[" + i + "]" + "= " + decrypted[i]);
 			}
@@ -57,14 +54,14 @@ public class Decrypt {
 			// Log.i(TAG, "init_str= " + str);
 			for (int i = 0; i < decrypted.length; i++) {
 				str = xorHex(str, decrypted[i]);
-				Log.i(TAG, "str= " + str);
+				// Log.i(TAG, "str= " + str);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 			showPersonalKeyError();
-			Log.e(TAG, "session_key is error, Exception= "+e.getMessage());
+			Log.e(TAG, "session_key is error, Exception= " + e.getMessage());
 		}
 
 		return str;
@@ -100,29 +97,30 @@ public class Decrypt {
 	}
 
 	/** here **/
-//	public void decryptJar3(String fileName, String folderPath, String seed) {
-//		 MCrypt mAES = new MCrypt(seed);
-//
-//		 try {
-//		 byte[] key = mAES.getKey().getBytes("UTF-8");
-//		 byte[] iv = mAES.getIv().getBytes("UTF-8");
-//		 byte[] b = null;
-//		 byte[] decryptedData = mAES.decryptCB2(key, iv, b);
-//		 } catch (Exception e) {
-//		 // TODO 自動產生的 catch 區塊
-//		 e.printStackTrace();
-//		 }
-//
-//	}
+	// public void decryptJar3(String fileName, String folderPath, String seed)
+	// {
+	// MCrypt mAES = new MCrypt(seed);
+	//
+	// try {
+	// byte[] key = mAES.getKey().getBytes("UTF-8");
+	// byte[] iv = mAES.getIv().getBytes("UTF-8");
+	// byte[] b = null;
+	// byte[] decryptedData = mAES.decryptCB2(key, iv, b);
+	// } catch (Exception e) {
+	// // TODO 自動產生的 catch 區塊
+	// e.printStackTrace();
+	// }
+	//
+	// }
 
-	public void decryptJar2(String fileName, String folderPath, String seed) {
+	public boolean decryptJar2(String fileName, String folderPath, String seed) {
 		// 解密保存
 		isSuccess = true;
 
 		decryptFile = new File(folderPath, fileName);
 		byte[] oldByte = new byte[(int) decryptFile.length()];
 
-		 MCrypt mAES = new MCrypt(seed);
+		MCrypt mAES = new MCrypt(seed);
 		// byte[] decrypted = null;
 		try {
 			fis = new FileInputStream(decryptFile);
@@ -130,7 +128,7 @@ public class Decrypt {
 
 			/** here **/
 			byte[] newByte = mAES.decryptCB(oldByte);
-//			 decrypted = mAES.decrypt2(oldByte);
+			// decrypted = mAES.decrypt2(oldByte);
 
 			// 解密
 			decryptFile = new File(folderPath, outputFileName);
@@ -172,6 +170,7 @@ public class Decrypt {
 			Log.e(TAG, "decrypted error, decryptFile path= "
 					+ decryptFile.getAbsolutePath().toString());
 		}
+		return isSuccess;
 	}
 
 	// public void decryptJar(String fileName, String folderPath, String seed) {

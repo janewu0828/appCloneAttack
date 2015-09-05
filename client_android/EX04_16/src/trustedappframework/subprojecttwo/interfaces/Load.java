@@ -1,6 +1,7 @@
 package trustedappframework.subprojecttwo.interfaces;
 
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.showLoadJarError;
 
 import java.io.File;
 import android.annotation.SuppressLint;
@@ -69,6 +70,8 @@ public class Load {
 
 			return true;
 		} catch (Exception e) {
+			showLoadJarError();
+			
 			e.printStackTrace();
 			Log.e(TAG, "Error: " + e.getMessage());
 

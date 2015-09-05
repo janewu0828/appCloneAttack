@@ -2,7 +2,6 @@ package trustedappframework.subprojecttwo.module;
 
 import static trustedappframework.subprojecttwo.module.ACAPDAsyncTask.outputFilePath;
 import static trustedappframework.subprojecttwo.module.ACAPDAsyncTask.enable_block;
-import static trustedappframework.subprojecttwo.module.ACAPDAsyncTask.test_session_key;
 import static trustedappframework.subprojecttwo.module.ACAPDAsyncTask.personalKey;
 import static trustedappframework.subprojecttwo.module.ACAPDAsyncTask.sr;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.showPersonalKeyError;
@@ -23,7 +22,7 @@ public class TracingTraitor {
 		if (new File(outputFilePath + fileName).exists()) {
 			// ---broadcast decryption---
 			String decryptFileName = broadcastDecryption(fileName, key);
-			Log.i(TAG, "decryptFileName= " + decryptFileName);
+			// Log.i(TAG, "decryptFileName= " + decryptFileName);
 
 			if (decryptFileName != null) {
 
@@ -51,14 +50,13 @@ public class TracingTraitor {
 		}
 
 		ACAPDAsyncTask.pd_del();
-		Log.i(TAG, "ccccccccccccccccccccccc");
+		Log.i(TAG, "loading end");
 	}
 
 	public static String broadcastDecryption(String fileName, String[] key) {
 		String str = null;
 		Decrypt decfile = new Decrypt();
 
-		// if (new File(outputFilePath + fileName).exists()) {
 		// decrypt EB(session_key) -----
 		String session_key = decfile.decryptSessionKey(enable_block, key);
 		// Log.i(TAG, "session_key= " + session_key);
@@ -70,18 +68,18 @@ public class TracingTraitor {
 		if (session_key.equals(temp) || session_key == temp) {
 			showPersonalKeyError();
 			Log.e(TAG, "session_key is error");
-			// session_key = test_session_key;
-			// Log.i(TAG, "failed, modifiy session_key= " + session_key);
 		} else {
 			Log.i(TAG, "session_key= " + session_key);
 
-			decfile.decryptJar2(fileName, outputFilePath, session_key);
-			str = decfile.getOutputFileName();
+			/** here **/
+//			boolean des_status = decfile.decryptJar2(fileName, outputFilePath,
+//					session_key);
+//			if (des_status)
+//				str = decfile.getOutputFileName();
+			
+			// for test
+			str = fileName;
 		}
-
-		// } else {
-		// Log.i(TAG, "encrypted Jar is not exist");
-		// }
 
 		return str;
 	}
@@ -107,7 +105,7 @@ public class TracingTraitor {
 		Log.i(TAG, "tracing= " + sr.getTracingStatus());
 		if (sr.getTracingStatus()) {
 			/** here **/
-			// // ---key update---
+			// ---key update---
 			String keyStatus = sr.getSession().get(
 					"s_personal_key_update_status");
 			Log.i(TAG, "keyStatus=" + keyStatus);

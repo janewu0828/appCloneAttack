@@ -75,6 +75,16 @@ public class ProjectConfig {
 						R.string.alert_checkuser_error_msg), false);
 		Log.e(TAG, "showCheckUserError");
 	}
+	
+	public static void showLoadJarError() {
+		alert.showAlertDialog(
+				mContext,
+				mContext.getResources().getString(
+						R.string.alert_load_jar_error_title),
+				mContext.getResources().getString(
+						R.string.alert_load_jar_error_msg), false);
+		Log.e(TAG, "showLoadJarError");
+	}
 
 	public static void showToast(String str) {
 		Toast.makeText(mAppContext, str, Toast.LENGTH_SHORT).show();

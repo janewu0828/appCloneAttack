@@ -25,7 +25,7 @@ import android.util.Log;
 public class TracingLog {
 	private static final String TAG = "TracingLog";
 
-	private String uri = appSecurityEnhancer_url + "php/tracing_20150905.php";
+	private String uri = appSecurityEnhancer_url + "php/tracing.php";
 	private HashMap<String, String> session;
 
 	public TracingLog(HashMap<String, String> session) {
