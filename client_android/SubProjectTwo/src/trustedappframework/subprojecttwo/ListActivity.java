@@ -8,7 +8,6 @@ import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -30,17 +29,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -54,7 +50,6 @@ public class ListActivity extends Activity {
 
 	String server_uri = ACAPDAsyncTask.appSecurityEnhancer_url
 			+ "/php/information.php";
-	ArrayList<HashMap<String, String>> arrList;
 
 	private ListView listView;
 	public static ProgressDialog progressDialog;
@@ -64,10 +59,10 @@ public class ListActivity extends Activity {
 	public static final int DATA_ERROR = 0;
 	public static final int DATA_CREATLIST = 1;
 	List<Apps> data = null; // applist
-	String strPackageName;
 	// apk-info
 	List<PackageInfo> pis;
 	List<ResolveInfo> appInfo;
+	ArrayList<String> arr_apkid;
 
 	private void initACAPD() {
 		// get global Application object of the current process
@@ -82,12 +77,7 @@ public class ListActivity extends Activity {
 
 	private String getJsonData() {
 		StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-				.detectDiskReads().detectDiskWrites().detectNetwork() // or
-																		// .detectAll()
-																		// for
-																		// all
-																		// detectable
-																		// problems
+				.detectDiskReads().detectDiskWrites().detectNetwork()
 				.penaltyLog().build());
 
 		String str = "";
@@ -107,7 +97,7 @@ public class ListActivity extends Activity {
 		try {
 			response = myClient.execute(myConnection);
 			str = EntityUtils.toString(response.getEntity(), "UTF-8");
-			System.out.println("-----------info-----------" + str);
+			// System.out.println("-----------info-----------" + str);
 
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
@@ -144,53 +134,65 @@ public class ListActivity extends Activity {
 
 							/** display system app info **/
 							// for (ResolveInfo app : appInfo) {
-							//
 							// data.add(new
 							// Apps(app.loadIcon(packageManager),
 							// (String) app.loadLabel(packageManager)));
 							// }
 
-//							String json_str = getJsonData();
-//							try {
-//								JSONArray jArray = new JSONArray(json_str);
-//
-//								for (int i = 0; i < jArray.length(); i++) {
-//									JSONObject json = null;
-//									json = jArray.getJSONObject(i);
-//
+							String json_str = getJsonData();
+							// Log.i(TAG, "json_str= " + json_str);
+							try {
+								JSONArray jArray = new JSONArray(json_str);
+								arr_apkid = new ArrayList<String>();
+
+								for (int i = 0; i < jArray.length(); i++) {
+									JSONObject json = null;
+									json = jArray.getJSONObject(i);
+
 //									HashMap<String, String> map1 = new HashMap<String, String>();
-//
-//									// adding each child node to HashMap key =>
-//									// value
+
+//									// adding each child node to HashMap key =>value
 //									map1.put("name", json.getString("name"));
+//									map1.put("apkid", json.getString("apkid"));
 //
-//									// adding HashList to ArrayList
-//									arrList.add(map1);
-//								}
-//
-//							} catch (JSONException e) {
-//								e.printStackTrace();
-//							}
-//
-//							if (!arrList.isEmpty()) {
-//							Log.e(TAG,arrList+"");
-//						}
-								/** here **/
-								for (PackageInfo pi : pis) {
-									// / Only display non-system app info
-									if ((pi.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0
-											&& (pi.applicationInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0) {
-										// // if non-system app info, add into
-										// applist
-										data.add(new Apps(
-												pi.applicationInfo
-														.loadIcon(packageManager),
-												(String) pi.applicationInfo
-														.loadLabel(packageManager),
-												pi.applicationInfo.packageName));
+//									for (String key : map1.keySet()) {
+//										Log.i(TAG, key + " : " + map1.get(key));
+//									}
+
+									arr_apkid.add(json.getString("apkid"));
+
+								}
+
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+
+							/** here **/
+							for (PackageInfo pi : pis) {
+								// / Only display non-system app info
+								if ((pi.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0
+										&& (pi.applicationInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0
+										&& (!arr_apkid.isEmpty())) {
+									// // if non-system app info, add into applist
+									
+									// Log.e(TAG,
+									// "pi.applicationInfo.packageName= "
+									// + pi.applicationInfo.packageName);
+
+									for (int i = 0; i < arr_apkid.size(); i++) {
+										if (pi.applicationInfo.packageName
+												.equals(arr_apkid.get(i))) {
+											// applist
+											data.add(new Apps(
+													pi.applicationInfo
+															.loadIcon(packageManager),
+													(String) pi.applicationInfo
+															.loadLabel(packageManager),
+													pi.applicationInfo.packageName));
+										}
 									}
 								}
-//							}
+							}
 
 							msg.what = DATA_CREATLIST;
 						} else {
@@ -225,9 +227,6 @@ public class ListActivity extends Activity {
 								ACAPDAsyncTask task = new ACAPDAsyncTask(data
 										.get(position).getPkg_name());
 								task.execute((Void[]) null);
-								// ACAPD myACAPD = new ACAPD(data.get(position)
-								// .getPkg_name());
-								// myACAPD.ACAPD();
 							}
 						});
 

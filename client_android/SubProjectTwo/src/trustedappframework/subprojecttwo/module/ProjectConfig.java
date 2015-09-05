@@ -3,7 +3,6 @@ package trustedappframework.subprojecttwo.module;
 import trustedappframework.subprojecttwo.R;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 public class ProjectConfig {
 	private static final String TAG = "ProjectConfig";
