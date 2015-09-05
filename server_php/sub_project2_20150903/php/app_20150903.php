@@ -2,73 +2,113 @@
 header("Content-Type: text/html; charset=utf-8") ;
 
 class MCrypt {
-    // 初始化向量(IV, Initialization Vector)
-    private $iv = 'fedcba9876543210'; 
-    // AES加解密的密鑰(personal_key)
+  // 初始化向量(IV, Initialization Vector)
+  private $iv = 'fedcba9876543210'; 
+  // AES加解密的密鑰(personal_key)
 
-    function __construct() {
+  function __construct() {
+  }
+
+  function encrypt($key,$str) {
+    //$key = $this->hex2bin($key);    
+    $iv = $this->iv;
+
+    $td = mcrypt_module_open('rijndael-128', '', 'cbc', $iv);
+
+    mcrypt_generic_init($td, $key, $iv);
+    $encrypted = mcrypt_generic($td, $str);
+
+    mcrypt_generic_deinit($td);
+    mcrypt_module_close($td);
+
+    return bin2hex($encrypted);
+  }
+  
+  function decrypt($key,$code) {
+    //$key = $this->hex2bin($key);
+    $code = $this->hex2bin($code);
+    $iv = $this->iv;
+
+    $td = mcrypt_module_open('rijndael-128', '', 'cbc', $iv);
+
+    mcrypt_generic_init($td, $key, $iv);
+    $decrypted = mdecrypt_generic($td, $code);
+
+    mcrypt_generic_deinit($td);
+    mcrypt_module_close($td);
+
+    return utf8_encode(trim($decrypted));
+  }
+
+  // /**
+  //  * @param string $str
+  //  * @param bool $isBinary whether to encrypt as binary or not. Default is: false
+  //  * @return string Encrypted data
+  //  */
+  // // function encrypt($str, $isBinary = false)
+  // function encrypt($key,$str, $isBinary)
+  // {
+  //     $iv = $this->iv;
+  //     $str = $isBinary ? $str : utf8_decode($str);
+  //     // echo '$str='.$str;
+  //     // echo '<br>$isBinary='.$isBinary;
+  //     // echo ($str=$isBinary)? "<br>YES" : "<br>NO" ;
+
+  //     $td = mcrypt_module_open('rijndael-128', ' ', 'cbc', $iv);
+
+  //     mcrypt_generic_init($td, $key, $iv);
+  //     $encrypted = mcrypt_generic($td, $str);
+
+  //     mcrypt_generic_deinit($td);
+  //     mcrypt_module_close($td);
+
+  //     return $isBinary ? $encrypted : bin2hex($encrypted);
+  // }
+  //  /**
+  //  * @param string $code
+  //  * @param bool $isBinary whether to decrypt as binary or not. Default is: false
+  //  * @return string Decrypted data
+  //  */
+  // function decrypt($key,$code, $isBinary)
+  // {
+  //     $code = $isBinary ? $code : $this->hex2bin($code);
+  //     $iv = $this->iv;
+
+  //     $td = mcrypt_module_open('rijndael-128', ' ', 'cbc', $iv);
+
+  //     mcrypt_generic_init($td, $key, $iv);
+  //     $decrypted = mdecrypt_generic($td, $code);
+
+  //     mcrypt_generic_deinit($td);
+  //     mcrypt_module_close($td);
+
+  //     return $isBinary ? trim($decrypted) : utf8_encode(trim($decrypted));
+  // }
+  protected function hex2bin($hexdata) {
+    $bindata = '';
+
+    for ($i = 0; $i < strlen($hexdata); $i += 2) {
+          $bindata .= chr(hexdec(substr($hexdata, $i, 2)));
     }
 
-    function encrypt($key,$str) {
+    return $bindata;
+  }
+  function getKey() {
 
-      //$key = $this->hex2bin($key);    
-      $iv = $this->iv;
-
-      $td = mcrypt_module_open('rijndael-128', '', 'cbc', $iv);
-
-      mcrypt_generic_init($td, $key, $iv);
-      $encrypted = mcrypt_generic($td, $str);
-
-      mcrypt_generic_deinit($td);
-      mcrypt_module_close($td);
-
-      return bin2hex($encrypted);
-    }
-
-    function decrypt($key,$code) {
-      //$key = $this->hex2bin($key);
-      $code = $this->hex2bin($code);
-      $iv = $this->iv;
-
-      $td = mcrypt_module_open('rijndael-128', '', 'cbc', $iv);
-
-      mcrypt_generic_init($td, $key, $iv);
-      $decrypted = mdecrypt_generic($td, $code);
-
-      mcrypt_generic_deinit($td);
-      mcrypt_module_close($td);
-
-      return utf8_encode(trim($decrypted));
-    }
-
-    protected function hex2bin($hexdata) {
-      $bindata = '';
-
-      for ($i = 0; $i < strlen($hexdata); $i += 2) {
-            $bindata .= chr(hexdec(substr($hexdata, $i, 2)));
-      }
-
-      return $bindata;
-    }
-
-    function getKey() {
-
-      return $this->key;
-    }
-
+    return $this->key;
+  }
 }
 
 function _get($str){
-    $val = !empty($_GET[$str]) ? $_GET[$str] : null;
-    return $val;
+  $val = !empty($_GET[$str]) ? $_GET[$str] : null;
+  return $val;
 }
 function xor_string($first,$second) {
-
- // Our output text
- $outText = bin2hex(pack('H*',$first) ^ pack('H*',$second)); 
- return $outText;
- 
+  // Our output text
+  $outText = bin2hex(pack('H*',$first) ^ pack('H*',$second)); 
+  return $outText;
 }
+
 session_start();
 
 // // appId
@@ -153,6 +193,22 @@ if($result = mysql_fetch_array($check_query)){
     // cbs
     $cipher_block = $mcrypt->encrypt($xor_key,$jar_contents);
     file_put_contents('../download/encrypted/'.$jarname, $cipher_block);
+
+    $d_jar_contents=file_get_contents('../download/encrypted/'.$jarname);
+    $d_cipher_block = $mcrypt->decrypt($xor_key,$d_jar_contents);
+    $d_jarname='aaa.jar';
+    file_put_contents('../download/encrypted/'.$d_jarname, $d_cipher_block);
+
+    $logo_jar_contents=file_get_contents("../download/"."logo.png");
+    $logo_cipher_block = $mcrypt->encrypt($xor_key,$logo_jar_contents);
+    $logo_jarname='enc_logo.png';
+    file_put_contents('../download/encrypted/'.$logo_jarname, $logo_cipher_block);
+
+    $d_logo_jar_contents=file_get_contents('../download/encrypted/'.$logo_jarname);
+    $d_logo_cipher_block = $mcrypt->decrypt($xor_key,$d_logo_jar_contents);
+    $d_logo_jarname='dec_logo.png';
+    file_put_contents('../download/encrypted/'.$d_logo_jarname, $d_logo_cipher_block);
+
     // echo $cipher_block;
     $cipher_jar_uri = "http://140.118.109.165:8081/sub_project2/download/encrypted/".$jarname;
     $arr = array(

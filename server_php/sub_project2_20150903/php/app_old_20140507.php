@@ -17,7 +17,6 @@ $deviceid=$_POST["UUID"];
 // IMEI
 // $androidid=$_POST["androidid"];
 
-
 //包含資料庫連接文件
 include('conn.php');
 mysql_query("set names utf8");

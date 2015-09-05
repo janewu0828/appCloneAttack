@@ -98,18 +98,9 @@ if($deviceid==$sess_deviceid){
     $row                            = mysqli_fetch_assoc($rs);
 
     $personal_key_update_status=TRUE;
-    //get personal keys
-    $sql = "SELECT personal_key,personal_key2,personal_key3 FROM member WHERE deviceid='".$_SESSION['deviceid']."';";
-    $result = mysql_query($sql) or die(mysql_error());
-    $row2=mysql_fetch_array($result); 
-
-    // $new_personal_key="0123456789abcdef";
-    // $new_personal_key2="0123456789abcdef";
-    // $new_personal_key3="0123456789abcdef";
-    $new_personal_key=$row2[0];
-    $new_personal_key2=$row2[1];
-    $new_personal_key3=$row2[2];
-
+    $new_personal_key="0123456789abcdef";
+    $new_personal_key2="0123456789abcdef";
+    $new_personal_key3="0123456789abcdef";
          
     $arr                            = array(
 
