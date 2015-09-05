@@ -5,7 +5,7 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="lib" path="src/trustedappframework/subprojecttwo/interfaces/inputACAPD_dynamic_loading_201505.jar"/>
-	<classpathentry kind="lib" path="src/trustedappframework/subprojecttwo/module/inputACAPD_check_user_and_tracing_201505.jar"/>
+	<classpathentry kind="lib" path="src/trustedappframework/subprojecttwo/interfaces/inputACAPD_dynamic_loading_201508.jar"/>
+	<classpathentry kind="lib" path="src/trustedappframework/subprojecttwo/module/inputACAPD_check_user_and_tracing_201508.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

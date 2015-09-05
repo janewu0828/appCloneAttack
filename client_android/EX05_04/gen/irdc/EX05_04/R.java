@@ -9,8 +9,13 @@ package irdc.EX05_04;
 
 public final class R {
     public static final class array {
+        public static final int classStatus=0x7f040002;
         public static final int class_separation_segment_file_name=0x7f040000;
-        public static final int personal_key_file_name=0x7f040001;
+        public static final int jarFlag=0x7f040001;
+        public static final int personal_key_file_name=0x7f040003;
+        public static final int test_classStatus=0x7f040006;
+        public static final int test_file_name=0x7f040004;
+        public static final int test_jarFlag=0x7f040005;
     }
     public static final class attr {
     }
@@ -50,13 +55,15 @@ public final class R {
         public static final int alert_checkuser_error_title=0x7f05000e;
         public static final int alert_internet_error_msg=0x7f05000c;
         public static final int alert_internet_error_title=0x7f05000b;
-        public static final int alert_personal_key_error_msg=0x7f050011;
-        public static final int alert_personal_key_error_title=0x7f050010;
+        public static final int alert_load_jar_error_msg=0x7f050011;
+        public static final int alert_load_jar_error_title=0x7f050010;
+        public static final int alert_personal_key_error_msg=0x7f050013;
+        public static final int alert_personal_key_error_title=0x7f050012;
         public static final int app_name=0x7f050000;
-        public static final int progress_checkJar=0x7f050014;
-        public static final int progress_dynamicLoadingJar=0x7f050015;
-        public static final int progress_loading_msg=0x7f050013;
-        public static final int progress_loading_title=0x7f050012;
+        public static final int progress_checkJar=0x7f050016;
+        public static final int progress_dynamicLoadingJar=0x7f050017;
+        public static final int progress_loading_msg=0x7f050015;
+        public static final int progress_loading_title=0x7f050014;
         public static final int str_button=0x7f050001;
         public static final int str_button_cancel=0x7f050002;
         public static final int str_cc=0x7f050005;

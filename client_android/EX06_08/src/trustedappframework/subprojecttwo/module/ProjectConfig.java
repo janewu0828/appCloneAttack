@@ -17,13 +17,15 @@ public class ProjectConfig {
 	// show AlertDialog
 	private static AlertDialogManager alert = new AlertDialogManager();
 
+	// show ProgressDialog
 	public static ProgressDialogManager pd;
 
 	// dynamic loading class separation (JAR) -----
 	public static String[] class_separation_segment = null;
-
-	// tracing traitors -----
-	public static String[] personal_key = null;
+	public static String[] jarFlag = null;
+	public static String[] classStatus = null;
+	public static String[] test_class_separation_segment = null;
+	public static String[] test_jarFlag = null;
 
 	public static void checkConnection() {
 		// check network setting on device
@@ -37,40 +39,11 @@ public class ProjectConfig {
 		}
 	}
 
-	public static void checkPersonalKey() {
-		for (int i = 0; i < personal_key.length; i++) {
-			ACAPD.personalKey[i] = PersonalKeyManager.read(personal_key[i]);
-
-			if (ACAPD.personalKey[i].length() > 0
-					&& !ACAPD.personalKey[i].trim().isEmpty()) {
-				// Log.i(TAG, "personalKey= " + ACAPD.personalKey[i]);
-
-			} else {
-				showPersonalKeyError();
-				Log.e(TAG, "Error: " + "personalKey= null");
-
-			}
-		}
-	}
-
-	public static void ProgressDialog() {
+	public static void initProgressDialog() {
 		pd = new ProgressDialogManager(mContext);
 		pd.onCreateDialog(R.drawable.acapd,
 				mContext.getString(R.string.progress_loading_title),
 				mContext.getString(R.string.progress_loading_msg), false);
-	}
-
-	public static void updateProgressDialog(int status) {
-		if (status == 0) {
-			pd.setText(mContext.getString(R.string.progress_loading_msg));
-			Log.e(TAG, "updateProgressDialog= checkUser");
-		} else if (status == 1) {
-			pd.setText(mContext.getString(R.string.progress_checkJar));
-			Log.e(TAG, "updateProgressDialog= checkJar");
-		} else if (status == 2) {
-			pd.setText(mContext.getString(R.string.progress_dynamicLoadingJar));
-			Log.e(TAG, "updateProgressDialog= dynamicLoadingJar");
-		}
 	}
 
 	public static void showPersonalKeyError() {
@@ -101,6 +74,16 @@ public class ProjectConfig {
 				mContext.getResources().getString(
 						R.string.alert_checkuser_error_msg), false);
 		Log.e(TAG, "showCheckUserError");
+	}
+	
+	public static void showLoadJarError() {
+		alert.showAlertDialog(
+				mContext,
+				mContext.getResources().getString(
+						R.string.alert_load_jar_error_title),
+				mContext.getResources().getString(
+						R.string.alert_load_jar_error_msg), false);
+		Log.e(TAG, "showLoadJarError");
 	}
 
 	public static void showToast(String str) {

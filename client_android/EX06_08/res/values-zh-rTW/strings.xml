@@ -12,6 +12,8 @@
     <string name="toast_checkuser_true">鑑別成功，將繼續程式。</string>
     <string name="alert_checkuser_error_title">檢測結果</string>
     <string name="alert_checkuser_error_msg">身分鑑別失敗，程式將停止執行。</string>
+    <string name="alert_load_jar_error_title">動態載入結果</string>
+    <string name="alert_load_jar_error_msg">無法加載，所需的可下載內容已遺失</string>
     <string name="alert_personal_key_error_title">個人金鑰異常</string>
     <string name="alert_personal_key_error_msg">請確認已付費後，再次嘗試。</string>
     <string name="progress_loading_title">抗複製偵測 (ACAPD)</string>

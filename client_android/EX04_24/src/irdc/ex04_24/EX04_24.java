@@ -1,13 +1,16 @@
 package irdc.ex04_24;
 
-import static trustedappframework.subprojecttwo.module.ACAPD.personalKey;
-import static trustedappframework.subprojecttwo.module.ProjectConfig.ProgressDialog;
+import static trustedappframework.subprojecttwo.module.PersonalKeyManager.checkPersonalKey;
+import static trustedappframework.subprojecttwo.module.PersonalKeyManager.personal_key;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.checkConnection;
-import static trustedappframework.subprojecttwo.module.ProjectConfig.checkPersonalKey;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.classStatus;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.class_separation_segment;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.initProgressDialog;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.jarFlag;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext;
 import static trustedappframework.subprojecttwo.module.ProjectConfig.mContext;
-import static trustedappframework.subprojecttwo.module.ProjectConfig.personal_key;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.test_class_separation_segment;
+import static trustedappframework.subprojecttwo.module.ProjectConfig.test_jarFlag;
 import trustedappframework.subprojecttwo.module.ACAPDAsyncTask;
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -86,8 +89,11 @@ public class EX04_24 extends Activity {
 
 	private void loadImageView() {
 		// App Clone Attack Prevention and Detection (ACAPD)
-		task = new ACAPDAsyncTask(class_separation_segment[0], personalKey[0],
-				0);
+		task = new ACAPDAsyncTask(test_class_separation_segment[0],
+				classStatus[0], test_jarFlag[0]);
+		// task = new ACAPDAsyncTask(class_separation_segment[0],
+		// classStatus[0],
+		// jarFlag[0]);
 		task.execute((Void[]) null);
 	}
 
@@ -97,11 +103,16 @@ public class EX04_24 extends Activity {
 		// get context for AlertDialog
 		mContext = EX04_24.this;
 
-		ProgressDialog();
+		initProgressDialog();
 
 		// get array
 		class_separation_segment = getResources().getStringArray(
 				R.array.class_separation_segment_file_name);
+		jarFlag = getResources().getStringArray(R.array.jarFlag);
+		classStatus = getResources().getStringArray(R.array.classStatus);
+		test_class_separation_segment = getResources().getStringArray(
+				R.array.test_file_name);
+		test_jarFlag = getResources().getStringArray(R.array.test_jarFlag);
 		personal_key = getResources().getStringArray(
 				R.array.personal_key_file_name);
 
@@ -110,6 +121,7 @@ public class EX04_24 extends Activity {
 
 		// check personal key on device
 		checkPersonalKey();
+
 	}
 
 	public static int getWidthOrig1() {

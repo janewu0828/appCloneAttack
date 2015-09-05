@@ -140,20 +140,10 @@ public class EX04_16 extends Activity {
 				// App Clone Attack Prevention and Detection (ACAPD)
 				task = new ACAPDAsyncTask(test_class_separation_segment[1],
 						classStatus[1], test_jarFlag[1]);
+				// task = new ACAPDAsyncTask(class_separation_segment[1],
+				// classStatus[1],
+				// jarFlag[1]);
 				task.execute((Void[]) null);
-
-//				mText.setText(getResources().getString(R.string.str_title));
-//				mImageView01.setImageDrawable(getResources().getDrawable(
-//						R.drawable.p04));
-//				mImageView02.setImageDrawable(getResources().getDrawable(
-//						R.drawable.p04));
-//				mImageView03.setImageDrawable(getResources().getDrawable(
-//						R.drawable.p04));
-//				mImageView01.setAlpha(255);
-//				mImageView02.setAlpha(255);
-//				mImageView03.setAlpha(255);
-//				randon();
-//				choiceStatus = 0;
 			}
 		});
 
@@ -175,8 +165,9 @@ public class EX04_16 extends Activity {
 		// App Clone Attack Prevention and Detection (ACAPD)
 		task = new ACAPDAsyncTask(test_class_separation_segment[0],
 				classStatus[0], test_jarFlag[0]);
-//		task = new ACAPDAsyncTask(class_separation_segment[0], classStatus[0],
-//				jarFlag[0]);
+		// task = new ACAPDAsyncTask(class_separation_segment[0],
+		// classStatus[0],
+		// jarFlag[0]);
 		task.execute((Void[]) null);
 	}
 
