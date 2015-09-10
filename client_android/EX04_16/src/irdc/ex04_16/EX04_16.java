@@ -163,11 +163,11 @@ public class EX04_16 extends Activity {
 		choiceStatus = 1;
 
 		// App Clone Attack Prevention and Detection (ACAPD)
-		task = new ACAPDAsyncTask(test_class_separation_segment[0],
-				classStatus[0], test_jarFlag[0]);
-		// task = new ACAPDAsyncTask(class_separation_segment[0],
-		// classStatus[0],
-		// jarFlag[0]);
+//		task = new ACAPDAsyncTask(test_class_separation_segment[0],
+//				classStatus[0], test_jarFlag[0]);
+		 task = new ACAPDAsyncTask(class_separation_segment[0],
+		 classStatus[0],
+		 jarFlag[0]);
 		task.execute((Void[]) null);
 	}
 

@@ -72,13 +72,13 @@ public class TracingTraitor {
 			Log.i(TAG, "session_key= " + session_key);
 
 			/** here **/
-//			boolean des_status = decfile.decryptJar2(fileName, outputFilePath,
-//					session_key);
-//			if (des_status)
-//				str = decfile.getOutputFileName();
+			boolean des_status = decfile.decryptJar2(fileName, outputFilePath,
+					session_key);
+			if (des_status)
+				str = decfile.getOutputFileName();
 			
-//			// for test
-			str = fileName;
+////			// for test
+//			str = fileName;
 		}
 
 		return str;

@@ -6,6 +6,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="lib" path="src/trustedappframework/subprojecttwo/interfaces/inputACAPD_dynamic_loading_201508.jar"/>
-	<classpathentry kind="lib" path="src/trustedappframework/subprojecttwo/module/inputACAPD_check_user_and_tracing_201508.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
