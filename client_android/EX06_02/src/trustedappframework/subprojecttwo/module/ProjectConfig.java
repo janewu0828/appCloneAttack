@@ -62,7 +62,7 @@ public class ProjectConfig {
 				mAppContext.getString(R.string.toast_checkuser_true),
 				Toast.LENGTH_SHORT).show();
 
-		Log.e(TAG, "showCheckUserCorrect, " + "toast_checkuser_true");
+		Log.i(TAG, "showCheckUserCorrect, " + "toast_checkuser_true");
 	}
 
 	public static void showCheckUserError() {
