@@ -29,7 +29,6 @@ public class Load {
 					sourceFile.getAbsolutePath(), file.getAbsolutePath(), null,
 					context.getClassLoader());
 			// Log.i(TAG, "sourceFile= " + sourceFile.getAbsolutePath());
-			// Log.i(TAG, "file= " + file.getAbsolutePath());
 
 			String className = null;
 			String[] strClassName = {
@@ -38,7 +37,6 @@ public class Load {
 					"trustedappframework.subprojecttwo.interfaces.InterfaceTest3" };
 
 			int classStatus = Integer.parseInt(classStatus_str);
-			Log.i(TAG, "classStatus= " + classStatus);
 			for (int i = 0; i < strClassName.length; i++)
 				if (classStatus == i)
 					className = strClassName[i];
@@ -59,19 +57,17 @@ public class Load {
 
 			// exe
 			mMainInterface.loadMethod();
-			Log.i(TAG, "finished");
+			// Log.i(TAG, "finished");
 
 			File deleteFile = new File(sourceFile.getAbsolutePath());
-			deleteFile.delete();
 
 			boolean deleted = deleteFile.delete();
-			Log.e(TAG, "deleted= " + String.valueOf(deleted) + ", file= "
-					+ sourceFile.getAbsolutePath());
+			Log.e(TAG, "deleted= " + String.valueOf(deleted));
 
 			return true;
 		} catch (Exception e) {
 			showLoadJarError();
-			
+
 			e.printStackTrace();
 			Log.e(TAG, "Error: " + e.getMessage());
 

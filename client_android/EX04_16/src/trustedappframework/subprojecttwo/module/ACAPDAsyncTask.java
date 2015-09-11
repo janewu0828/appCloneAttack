@@ -29,6 +29,8 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 	private static int enable_block_length = 3;
 	public static String[] enable_block = new String[enable_block_length];
 	public static String cipher_jar_uri = null;
+	
+	public static String test_session_key = null;
 
 	public ACAPDAsyncTask(String fileName, String classStatus, String jarFlag) {
 		super();

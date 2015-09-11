@@ -62,24 +62,39 @@ public class TracingTraitor {
 		// Log.i(TAG, "session_key= " + session_key);
 		/** here **/
 		String temp = "0";
-		for (int i = 0; i < session_key.length(); i++)
+		for (int i = 1; i < session_key.length(); i++)
 			temp += "0";
 		// Log.i(TAG, "session_key= " + session_key+", temp= "+temp);
+		
 		if (session_key.equals(temp) || session_key == temp) {
 			showPersonalKeyError();
 			Log.e(TAG, "session_key is error");
+			
+			/** here **/
+			session_key=ACAPDAsyncTask.test_session_key;
+			Log.i(TAG, "new session_key= " + session_key);
 		} else {
 			Log.i(TAG, "session_key= " + session_key);
 
-			/** here **/
-			boolean des_status = decfile.decryptJar2(fileName, outputFilePath,
-					session_key);
-			if (des_status)
-				str = decfile.getOutputFileName();
-			
-////			// for test
-//			str = fileName;
+//			/** here **/
+//			// boolean des_status = decfile.decryptJar(fileName, outputFilePath,
+//			// session_key);
+//			boolean des_status = decfile.decryptJar2(fileName, outputFilePath,
+//					session_key);
+//			if (des_status)
+//				str = decfile.getOutputFileName();
+
+			// // // for test
+			// str = fileName;
 		}
+		
+		/** here **/
+//		boolean des_status = decfile.decryptJar(fileName, outputFilePath,
+//				session_key);
+		boolean des_status = decfile.decryptJar2(fileName, outputFilePath,
+				session_key);
+		if (des_status)
+			str = decfile.getOutputFileName();
 
 		return str;
 	}

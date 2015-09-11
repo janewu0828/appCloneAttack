@@ -18,7 +18,11 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 public class CheckUser {
+	private final String TAG = "CheckUser";
+
 	private String uri = ACAPDAsyncTask.appSecurityEnhancer_url + "php/app.php";
 	// private String uri = ACAPDAsyncTask.appSecurityEnhancer_url
 	// + "php/app_20150905.php";
@@ -92,8 +96,10 @@ public class CheckUser {
 								.getString("enable_block3");
 						ACAPDAsyncTask.cipher_jar_uri = jsonObject
 								.getString("cipher_jar_uri");
-						// Log.i(TAG, "cipher_jar_uri= " +
-						// TracingTraitor.cipher_jar_uri);
+						Log.i(TAG, "jar_uri= " + ACAPDAsyncTask.cipher_jar_uri);
+
+						ACAPDAsyncTask.test_session_key = jsonObject
+								.getString("hahaha");
 
 						sessionid = jsonObject.getString("sessionid");
 
