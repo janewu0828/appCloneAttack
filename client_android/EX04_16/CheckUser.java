@@ -18,7 +18,10 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 public class CheckUser {
+	private final String TAG = "CheckUser";
 	private String uri = ACAPDAsyncTask.appSecurityEnhancer_url + "php/app.php";
 	// private String uri = ACAPDAsyncTask.appSecurityEnhancer_url
 	// + "php/app_20150905.php";
@@ -74,7 +77,7 @@ public class CheckUser {
 
 				if (entity != null) {
 					String info = EntityUtils.toString(entity);
-					System.out.println("-----------info-----------" + info);
+					// System.out.println("-----------info-----------" + info);
 					// 以下主要是對伺服器端傳回的資料進行解析
 					JSONObject jsonObject = null;
 					// flag為身份鑑別成功與否的標記，是從伺服器端傳回的資料
@@ -92,8 +95,8 @@ public class CheckUser {
 								.getString("enable_block3");
 						ACAPDAsyncTask.cipher_jar_uri = jsonObject
 								.getString("cipher_jar_uri");
-						// Log.i(TAG, "cipher_jar_uri= " +
-						// TracingTraitor.cipher_jar_uri);
+						Log.e(TAG, "cipher_jar_uri= "
+								+ ACAPDAsyncTask.cipher_jar_uri);
 
 						sessionid = jsonObject.getString("sessionid");
 

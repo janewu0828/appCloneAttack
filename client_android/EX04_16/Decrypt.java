@@ -1,7 +1,5 @@
 package trustedappframework.subprojecttwo.module;
 
-import static trustedappframework.subprojecttwo.module.ProjectConfig.showPersonalKeyError;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -58,9 +56,7 @@ public class Decrypt {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-
-			showPersonalKeyError();
+			e.printStackTrace();			
 			Log.e(TAG, "session_key is error, Exception= " + e.getMessage());
 		}
 

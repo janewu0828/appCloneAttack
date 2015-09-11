@@ -57,8 +57,8 @@ public class DownloadFileFromURL extends AsyncTask<String, String, String> {
 			// Output stream
 			OutputStream output = new FileOutputStream(outputFilePath
 					+ fileName);
-			Log.e(TAG, "outputFilePath= " + outputFilePath + ", fileName= "
-					+ fileName);
+			// Log.i(TAG, "outputFilePath= " + outputFilePath + ", fileName= "
+			// + fileName);
 
 			byte data[] = new byte[2048];
 
