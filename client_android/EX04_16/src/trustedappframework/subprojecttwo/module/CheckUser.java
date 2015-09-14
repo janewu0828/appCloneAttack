@@ -24,8 +24,7 @@ public class CheckUser {
 	private final String TAG = "CheckUser";
 
 	private String uri = ACAPDAsyncTask.appSecurityEnhancer_url + "php/app.php";
-	// private String uri = ACAPDAsyncTask.appSecurityEnhancer_url
-	// + "php/app_20150905.php";
+//	private String uri = ACAPDAsyncTask.appSecurityEnhancer_url + "php/app_20150914.php";
 
 	private String appId = null;
 	private String appId2 = null;

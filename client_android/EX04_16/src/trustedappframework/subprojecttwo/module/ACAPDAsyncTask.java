@@ -80,7 +80,8 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 
 			// ---download encrypted Jar---
 			sr.setJarFlag(jarFlag);
-			sr.setFilePath(appSecurityEnhancer_url + "download/" + fileName);
+			sr.setFilePath(cipher_jar_uri);
+//			sr.setFilePath(appSecurityEnhancer_url + "download/" + fileName);
 			// Log.i(TAG,"ProjectConfig.test[test_id]= "+ProjectConfig.test[test_id]);
 			sr.setPostStatus(1);
 

@@ -91,7 +91,7 @@ public class TracingTraitor {
 		/** here **/
 //		boolean des_status = decfile.decryptJar(fileName, outputFilePath,
 //				session_key);
-		boolean des_status = decfile.decryptJar2(fileName, outputFilePath,
+		boolean des_status = decfile.decryptJar3(fileName, outputFilePath,
 				session_key);
 		if (des_status)
 			str = decfile.getOutputFileName();

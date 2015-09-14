@@ -1,11 +1,15 @@
 package trustedappframework.subprojecttwo.module;
 
+import static trustedappframework.subprojecttwo.module.ACAPDAsyncTask.outputFilePath;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+
 import android.annotation.SuppressLint;
 import android.util.Log;
 
@@ -13,10 +17,10 @@ public class Decrypt {
 	private static final String TAG = "Decrypt";
 
 	private String outputFileName = "decrypted.jar";
-	private File decryptFile;
-
-	private FileInputStream fis = null;
-	private FileOutputStream fos = null;
+//	private File decryptFile;
+//
+//	private FileInputStream fis = null;
+//	private FileOutputStream fos = null;
 
 	private boolean isSuccess = false;
 
@@ -63,144 +67,165 @@ public class Decrypt {
 
 		return str;
 	}
-
-	/** here **/
-	@SuppressLint("NewApi")
-	public boolean decryptJar2(String fileName, String folderPath,
-			String session_key) {
-		// 解密保存
-		isSuccess = true;
-
-		decryptFile = new File(folderPath, fileName);
-		byte[] oldByte = new byte[(int) decryptFile.length()];
-
-		MCrypt mAES = new MCrypt(session_key);
-		// byte[] decrypted = null;
+	
+	public boolean decryptJar3(String fileName, String outputFilePath,
+			String session_key){
 		try {
-			fis = new FileInputStream(decryptFile);
-			fis.read(oldByte);
-
-			/** here **/
-			// decrypted = mAES.decrypt2(oldByte);
-			try {
-				String decrypted = new String(oldByte, StandardCharsets.UTF_8);
-				byte[] newByte = mAES.decryptCB3(decrypted);
-				File decryptFile333 = new File(folderPath, "test456.jar");
-				Log.i(TAG,
-						"decryptFile333 path= "
-								+ decryptFile333.getAbsolutePath());
-				fos = new FileOutputStream(decryptFile333);
-				fos.write(newByte);
-			} catch (Exception e) {
-				// TODO 自動產生的 catch 區塊
-				e.printStackTrace();
-				Log.e(TAG, "decryptFile333 error= " + e.getMessage());
-			}
-
-			try {
-				File decryptFile444 = new File(folderPath, "test789.jar");
-				Log.i(TAG,
-						"decryptFile444 path= "
-								+ decryptFile444.getAbsolutePath());
-				fos = new FileOutputStream(decryptFile444);
-				mAES.DecryptFile(session_key, decryptFile, decryptFile444);
-			} catch (Exception e) {
-				// TODO 自動產生的 catch 區塊
-				e.printStackTrace();
-				Log.e(TAG, "decryptFile444 error= " + e.getMessage());
-			}
-
-			try {
-				File decryptFile555 = new File(folderPath, "test012.jar");
-				Log.i(TAG,
-						"decryptFile555 path= "
-								+ decryptFile555.getAbsolutePath());
-				fos = new FileOutputStream(decryptFile555);
-				mAES.DecryptFile2(session_key, decryptFile, decryptFile555);
-			} catch (Exception e) {
-				// TODO 自動產生的 catch 區塊
-				e.printStackTrace();
-				Log.e(TAG, "decryptFile555 error= " + e.getMessage());
-			}
-
-			byte[] newByte = mAES.decryptCB(oldByte);
-
-			// 解密
-			decryptFile = new File(folderPath, outputFileName);
-			fos = new FileOutputStream(decryptFile);
-			fos.write(newByte);
-			fis.close();
-			fos.close();
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			Log.e(TAG, "NullPointerException Error: " + e.getMessage());
-		} catch (FileNotFoundException e) {
+			isSuccess = true;
+			byte[] key = fileName.getBytes("UTF-8");
+			new AESFiles().decrypt(new File(outputFilePath
+					+ fileName), new File(outputFilePath
+					+ outputFileName), key);
+		} catch (UnsupportedEncodingException e) {
 			isSuccess = false;
 			e.printStackTrace();
-			Log.e(TAG, "FileNotFoundException Error: " + e.getMessage());
-		} catch (IOException e) {
-			isSuccess = false;
-			e.printStackTrace();
-			Log.e(TAG, "IOException Error: " + e.getMessage());
+			Log.e(TAG, e.getMessage());
 		} catch (Exception e) {
 			isSuccess = false;
 			e.printStackTrace();
-			Log.e(TAG, "Exception Error: " + e.getMessage());		
+			Log.e(TAG, e.getMessage());
 		}
 
-		if (!isSuccess) {
-			Log.e(TAG, "decrypted error, decryptFile path= "
-					+ decryptFile.getAbsolutePath().toString());
-		}
 		return isSuccess;
-	} // end_decryptJar2
+	}
 
-	public boolean decryptJar(String fileName, String folderPath, String seed) {
-		// 解密保存
-		isSuccess = true;
+//	/** here **/
+//	@SuppressLint("NewApi")
+//	public boolean decryptJar2(String fileName, String folderPath,
+//			String session_key) {
+//		// 解密保存
+//		isSuccess = true;
+//
+//		decryptFile = new File(folderPath, fileName);
+//		byte[] oldByte = new byte[(int) decryptFile.length()];
+//
+//		MCrypt mAES = new MCrypt(session_key);
+//		// byte[] decrypted = null;
+//		try {
+//			fis = new FileInputStream(decryptFile);
+//			fis.read(oldByte);
+//
+//			/** here **/
+//			// decrypted = mAES.decrypt2(oldByte);
+////			try {
+////				String decrypted = new String(oldByte, StandardCharsets.UTF_8);
+////				byte[] newByte = mAES.decryptCB3(decrypted);
+////				File decryptFile333 = new File(folderPath, "test456.jar");
+////				Log.i(TAG,
+////						"decryptFile333 path= "
+////								+ decryptFile333.getAbsolutePath());
+////				fos = new FileOutputStream(decryptFile333);
+////				fos.write(newByte);
+////			} catch (Exception e) {
+////				// TODO 自動產生的 catch 區塊
+////				e.printStackTrace();
+////				Log.e(TAG, "decryptFile333 error= " + e.getMessage());
+////			}
+//
+//			try {
+//				File decryptFile444 = new File(folderPath, "test789.jar");
+//				Log.i(TAG,
+//						"decryptFile444 path= "
+//								+ decryptFile444.getAbsolutePath());
+//				fos = new FileOutputStream(decryptFile444);
+//				mAES.DecryptFile(session_key, decryptFile, decryptFile444);
+//			} catch (Exception e) {
+//				// TODO 自動產生的 catch 區塊
+//				e.printStackTrace();
+//				Log.e(TAG, "decryptFile444 error= " + e.getMessage());
+//			}
+//
+//			try {
+//				File decryptFile555 = new File(folderPath, "test012.jar");
+//				Log.i(TAG,
+//						"decryptFile555 path= "
+//								+ decryptFile555.getAbsolutePath());
+//				fos = new FileOutputStream(decryptFile555);
+//				mAES.DecryptFile2(session_key, decryptFile, decryptFile555);
+//			} catch (Exception e) {
+//				// TODO 自動產生的 catch 區塊
+//				e.printStackTrace();
+//				Log.e(TAG, "decryptFile555 error= " + e.getMessage());
+//			}
+//
+//			byte[] newByte = mAES.decryptCB(oldByte);
+//
+//			// 解密
+//			decryptFile = new File(folderPath, outputFileName);
+//			fos = new FileOutputStream(decryptFile);
+//			fos.write(newByte);
+//			fis.close();
+//			fos.close();
+//		} catch (NullPointerException e) {
+//			e.printStackTrace();
+//			Log.e(TAG, "NullPointerException Error: " + e.getMessage());
+//		} catch (FileNotFoundException e) {
+//			isSuccess = false;
+//			e.printStackTrace();
+//			Log.e(TAG, "FileNotFoundException Error: " + e.getMessage());
+//		} catch (IOException e) {
+//			isSuccess = false;
+//			e.printStackTrace();
+//			Log.e(TAG, "IOException Error: " + e.getMessage());
+//		} catch (Exception e) {
+//			isSuccess = false;
+//			e.printStackTrace();
+//			Log.e(TAG, "Exception Error: " + e.getMessage());		
+//		}
+//
+//		if (!isSuccess) {
+//			Log.e(TAG, "decrypted error, decryptFile path= "
+//					+ decryptFile.getAbsolutePath().toString());
+//		}
+//		return isSuccess;
+//	} // end_decryptJar2
 
-		decryptFile = new File(folderPath, fileName);
-		byte[] oldByte = new byte[(int) decryptFile.length()];
-
-		try {
-			fis = new FileInputStream(decryptFile);
-			fis.read(oldByte);
-
-			// 解密
-			byte[] newByte = AESUtils.decryptFile(seed, oldByte);
-			decryptFile = new File(folderPath, outputFileName);
-			fos = new FileOutputStream(decryptFile);
-			fos.write(newByte);
-
-		} catch (FileNotFoundException e) {
-			isSuccess = false;
-			e.printStackTrace();
-		} catch (IOException e) {
-			isSuccess = false;
-			e.printStackTrace();
-		} catch (Exception e) {
-			isSuccess = false;
-			e.printStackTrace();
-		}
-
-		try {
-			fis.close();
-			fos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-			Log.e(TAG, "IOException Error: " + e.getMessage());
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			Log.e(TAG, "NullPointerException Error: " + e.getMessage());
-		}
-
-		if (!isSuccess) {
-			Log.e(TAG, "decrypted error");
-			Log.i(TAG, "decrypted path= "
-					+ decryptFile.getAbsolutePath().toString());
-		}
-		return isSuccess;
-	} // end_decryptJar
+//	public boolean decryptJar(String fileName, String folderPath, String seed) {
+//		// 解密保存
+//		isSuccess = true;
+//
+//		decryptFile = new File(folderPath, fileName);
+//		byte[] oldByte = new byte[(int) decryptFile.length()];
+//
+//		try {
+//			fis = new FileInputStream(decryptFile);
+//			fis.read(oldByte);
+//
+//			// 解密
+//			byte[] newByte = AESUtils.decryptFile(seed, oldByte);
+//			decryptFile = new File(folderPath, outputFileName);
+//			fos = new FileOutputStream(decryptFile);
+//			fos.write(newByte);
+//
+//		} catch (FileNotFoundException e) {
+//			isSuccess = false;
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			isSuccess = false;
+//			e.printStackTrace();
+//		} catch (Exception e) {
+//			isSuccess = false;
+//			e.printStackTrace();
+//		}
+//
+//		try {
+//			fis.close();
+//			fos.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			Log.e(TAG, "IOException Error: " + e.getMessage());
+//		} catch (NullPointerException e) {
+//			e.printStackTrace();
+//			Log.e(TAG, "NullPointerException Error: " + e.getMessage());
+//		}
+//
+//		if (!isSuccess) {
+//			Log.e(TAG, "decrypted error");
+//			Log.i(TAG, "decrypted path= "
+//					+ decryptFile.getAbsolutePath().toString());
+//		}
+//		return isSuccess;
+//	} // end_decryptJar
 
 	public String xorHex(String a, String b) {
 		// TODO: Validation

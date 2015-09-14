@@ -174,21 +174,21 @@ public class MCrypt {
         }
     }
 
-	public byte[] decryptCB3(String code) throws Exception {
-		if (code == null || code.length() == 0)
-			throw new Exception("Empty string");
-
-		byte[] decrypted = null;
-
-		try {
-			cipher.init(Cipher.DECRYPT_MODE, keyspec, ivspec);
-
-			decrypted = cipher.doFinal(hexToBytes(code));
-		} catch (Exception e) {
-			throw new Exception("[decrypt] " + e.getMessage());
-		}
-		return decrypted;
-	}
+//	public byte[] decryptCB3(String code) throws Exception {
+//		if (code == null || code.length() == 0)
+//			throw new Exception("Empty string");
+//
+//		byte[] decrypted = null;
+//
+//		try {
+//			cipher.init(Cipher.DECRYPT_MODE, keyspec, ivspec);
+//
+//			decrypted = cipher.doFinal(hexToBytes(code));
+//		} catch (Exception e) {
+//			throw new Exception("[decrypt] " + e.getMessage());
+//		}
+//		return decrypted;
+//	}
 
 	public byte[] decryptCB2(byte[] raw, byte[] iv, byte[] encrypted)
 			throws Exception {
