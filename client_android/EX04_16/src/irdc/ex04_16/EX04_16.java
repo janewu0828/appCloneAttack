@@ -85,13 +85,6 @@ public class EX04_16 extends Activity {
 		setContentView(R.layout.main);
 
 		initACAPD();
-		// here ---
-		// A/libc(20572): Fatal signal 7 (SIGBUS) at 0x7980c4e0 (code=2), thread
-		// 20572 (irdc.ex04_16)
-		// startService(new Intent(
-		// "trustedappframework.subprojecttwo.interfaces.InterfaceTest.loadMethod"));
-		// startService(new Intent("irdc.ex04_16.EX04_16"));
-		// here ---
 
 		/* 取得相關物件 */
 		mText = (TextView) findViewById(R.id.mText);
@@ -163,11 +156,10 @@ public class EX04_16 extends Activity {
 		choiceStatus = 1;
 
 		// App Clone Attack Prevention and Detection (ACAPD)
-//		task = new ACAPDAsyncTask(test_class_separation_segment[0],
-//				classStatus[0], test_jarFlag[0]);
-		 task = new ACAPDAsyncTask(class_separation_segment[0],
-		 classStatus[0],
-		 jarFlag[0]);
+		// task = new ACAPDAsyncTask(test_class_separation_segment[0],
+		// classStatus[0], test_jarFlag[0]);
+		task = new ACAPDAsyncTask(class_separation_segment[0], classStatus[0],
+				jarFlag[0]);
 		task.execute((Void[]) null);
 	}
 

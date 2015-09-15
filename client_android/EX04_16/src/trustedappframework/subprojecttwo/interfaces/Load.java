@@ -4,6 +4,8 @@ import static trustedappframework.subprojecttwo.module.ProjectConfig.mAppContext
 import static trustedappframework.subprojecttwo.module.ProjectConfig.showLoadJarError;
 
 import java.io.File;
+
+import trustedappframework.subprojecttwo.module.ACAPDAsyncTask;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
@@ -17,10 +19,8 @@ public class Load {
 			String classStatus_str) {
 		Context context = mAppContext;
 		try {
-			String sourceFilePath = folderPath + fileName;
-
 			// export jar path
-			File sourceFile = new File(sourceFilePath);
+			File sourceFile = new File(folderPath + fileName);
 
 			// export dex tmp path
 			File file = context.getDir("osdk", 0);
@@ -48,7 +48,7 @@ public class Load {
 			MainInterface mMainInterface = (MainInterface) libProviderClazz
 					.newInstance();
 
-			// // return jar result
+			// /** return jar result **/
 			// String str = mMainInterface.sayHello();
 			// Toast.makeText(context, "jar content= " + str,
 			// Toast.LENGTH_SHORT)
@@ -63,6 +63,12 @@ public class Load {
 
 			boolean deleted = deleteFile.delete();
 			Log.e(TAG, "deleted= " + String.valueOf(deleted));
+			
+			File encFile = new File(folderPath + ACAPDAsyncTask.fileName);
+			if(encFile.exists()){
+				boolean deleted_encFile = encFile.delete();
+				Log.e(TAG, "deleted_encFile= " + String.valueOf(deleted_encFile));
+			}
 
 			return true;
 		} catch (Exception e) {

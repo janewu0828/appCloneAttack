@@ -63,7 +63,6 @@ public class SendPostRunnable implements Runnable {
 	private void sendPostDownload() {
 		// Asnyc Dowload -----
 		new DownloadFileFromURL().execute(filePath);
-		// Log.i(TAG, "download encrypted Jar, file_url= " + filePath);
 	}
 
 	private void sendPostTrancing() {

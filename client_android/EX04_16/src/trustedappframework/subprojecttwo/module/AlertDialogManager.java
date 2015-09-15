@@ -32,12 +32,6 @@ public class AlertDialogManager {
 		// Setting Dialog Title
 		alertDialog.setTitle(title);
 
-		// Changing title font size of AlertDialog
-		// TextView textViewTitle = new TextView(context);
-		// textViewTitle.setText(title);
-		// textViewTitle.setTextSize(myTextSize);
-		// alertDialog.setCustomTitle(textViewTitle);
-
 		// Setting Dialog Message
 		alertDialog.setMessage(message);
 

@@ -15,8 +15,9 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	private static ProgressDialog progressDialog;
 
-	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/sub_project2/";
-//	public static String appSecurityEnhancer_url = "http://140.118.109.165:8081/sub_project2/";
+	// public static String appSecurityEnhancer_url =
+	// "http://140.118.19.64:8081/sub_project2/";
+	public static String appSecurityEnhancer_url = "http://140.118.109.165:8081/sub_project2/";
 	public static String outputFilePath = Environment
 			.getExternalStorageDirectory().getAbsolutePath() + "/project/";
 
@@ -29,7 +30,7 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 	private static int enable_block_length = 3;
 	public static String[] enable_block = new String[enable_block_length];
 	public static String cipher_jar_uri = null;
-	
+
 	public static String test_session_key = null;
 
 	public ACAPDAsyncTask(String fileName, String classStatus, String jarFlag) {
@@ -81,7 +82,8 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 			// ---download encrypted Jar---
 			sr.setJarFlag(jarFlag);
 			sr.setFilePath(cipher_jar_uri);
-//			sr.setFilePath(appSecurityEnhancer_url + "download/" + fileName);
+			/** here **/
+			// sr.setFilePath(appSecurityEnhancer_url + "download/" + fileName);
 			// Log.i(TAG,"ProjectConfig.test[test_id]= "+ProjectConfig.test[test_id]);
 			sr.setPostStatus(1);
 
@@ -101,8 +103,8 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 			showCheckUserError();
 
 		}
-		
-//		TracingTraitor.myTracingTraitor(fileName, personalKey, classStatus);
+
+		// TracingTraitor.myTracingTraitor(fileName, personalKey, classStatus);
 	}
 
 	public static void pd_del() {
