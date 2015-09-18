@@ -3,7 +3,8 @@
 	$deviceid=$_POST["UUID"];//need apps.apkid , apps.name , app.app_id2 
 	include('conn.php');
 	mysql_query("set names utf8");
-	$sql = "select apps.apkid ,apps.name ,apps.icon ,member.deviceid ,purchase.app_id2 from apps,member,purchase where member.deviceid='$deviceid' and purchase.username=member.username and purchase.note=apps.name";  
+	// $sql = "select apps.apkid ,apps.name ,apps.icon ,member.deviceid ,purchase.app_id2 from apps,member,purchase where member.deviceid='$deviceid' and purchase.username=member.username and purchase.note=apps.name";  
+	$sql = "select apps.apkid ,apps.name ,apps.icon ,member.deviceid ,purchase.app_id2 from apps,member,purchase group by apps.apkid";
 	$result = mysql_query($sql) or die(mysql_error());
 	$arr=array();
 	$img_url="http://140.118.19.64:8081/../../islab/public/";
