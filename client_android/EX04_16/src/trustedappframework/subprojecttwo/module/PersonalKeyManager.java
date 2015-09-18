@@ -26,8 +26,8 @@ public class PersonalKeyManager {
 
 			if (ACAPDAsyncTask.getPersonalKey(i).length() > 0
 					&& !ACAPDAsyncTask.getPersonalKey(i).trim().isEmpty()) {
-//				 Log.i(TAG, "personalKey[" + i + "]= "
-//				 + ACAPDAsyncTask.getPersonalKey(i));
+				// Log.i(TAG, "personalKey[" + i + "]= "
+				// + ACAPDAsyncTask.getPersonalKey(i));
 			} else {
 				showPersonalKeyError();
 				Log.e(TAG, "Error: " + "personalKey= null");

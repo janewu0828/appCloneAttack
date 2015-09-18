@@ -14,16 +14,15 @@ import javax.crypto.spec.SecretKeySpec;
 import android.util.Log;
 
 public class AESFiles {
-	final String TAG = "AESFiles";
-	byte[] iv;
-	byte[] ivBytes;
-	IvParameterSpec ivParameterSpec;
-	Cipher cipher;
+	private final String TAG = "AESFiles";
+	private byte[] iv;
+	private byte[] ivBytes;
+	private IvParameterSpec ivParameterSpec;
+	private Cipher cipher;
 
 	public AESFiles() {
 		try {
-//			cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-			cipher = Cipher.getInstance("AES/CBC/NoPadding");
+			cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 			iv = "fedcba9876543210".getBytes("UTF-8");
 			ivBytes = getKeyBytes(iv);
 			ivParameterSpec = new IvParameterSpec(ivBytes);
@@ -46,26 +45,14 @@ public class AESFiles {
 
 	public Cipher getCipherEncrypt(final byte[] key) throws Exception {
 		byte[] keyBytes = getKeyBytes(key);
-		// Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-		// Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
 		SecretKeySpec secretKeySpec = new SecretKeySpec(keyBytes, "AES");
-		// IvParameterSpec ivParameterSpec = new IvParameterSpec(keyBytes);
-		// byte[] iv = "fedcba9876543210".getBytes("UTF-8");
-		// byte[] ivBytes = getKeyBytes(iv);
-		// IvParameterSpec ivParameterSpec = new IvParameterSpec(ivBytes);
 		cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, ivParameterSpec);
 		return cipher;
 	}
 
 	public Cipher getCipherDecrypt(byte[] key) throws Exception {
 		byte[] keyBytes = getKeyBytes(key);
-		// Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-		// Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
 		SecretKeySpec secretKeySpec = new SecretKeySpec(keyBytes, "AES");
-		// IvParameterSpec ivParameterSpec = new IvParameterSpec(keyBytes);
-		// byte[] iv = "fedcba9876543210".getBytes("UTF-8");
-		// byte[] ivBytes = getKeyBytes(iv);
-		// IvParameterSpec ivParameterSpec = new IvParameterSpec(ivBytes);
 		cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, ivParameterSpec);
 		return cipher;
 	}
@@ -89,8 +76,7 @@ public class AESFiles {
 			while (read != -1) {
 				cos.write(data, 0, read);
 				read = fis.read(data);
-				// System.out.println(new String(data, "UTF-8").trim());
-//				Log.i(TAG, "encrypt, data= " + new String(data, "UTF-8").trim());
+				Log.i(TAG, "encrypt, data= " + new String(data, "UTF-8").trim());
 			}
 			cos.flush();
 		} finally {
@@ -108,11 +94,6 @@ public class AESFiles {
 
 	public void decrypt(File inputFile, File outputFile, byte[] key)
 			throws Exception {
-		
-		Log.i(TAG, "inputFile= "+inputFile.getAbsolutePath());
-		Log.i(TAG, "outputFile= "+outputFile.getAbsolutePath());
-		
-		
 		Cipher cipher = getCipherDecrypt(key);
 		FileOutputStream fos = null;
 		CipherInputStream cis = null;
@@ -126,8 +107,7 @@ public class AESFiles {
 			while (read != -1) {
 				fos.write(data, 0, read);
 				read = cis.read(data);
-				// System.out.println(new String(data, "UTF-8").trim());
-//				Log.i(TAG, "decrypt, data= "+new String(data, "UTF-8").trim());
+				// Log.i(TAG, "decrypt, data= "+new String(data,"UTF-8").trim());
 			}
 		} finally {
 			fos.close();

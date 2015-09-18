@@ -15,8 +15,9 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	private static ProgressDialog progressDialog;
 
-	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/sub_project2/";
-//	public static String appSecurityEnhancer_url = "http://140.118.109.165:8081/sub_project2/";
+	// public static String appSecurityEnhancer_url =
+	// "http://140.118.19.64:8081/sub_project2/";
+	public static String appSecurityEnhancer_url = "http://140.118.109.165:8081/sub_project2";
 	public static String outputFilePath = Environment
 			.getExternalStorageDirectory().getAbsolutePath() + "/project/";
 
@@ -29,7 +30,8 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 	private static int enable_block_length = 3;
 	public static String[] enable_block = new String[enable_block_length];
 	public static String cipher_jar_uri = null;
-
+	
+	/** here **/
 	public static String test_session_key = null;
 
 	public ACAPDAsyncTask(String fileName, String classStatus, String jarFlag) {
@@ -46,7 +48,6 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 
 		progressDialog = pd.getProgressDialog();
 		progressDialog.show();
-
 	}
 
 	@Override
@@ -81,9 +82,6 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 			// ---download encrypted Jar---
 			sr.setJarFlag(jarFlag);
 			sr.setFilePath(cipher_jar_uri);
-			/** here **/
-			// sr.setFilePath(appSecurityEnhancer_url + "download/" + fileName);
-			// Log.i(TAG,"ProjectConfig.test[test_id]= "+ProjectConfig.test[test_id]);
 			sr.setPostStatus(1);
 
 			Thread t2 = new Thread(sr);
@@ -113,11 +111,7 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 
 		}
 	}
-
-	public static String[] getPersonalKey() {
-		return personalKey;
-	}
-
+	
 	public static String getPersonalKey(int i) {
 		return personalKey[i];
 	}
