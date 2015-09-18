@@ -75,7 +75,7 @@ public class ProjectConfig {
 						R.string.alert_checkuser_error_msg), false);
 		Log.e(TAG, "showCheckUserError");
 	}
-	
+
 	public static void showLoadJarError() {
 		alert.showAlertDialog(
 				mContext,

@@ -57,6 +57,7 @@ public class DownloadFileFromURL extends AsyncTask<String, String, String> {
 			// Output stream
 			OutputStream output = new FileOutputStream(outputFilePath
 					+ fileName);
+			// Log.i(TAG, "fileName= " + outputFilePath + fileName);
 
 			byte data[] = new byte[2048];
 
@@ -98,10 +99,7 @@ public class DownloadFileFromURL extends AsyncTask<String, String, String> {
 	 * **/
 	@Override
 	protected void onPostExecute(String paramString) {
-		TracingTraitor myTraitor=new TracingTraitor();
+		TracingTraitor myTraitor = new TracingTraitor();
 		myTraitor.myTracingTraitor(fileName, personalKey, classStatus);
-		// Log.i(TAG, "fileName= " + fileName + ", key="
-		// + TracingTraitor.loadPersonalKey);
-
 	}
 }

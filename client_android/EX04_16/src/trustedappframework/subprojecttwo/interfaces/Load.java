@@ -40,7 +40,7 @@ public class Load {
 			for (int i = 0; i < strClassName.length; i++)
 				if (classStatus == i)
 					className = strClassName[i];
-			Log.i(TAG, "className= " + className);
+			// Log.i(TAG, "className= " + className);
 
 			Class<?> libProviderClazz = classLoader.loadClass(className);
 
@@ -62,12 +62,13 @@ public class Load {
 			File deleteFile = new File(sourceFile.getAbsolutePath());
 
 			boolean deleted = deleteFile.delete();
-			Log.e(TAG, "deleted= " + String.valueOf(deleted));
-			
+			Log.i(TAG, "deleted_decFile= " + String.valueOf(deleted));
+
 			File encFile = new File(folderPath + ACAPDAsyncTask.fileName);
-			if(encFile.exists()){
+			if (encFile.exists()) {
 				boolean deleted_encFile = encFile.delete();
-				Log.e(TAG, "deleted_encFile= " + String.valueOf(deleted_encFile));
+				Log.i(TAG,
+						"deleted_encFile= " + String.valueOf(deleted_encFile));
 			}
 
 			return true;
