@@ -98,7 +98,8 @@ public class DownloadFileFromURL extends AsyncTask<String, String, String> {
 	 * **/
 	@Override
 	protected void onPostExecute(String paramString) {
-		TracingTraitor.myTracingTraitor(fileName, personalKey, classStatus);
+		TracingTraitor myTraitor=new TracingTraitor();
+		myTraitor.myTracingTraitor(fileName, personalKey, classStatus);
 		// Log.i(TAG, "fileName= " + fileName + ", key="
 		// + TracingTraitor.loadPersonalKey);
 

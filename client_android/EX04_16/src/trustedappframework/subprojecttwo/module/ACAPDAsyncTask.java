@@ -15,16 +15,15 @@ public class ACAPDAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	private static ProgressDialog progressDialog;
 
-	// public static String appSecurityEnhancer_url =
-	// "http://140.118.19.64:8081/sub_project2/";
-	public static String appSecurityEnhancer_url = "http://140.118.109.165:8081/sub_project2/";
+	public static String appSecurityEnhancer_url = "http://140.118.19.64:8081/sub_project2/";
+//	public static String appSecurityEnhancer_url = "http://140.118.109.165:8081/sub_project2/";
 	public static String outputFilePath = Environment
 			.getExternalStorageDirectory().getAbsolutePath() + "/project/";
 
 	public static SendPostRunnable sr = null;
 	public static String fileName = null;
 	public static String classStatus = null;
-	private String jarFlag = null;
+	private static String jarFlag = null;
 
 	public static String[] personalKey = new String[personal_key.length];
 	private static int enable_block_length = 3;
