@@ -70,7 +70,7 @@ public class TracingLog {
 				if (entity != null) {
 					// 取出response字串
 					String info = EntityUtils.toString(entity);
-					System.out.println("-----------info-----------" + info);
+					// System.out.println("-----------info-----------" + info);
 					// 以下主要是對伺服器端傳回的資料進行解析
 					JSONObject jsonObject = null;
 					// flag為標記，是從伺服器端傳回的資料

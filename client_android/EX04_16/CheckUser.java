@@ -95,7 +95,7 @@ public class CheckUser {
 								.getString("enable_block3");
 						ACAPDAsyncTask.cipher_jar_uri = jsonObject
 								.getString("cipher_jar_uri");
-						Log.e(TAG, "cipher_jar_uri= "
+						Log.i(TAG, "cipher_jar_uri= "
 								+ ACAPDAsyncTask.cipher_jar_uri);
 
 						sessionid = jsonObject.getString("sessionid");
