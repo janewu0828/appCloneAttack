@@ -9,9 +9,7 @@ class MCrypt {
     function __construct() {
     }
 
-    function encrypt($key,$str) {
-
-      //$key = $this->hex2bin($key);    
+    function encrypt($key,$str) {  
       $iv = $this->iv;
 
       $td = mcrypt_module_open('rijndael-128', '', 'cbc', $iv);
@@ -26,7 +24,6 @@ class MCrypt {
     }
 
     function decrypt($key,$code) {
-      //$key = $this->hex2bin($key);
       $code = $this->hex2bin($code);
       $iv = $this->iv;
 
@@ -38,7 +35,7 @@ class MCrypt {
       mcrypt_generic_deinit($td);
       mcrypt_module_close($td);
 
-      return utf8_encode(trim($decrypted));
+      return $decrypted;
     }
 
     protected function hex2bin($hexdata) {
@@ -83,6 +80,13 @@ $deviceid=$_POST["UUID"];// need post
 $jarname=$_POST["jarName"]; // need post 
 //包含資料庫連接文件
 include('conn.php');
+
+
+/** here **/
+include('openssl_test.php');
+
+
+
 mysql_query("set names utf8");  
 // 檢測用戶身份是否正確
 // $check_query = mysql_query("select purchase.app_id, member.deviceid from purchase, member where purchase.username=member.username and purchase.app_id='$app_id' and member.deviceid='$deviceid' limit 1");
@@ -126,8 +130,9 @@ if($result = mysql_fetch_array($check_query)){
     $enable_block3 = $mcrypt->encrypt($row2[2],$secret_value[2]);
 
     // echo $enable_block3."<br>";
+    // echo "Before: ".$secret_value[2]."<br>";
     // $test=$mcrypt->decrypt($row2[2],$enable_block3);
-    // echo $test."<br>";
+    // echo "After: ".$test."<br>";
 
     //xor secret value to session key
     $xor_key=xor_string($secret_value[0],$secret_value[1]);
@@ -153,8 +158,25 @@ if($result = mysql_fetch_array($check_query)){
     // cbs
     $cipher_block = $mcrypt->encrypt($xor_key,$jar_contents);
     file_put_contents('../download/encrypted/'.$jarname, $cipher_block);
+
+    // test decrypt --------------------------------------------------
+    $test = $mcrypt->decrypt($xor_key,$cipher_block);
+    file_put_contents('../download/encrypted/test.jar', $test);
+    //----------------------------------------------------------------
+
     // echo $cipher_block;
-    $cipher_jar_uri = "http://140.118.19.64:8081/sub_project2/download/encrypted/".$jarname;
+    // $cipher_jar_uri = "http://140.118.19.64:8081/sub_project2/download/encrypted/".$jarname;
+
+
+    /** here **/
+    // echo 'data_enc_path= '.$data_enc_path;
+    // echo '<br>';
+    // echo '$xor_key= '.$xor_key=$pass;
+    // echo '<br>';
+    $xor_key=$pass;
+    $cipher_jar_uri = "http://140.118.19.64:8081/sub_project2/download/encrypted".$data_enc_path;
+
+
     $arr = array(
       'flag'=>'success',
 
